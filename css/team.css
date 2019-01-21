@@ -1,0 +1,25 @@
+.container {
+    min-width: 289px;
+    font-family: Helvetica, Arial, sans-serif;
+    color: white;
+}
+
+.team {
+    
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    padding: 15px;
+    border: 0.5px solid rgba(0, 0, 0, 0.156);
+    grid-gap: 20px;
+}
+
+.team_profile {
+    background-color: lightgrey;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    0.5px solid rgba(0, 0, 0, 0.256);
+    border-radius: 30px;
+}
