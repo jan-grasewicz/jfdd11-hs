@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg viewBox="0 0 200 200" width="200px" height="200px" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" xmlns:bx="https://boxy-svg.com">
+  <defs>
+    <bx:grid x="0" y="0" width="20" height="20"/>
+  </defs>
+  <polygon style="fill: rgb(216, 216, 216); stroke: rgb(0, 0, 0);" points="97.808 111.744"/>
+  <rect x="15.945" y="156.601" width="169.343" height="11.156" style=""/>
+  <rect x="31.121" y="68.938" width="66.072" height="87.451" style="fill: rgb(216, 216, 216);"/>
+  <rect x="36.379" y="75.179" width="54.066" height="74.847" style="fill: rgb(255, 217, 0);"/>
+  <rect x="34.841" y="73.117" width="55.98" height="11.613" style="fill: rgb(255, 255, 255);"/>
+  <circle style="fill: rgb(255, 255, 255);" cx="43.436" cy="109.666" r="2.02"/>
+  <circle style="fill: rgb(255, 255, 255);" cx="52.419" cy="117.807" r="2.02"/>
+  <circle style="fill: rgb(255, 255, 255);" cx="65.168" cy="103.302" r="2.02"/>
+  <circle style="fill: rgb(255, 255, 255);" cx="72.267" cy="131.459" r="2.02"/>
+  <circle style="fill: rgb(255, 255, 255);" cx="77.609" cy="100.99" r="2.02"/>
+  <polygon style="fill: rgb(216, 216, 216);" points="97.062 86.62 123.246 86.426 123.598 139.033 96.801 138.331 96.747 129.998 116.888 130.432 116.536 94.302 97.694 93.947"/>
+  <ellipse style="fill: none; stroke: rgb(61, 64, 51);" cx="120.145" cy="106.21" rx="7.265" ry="4.525"/>
+  <ellipse style="fill: none; stroke: rgb(0, 0, 0);" cx="131.32" cy="106.21" rx="7.265" ry="4.525"/>
+  <ellipse style="fill: none; stroke: rgb(0, 0, 0);" cx="154.272" cy="124.497" rx="7.265" ry="4.525" transform="matrix(0.877861, 0.478915, -0.478915, 0.877861, 64.997292, -71.290863)"/>
+  <ellipse style="fill: none; stroke: rgb(0, 0, 0);" cx="154.272" cy="124.497" rx="7.265" ry="4.525" transform="matrix(0.083567, 0.996502, -0.996502, 0.083567, 255.260376, -43.277138)"/>
+  <ellipse style="fill: none; stroke: rgb(0, 0, 0);" cx="154.272" cy="124.497" rx="7.265" ry="4.525" transform="matrix(0.037479, 0.999297, -0.999297, 0.037479, 265.178314, -27.669102)"/>
+  <ellipse style="fill: none; stroke: rgb(0, 0, 0);" cx="154.272" cy="124.497" rx="7.265" ry="4.525" transform="matrix(0.199213, 0.979956, -0.979956, 0.199213, 238.389404, -34.084061)"/>
+  <ellipse style="fill: none; stroke: rgb(0, 0, 0);" cx="154.272" cy="124.497" rx="7.265" ry="4.525" transform="matrix(0.385448, 0.92273, -0.92273, 0.385448, 205.197067, -37.153919)"/>
+</svg>
