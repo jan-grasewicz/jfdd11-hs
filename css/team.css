@@ -1,25 +1,75 @@
 .container {
-    min-width: 289px;
-    font-family: Helvetica, Arial, sans-serif;
-    color: white;
+    min-width: 199px;
+    font-family: Montserrat, Helvetica, Arial, sans-serif;
+    color: black;
 }
 
 .team {
-    
     display: grid;
     grid-template-columns: repeat(1, 1fr);
     grid-template-rows: repeat(4, 1fr);
-    padding: 15px;
-    border: 0.5px solid rgba(0, 0, 0, 0.156);
-    grid-gap: 20px;
+    padding: 25px;
+    border: 0.5px solid rgba(0, 0, 0, 0.56);
+    grid-gap: 25px;
 }
 
 .team_profile {
-    background-color: lightgrey;
     padding: 25px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    0.5px solid rgba(0, 0, 0, 0.256);
-    border-radius: 30px;
+    border: 1px solid black;
 }
+
+@media (min-width:796px) {
+    .team {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+    }
+}
+
+
+
+/*
+
+<div id="hexagon"></div>
+
+CSS
+There are different ways to create a hexagon. One way to create it is almost identical to the creation of the pentagon. 
+First create a rectangular shape and then add two triangles on the top.
+
+#hexagon {
+    width: 100px;
+    height: 55px;
+    background: #fc5e5e;
+    position: relative;
+    margin: 10px auto;
+}
+
+#hexagon:before {
+    content: "";
+    width: 0;
+    height: 0;
+    position: absolute;
+    top: -25px;
+    left: 0;
+    border-left: 50px solid transparent;
+    border-right: 50px solid transparent;
+    border-bottom: 25px solid #fc5e5e;
+}
+
+#hexagon:after {
+    content: "";
+    width: 0;
+    height: 0;
+    position: absolute;
+    bottom: -25px;
+    left: 0;
+    border-left: 50px solid transparent;
+    border-right: 50px solid transparent;
+    border-top: 25px solid #fc5e5e;
+}
+
+*/
+
