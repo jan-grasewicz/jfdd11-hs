@@ -4,6 +4,7 @@ body {
   box-sizing: border-box;
   font-family: 'Montserrat', sans-serif;
   font-family: 'Domine', serif;
+  color: white;
 }
 
 .form_container {
@@ -12,33 +13,54 @@ body {
   align-items: center;
   height: 100vh;
   width: 100%;
-  background-image: url(pexels-photo.jpg);
+  background-image: url(./img/form_bg2.jpg);
+  background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
 }
 
 .form_container--field {
-  text-align: center;
-  background-color: rgba(255, 255, 255, 0.63);
   width: 80%;
   height: 80%;
   font-size: 14px;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.527);
+  border-radius: 4px;
 }
 
 .form_container--field h3 {
-  font-weight: normal;
-  font-size: 20px;
+  font-weight: 400;
+  font-size: 40px;
 }
+
+.form_container--field span {
+  color: #0ae7b7;
+  font-weight: bold;
+}
+
+/*brewio color -  #cdaf82 */
 
 .form_container--field label {
   display: inline-block;
-  padding: 20px 0;
+  padding: 10px 0;
 }
 
-input:focus {
+.form input {
+  color: #0ae7b7;
+  background-color: transparent;
+  width: 60%;
+  border: none;
+  border-bottom: 1px solid #0ae7b7;
+  padding: 15px;
+  letter-spacing: 2px;
+  font-size: 12px;
   outline: 0;
 }
 
-label:nth-last-of-type(1) {
-  color: red;
+.form input:nth-last-of-type(1) {
+  width: auto;
+  border: 1px solid white;
+  border-radius: 10px;
+  margin-top: 20px;
+  cursor: pointer;
 }
