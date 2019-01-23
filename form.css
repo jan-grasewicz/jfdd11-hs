@@ -1,9 +1,14 @@
-body {
+/*brewio color -  #cdaf82 */
+
+* {
+  box-sizing: border-box;
   padding: 0;
   margin: 0;
-  box-sizing: border-box;
-  font-family: 'Montserrat', sans-serif;
+}
+
+body {
   font-family: 'Domine', serif;
+  font-family: 'Montserrat', sans-serif;
   color: white;
 }
 
@@ -13,7 +18,7 @@ body {
   align-items: center;
   height: 100vh;
   width: 100%;
-  background-image: url(./img/form_bg2.jpg);
+  background-image: linear-gradient(#6665656b, #75737354), url(./img/form_bg2.jpg);
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -22,45 +27,75 @@ body {
 .form_container--field {
   width: 80%;
   height: 80%;
+  padding: 20px;
   font-size: 14px;
   text-align: center;
-  background-color: rgba(0, 0, 0, 0.527);
-  border-radius: 4px;
+  background-color: rgba(0, 0, 0, 0.7);
+  border-radius: 8px;
 }
 
 .form_container--field h3 {
-  font-weight: 400;
-  font-size: 40px;
+  margin: 0;
+  font-weight: 700;
+  font-size: 1.8rem;
 }
 
 .form_container--field span {
-  color: #0ae7b7;
+  padding-bottom: 20px;
+  font-size: 2.5rem;
   font-weight: bold;
+  color: #cdaf82;
 }
 
-/*brewio color -  #cdaf82 */
+.notification_info {
+  margin: 15px 0 5px 0;
+  font-size: .8rem;
+}
 
 .form_container--field label {
   display: inline-block;
-  padding: 10px 0;
+  padding-top: 10px;
 }
 
-.form input {
-  color: #0ae7b7;
-  background-color: transparent;
-  width: 60%;
-  border: none;
-  border-bottom: 1px solid #0ae7b7;
+.label_fill {
+  margin-top: 5px;
+  font-size: .8rem;
+  font-weight: bold;
+  color: #cdaf82;
+}
+
+.input_fill {
+  width: 85%;
   padding: 15px;
-  letter-spacing: 2px;
-  font-size: 12px;
   outline: 0;
+  border: none;
+  border-bottom: 1px solid #cdaf82;
+  font-size: 1rem;
+  text-align: center;
+  color: #fff;
+  background-color: transparent;
 }
 
-.form input:nth-last-of-type(1) {
-  width: auto;
-  border: 1px solid white;
-  border-radius: 10px;
-  margin-top: 20px;
+.checkbox_label {
+  display: inline-block;
+  margin-top: 5px;
+  font-size: 11px;
+}
+
+.checkbox {
+  margin-right: 10px;
+}
+
+.subscribe_button {
+  width: 80%;
+  margin-top: 25px;
+  padding: 10px 10px;
+  border: 2px solid #cdaf82;
+  border-radius: 55px;
+  font-size: 1rem;
+  font-weight: bold;
+  text-transform: uppercase;
   cursor: pointer;
+  color: #cdaf82;
+  background-color: transparent;
 }
