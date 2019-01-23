@@ -3,33 +3,56 @@
     grid-template-columns: repeat(1, 1fr);
     grid-template-rows: repeat(4, 1fr);
     padding: 25px;
-    border: 0.5px solid rgba(0, 0, 0, 0.56);
     grid-gap: 25px;
 }
+
 .team_profile {
     padding: 25px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    border: 1px solid black;
     justify-content: center;
     max-width: 100%;
     border: 1px solid lightgrey;
     border-radius: 21%;
 }
-.github{
+
+.team_profile a {
+    text-decoration: none;
+    color: white;
+}
+
+.team_profile a:hover {
+    text-decoration: underline;
+}
+
+.github {
     margin-top: 0;
     max-width: 100%;
 }
-.LinkedIn{
+
+.LinkedIn {
     max-width: 100%;
+}
+
+.hexagon {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    padding: 10px;
 }
 
 @media (min-width:796px) {
     .team {
         display: grid;
+        justify-items: center;
         grid-template-columns: repeat(2, 1fr);
         grid-template-rows: repeat(2, 1fr);
     }
-}
+    .team_profile {
+        padding:40px;
 
+        max-width: 400px;
+        max-height: 400px;
+    }
+}
