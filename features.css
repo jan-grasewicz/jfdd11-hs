@@ -9,6 +9,7 @@ html body {
 
 .features {
     font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
     font-size: 24px;
     /* background: rgb(0, 78, 0); */
 }
@@ -47,12 +48,60 @@ html body {
 
 /* tablet */
 
-@media (min-width:700px) and (max-width:1024px) {
+@media (min-width:768px) and (max-width:1024px) {
     .featurelist {
         grid-template-columns: 1fr 1fr 1fr;
+    }
+    .feat-a {
+        order: 1;
+    }
+    .feat-aa {
+        order: 4;
+    }
+    .feat-b {
+        order: 2;
+    }
+    .feat-bb {
+        order: 5;
+    }
+    .feat-c {
+        order: 3;
+    }
+    .feat-cc {
+        order: 6;
+    }
+    .fpar {
+        /* text-align: center; */
+        max-width: 260px;
     }
 }
 
 /* desktop */
 
-@media (min-width:1025px) {}
+@media (min-width:1025px) {
+    .featurelist {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+    .feat-a {
+        order: 1;
+    }
+    .feat-aa {
+        order: 4;
+    }
+    .feat-b {
+        order: 2;
+    }
+    .feat-bb {
+        order: 5;
+    }
+    .feat-c {
+        order: 3;
+    }
+    .feat-cc {
+        order: 6;
+    }
+    .fpar {
+        /* text-align: center; */
+        max-width: 270px;
+    }
+}
