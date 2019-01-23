@@ -33,6 +33,7 @@ html body {
 .featurelist>p {
     padding: 5%;
     margin: 0;
+    text-align: left;
 }
 
 .featurelist>img {
