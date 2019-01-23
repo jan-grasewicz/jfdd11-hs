@@ -1,3 +1,6 @@
+*{
+    box-sizing: border-box;
+}
 .container {
     min-width: 199px;
     font-family: Montserrat, Helvetica, Arial, sans-serif;
@@ -19,6 +22,14 @@
     align-items: center;
     border: 1px solid black;
     justify-content: center;
+    max-width: 100%;
+}
+.github{
+    margin-top: 0;
+    max-width: 100%;
+}
+.LinkedIn{
+    max-width: 100%;
 }
 
 @media (min-width:796px) {
