@@ -1,64 +1,180 @@
-*{
+* {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
-header{
+html {
+    scroll-behavior: smooth;
+}
+
+header {
     height: 100vh;
     background-image: linear-gradient(#00000055, #00000054), url(img/nikola-jovanovic-198375-unsplash.jpg);
     background-position: left;
     background-size: cover;
+    position: relative;
 }
 
-.hero-text{
+/* arrow */
+
+.arrow {
+    width: 3vmin;
+    height: 3vmin;
+    box-sizing: border-box;
+    position: absolute;
+    left: calc(50% - 1.5vmin);
+    right: 50%;
+    bottom: 27px;
+    transform: rotate(135deg);
+}
+
+.arrow::before {
+    content: '';
+    width: 100%;
+    height: 100%;
+    border-width: .8vmin .8vmin 0 0;
+    border-style: solid;
+    border-color: #fafafa;
+    transition: .2s ease;
+    display: block;
+    transform-origin: 100% 0;
+}
+
+.arrow:after {
+    content: '';
+    float: left;
+    position: relative;
+    top: -100%;
+    width: 100%;
+    height: 100%;
+    border-width: 0 .8vmin 0 0;
+    border-style: solid;
+    border-color: #fafafa;
+    transform-origin: 100% 0;
+    transition: .2s ease;
+}
+
+.arrow:hover::after {
+    transform: rotate(45deg);
+    border-color: #cdaf82;
+    height: 120%;
+}
+
+.arrow:hover::before {
+    border-color: #cdaf82;
+    transform: scale(0.8);
+}
+
+/* arrow */
+
+.icon {
+    height: auto;
+    position: absolute;
+    color: white;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+}
+
+.icon>img {
+    width: 40px;
+}
+
+.hero-text {
     display: flex;
     flex-direction: column;
     height: 100vh;
     justify-content: center;
+    padding-left: 10%;
 }
 
-.hero-text>h1,
-.hero-text>h2,
-.hero-text>a{
+.hero-text>h1, .hero-text>h2, .hero-text>a {
     font-family: 'Montserrat', sans-serif;
     color: white;
 }
 
-.hero-text>h1{
+.hero-text>h1 {
     font-size: 2rem;
     font-weight: 700;
-    margin-left: 6%;
-    margin-bottom: 5%;
+    margin-bottom: 2%;
 }
 
-.font-color{
+.font-color {
     font-size: 2rem;
     font-weight: 700;
     color: #cdaf82;
 }
 
-.hero-text>h2{
+.hero-text>h2 {
+    font-size: 1.5rem;
     font-weight: 500;
-    margin-left: 6%;
     margin-right: 2%;
 }
 
-.hero-text>a{
+.hero-text>a {
+    font-size: 1rem;
     border: 2px solid white;
     border-radius: 10px;
     margin-top: 10%;
-    margin-left: 5%;
     width: 200px;
     padding-top: 15px;
     padding-bottom: 15px;
-    padding-left: 10px;
-    padding-right: 10px;
+    padding-left: 1%;
+    padding-right: 1%;
     text-decoration: none;
     text-align: center;
     transition: background-color 0.5s;
 }
 
-.hero-text>a:hover{
+.hero-text>a:hover {
     background-color: #cdaf82;
+}
+
+@media (min-width: 768px) {
+    .hero-text>h1 {
+        font-size: 2.5rem;
+    }
+    .font-color {
+        font-size: 2.5rem;
+    }
+    .hero-text>a {
+        font-size: 1.5rem;
+    }
+    .hero-text>h2 {
+        font-size: 2rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    .hero-text>h1 {
+        font-size: 3rem;
+    }
+    .font-color {
+        font-size: 3rem;
+    }
+    .hero-text>a {
+        font-size: 2rem;
+        width: 300px;
+    }
+    .hero-text>h2 {
+        font-size: 2.5rem;
+    }
+}
+
+@media (min-width: 1280px) {
+    .hero-text>h1 {
+        font-size: 4rem;
+    }
+    .font-color {
+        font-size: 4rem;
+    }
+    .hero-text>a {
+        font-size: 2rem;
+        width: 300px;
+    }
+    .hero-text>h2 {
+        font-size: 3.5rem;
+    }
 }
