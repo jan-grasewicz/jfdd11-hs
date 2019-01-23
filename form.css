@@ -99,3 +99,47 @@ body {
   color: #cdaf82;
   background-color: transparent;
 }
+
+@media (orientation:landscape) {
+  .form_container--field {
+    padding: 10px
+  }
+  .form_container--field h3 {
+    font-size: 1.3rem;
+  }
+  .form_container--field span {
+    font-size: 2rem;
+  }
+  .notification_info {
+    margin: 10px 0 5px 0;
+    font-size: .75rem;
+  }
+  .form_container--field label {
+    padding-top: 0;
+  }
+  .label_fill {
+    margin-top: 0;
+  }
+  .input_fill {
+    width: 60%;
+    padding: 5px;
+    outline: 0;
+    border: none;
+    border-bottom: 1px solid #cdaf82;
+    font-size: 1rem;
+    text-align: center;
+    color: #fff;
+    background-color: transparent;
+  }
+  .checkbox_label {
+    margin-top: 5px;
+  }
+  .subscribe_button {
+    width: 50%;
+    margin-top: 10px;
+    padding: 10px 10px;
+    border: 2px solid #cdaf82;
+    border-radius: 55px;
+    font-size: 1rem;
+  }
+}
