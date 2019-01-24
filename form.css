@@ -188,9 +188,7 @@ body {
   }
   .label_fill {
     margin: 20px 0 20px 0;
-    font-size: .8rem;
-    font-weight: bold;
-    color: #cdaf82;
+    font-size: 1rem;
   }
   .checkbox_label {
     margin-top: 20px;
@@ -200,5 +198,26 @@ body {
   .subscribe_button {
     margin-top: 40px;
     font-size: 1rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .subscribe_button {
+    width: 40%;
+  }
+}
+
+@media (min-width: 1400px) {
+  .form_container--field {
+    margin: 0 auto;
+    max-width: 1200px;
+  }
+  .input_fil .form_container--field h3 {
+    margin-top: 50px;
+    width: 40%;
+  }
+  .subscribe_button {
+    width: 30%;
+    font-size: 1.5rem;
   }
 }
