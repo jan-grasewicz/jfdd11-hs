@@ -23,27 +23,20 @@ nav {
     padding-left: 5px;
     justify-content: space-between;
     align-items: center;
-    background-color: #cdaf8260;
+    background-color: rgba(0, 0, 0, 0.705);
     position: absolute;
     top: 0;
     z-index: 999999999;
 }
 
-
-/* fixed */
-
-.js__position {
+nav.js__fixed{
     position: fixed;
 }
 
 
-/* end */
-
 nav>div img {
     width: 50px;
     padding: 5px;
-    background-color: white;
-    border-radius: 30px;
 }
 
 nav>ul {
@@ -68,7 +61,15 @@ nav>ul>li {
     font-size: 1rem;
     color: white;
     text-transform: uppercase;
-    font-family: 'Domine'
+    font-family: 'Montserrat'
+}
+
+.navbar-items>li:last-child{
+    padding-bottom: 20px;
+}
+
+.navbar-items>li:last-of-type{
+    border-bottom: 1px solid #cdaf82;
 }
 
 
@@ -212,6 +213,10 @@ nav>ul>li {
         padding: 20px;
         background-color: rgba(255, 255, 255, 0);
     }
+    .js__fixed{
+        background-color: rgba(0, 0, 0, 0.883);
+    }
+    
     .navbar-items>li>a {
         padding-bottom: 10px;
         position: relative;
@@ -243,6 +248,13 @@ nav>ul>li {
     .navbar-items>li>a:focus:before {
         visibility: visible;
         transform: scaleX(1);
+    }
+    .navbar-items>li:last-child{
+        padding-bottom: 0;
+    }
+    
+    .navbar-items>li:last-of-type{
+        border: none;
     }
 }
 
@@ -268,6 +280,10 @@ nav>ul>li {
         padding: 20px;
         background-color: rgba(255, 255, 255, 0);
     }
+    .js__fixed{
+        background-color: rgba(0, 0, 0, 0.883);
+    }
+
     .navbar-items>li>a {
         padding-bottom: 10px;
         position: relative;
@@ -300,6 +316,13 @@ nav>ul>li {
         visibility: visible;
         transform: scaleX(1);
     }
+    .navbar-items>li:last-child{
+        padding-bottom: 0;
+    }
+    
+    .navbar-items>li:last-of-type{
+        border: none;
+    }
 }
 
 @media (min-width: 1280px) {
@@ -324,6 +347,10 @@ nav>ul>li {
         padding: 20px;
         background-color: rgba(255, 255, 255, 0);
     }
+    .js__fixed{
+        background-color: rgba(0, 0, 0, 0.883);
+    }
+    
     .navbar-items>li>a {
         padding-bottom: 10px;
         position: relative;
@@ -355,5 +382,12 @@ nav>ul>li {
     .navbar-items>li>a:focus:before {
         visibility: visible;
         transform: scaleX(1);
+    }
+    .navbar-items>li:last-child{
+        padding-bottom: 0;
+    }
+    
+    .navbar-items>li:last-of-type{
+        border: none;
     }
 }
