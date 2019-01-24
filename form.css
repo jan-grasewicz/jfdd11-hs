@@ -144,7 +144,7 @@ body {
   }
 }
 
-@media (min-width: 360px) {
+@media (min-width: 360px) and (orientation: portrait) {
   .subscribe_button {
     margin-top: 40px;
   }
@@ -156,7 +156,7 @@ body {
   }
 }
 
-@media(min-width: 360px) and (orientation: landscape) {
+@media(min-width: 640px) and (orientation: landscape) {
   .notification_info {
     margin: 15px 5px;
   }
@@ -170,3 +170,5 @@ body {
     margin-bottom: 5px;
   }
 }
+
+@media (min-width: 768px) {}
