@@ -78,7 +78,7 @@ body {
 
 .checkbox_label {
   display: inline-block;
-  margin-top: 5px;
+  margin-top: 15px;
   font-size: 11px;
 }
 
@@ -88,7 +88,7 @@ body {
 
 .subscribe_button {
   width: 80%;
-  margin-top: 25px;
+  margin-top: 15px;
   padding: 10px 10px;
   border: 2px solid #cdaf82;
   border-radius: 55px;
@@ -115,7 +115,7 @@ body {
     font-size: .75rem;
   }
   .form_container--field label {
-    padding-top: 0;
+    padding-top: 3px;
   }
   .label_fill {
     margin-top: 0;
@@ -137,7 +137,7 @@ body {
   .subscribe_button {
     width: 50%;
     margin-top: 10px;
-    padding: 10px 10px;
+    padding: 6px 6px;
     border: 2px solid #cdaf82;
     border-radius: 55px;
     font-size: 1rem;
