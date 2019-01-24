@@ -1,14 +1,15 @@
 .team {
     display: grid;
-    grid-template-columns: repeat(1, 1fr);
+    grid-template-columns: repeat(1, 200px);
     grid-template-rows: repeat(4, 1fr);
-    padding: 25px;
-    grid-gap: 25px;
+    padding: 35px;
+    grid-gap: 35px;
 }
 
 .team_profile {
-    max-width: 400px;
+    max-width: 200px;
     max-height: 400px;
+    margin-top: 10px;
     padding: 5px;
     display: flex;
     flex-direction: column;
@@ -16,11 +17,16 @@
     justify-content: center;
     max-width: 100%;
     border: 0px solid lightgrey;
-    border-radius: 21%;
+    border-radius: 18px;
+    -webkit-box-shadow: 0px 0px 119px -22px rgba(255, 255, 255, 1);
+    -moz-box-shadow: 0px 0px 119px -22px rgba(255, 255, 255, 1);
+    box-shadow: 0px 0px 119px -22px rgba(255, 255, 255, 1);
 }
+
 .team_profile h2 {
-    margin:5px;
+    margin: 5px;
 }
+
 .team_profile a {
     text-decoration: none;
     color: white;
@@ -44,7 +50,10 @@
     max-width: 200px;
     max-height: 200px;
     border-radius: 50%;
-    
+}
+
+.blank {
+    display: none;
 }
 
 @media (min-width:796px) {
@@ -55,8 +64,7 @@
         grid-template-rows: repeat(2, 1fr);
     }
     .team_profile {
-        padding:40px;
-
+        padding: 40px;
         max-width: 400px;
         max-height: 400px;
     }
