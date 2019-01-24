@@ -1,0 +1,71 @@
+.team {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    padding: 35px;
+    grid-gap: 35px;
+}
+
+.team_profile {
+    max-width: 200px;
+    max-height: 400px;
+    margin-top: 10px;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: 100%;
+    border: 0px solid lightgrey;
+    border-radius: 18px;
+    -webkit-box-shadow: 0px 0px 119px -22px rgba(255, 255, 255, 1);
+    -moz-box-shadow: 0px 0px 119px -22px rgba(255, 255, 255, 1);
+    box-shadow: 0px 0px 119px -22px rgba(255, 255, 255, 1);
+}
+
+.team_profile h2 {
+    margin: 5px;
+}
+
+.team_profile a {
+    text-decoration: none;
+    color: white;
+}
+
+.team_profile a:hover {
+    text-decoration: underline;
+}
+
+.github {
+    margin-top: 10px;
+    max-width: 100%;
+    max-height: 65px;
+}
+
+.LinkedIn {
+    max-width: 100%;
+}
+
+.hexagon {
+    max-width: 200px;
+    max-height: 200px;
+    border-radius: 50%;
+}
+
+.blank {
+    display: none;
+}
+
+@media (min-width:796px) {
+    .team {
+        display: grid;
+        justify-items: center;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+    }
+    .team_profile {
+        padding: 40px;
+        max-width: 400px;
+        max-height: 400px;
+    }
+}
