@@ -171,4 +171,34 @@ body {
   }
 }
 
-@media (min-width: 768px) {}
+@media (min-width: 768px) {
+  .form_container--field h3 {
+    margin: 25px 0 25px 0;
+    font-size: 2rem;
+  }
+  .form_container--field span {
+    padding-bottom: 20px;
+    font-size: 3rem;
+    font-weight: bold;
+    color: #cdaf82;
+  }
+  .notification_info {
+    margin: 35px 0 25px 0;
+    font-size: 0.9rem;
+  }
+  .label_fill {
+    margin: 20px 0 20px 0;
+    font-size: .8rem;
+    font-weight: bold;
+    color: #cdaf82;
+  }
+  .checkbox_label {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    font-size: 0.8rem;
+  }
+  .subscribe_button {
+    margin-top: 40px;
+    font-size: 1rem;
+  }
+}
