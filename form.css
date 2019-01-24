@@ -143,3 +143,30 @@ body {
     font-size: 1rem;
   }
 }
+
+@media (min-width: 360px) {
+  .subscribe_button {
+    margin-top: 40px;
+  }
+  .checkbox_label {
+    padding-top: 15px;
+  }
+  .notification_info {
+    margin: 20px 5px;
+  }
+}
+
+@media(min-width: 360px) and (orientation: landscape) {
+  .notification_info {
+    margin: 15px 5px;
+  }
+  .subscribe_button {
+    margin-top: 15px;
+  }
+  .checkbox_label {
+    margin-top: 6px;
+  }
+  .input_fill {
+    margin-bottom: 5px;
+  }
+}
