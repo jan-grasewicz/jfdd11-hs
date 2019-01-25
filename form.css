@@ -86,18 +86,27 @@ body {
   margin-right: 10px;
 }
 
+.privacy_link {
+  color: white;
+}
+
 .subscribe_button {
   width: 80%;
   margin-top: 15px;
   padding: 10px 10px;
-  border: 2px solid #cdaf82;
-  border-radius: 55px;
+  border: 2px solid white;
+  border-radius: 10px;
   font-size: 1rem;
   font-weight: bold;
   text-transform: uppercase;
   cursor: pointer;
-  color: #cdaf82;
+  color: white;
   background-color: transparent;
+  transition: background-color 0.5s;
+}
+
+.subscribe_button:hover {
+  background-color: #cdaf82;
 }
 
 @media (orientation:landscape) {
@@ -138,8 +147,6 @@ body {
     width: 50%;
     margin-top: 10px;
     padding: 6px 6px;
-    border: 2px solid #cdaf82;
-    border-radius: 55px;
     font-size: 1rem;
   }
 }
