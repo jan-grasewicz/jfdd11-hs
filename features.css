@@ -1,58 +1,92 @@
+* {
+    box-sizing: border-box;
+}
+
 html body {
     /* font-family: 'Montserrat', sans-serif; */
     /* font-family: 'Domine', serif; */
     background: black;
     color: white;
-    padding: 0;
     margin: 0 auto;
 }
-
 .features {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 24px;
-    /* background: rgb(0, 78, 0); */
-}
-
-.features>h2 {
-    margin: 0;
-    padding: 5%
-}
-
-.featurelist {
     font-family: 'Domine', serif;
     font-size: 20px;
-    list-style-type: none;
-    padding: 5%;
-    max-width: 100%;
+    margin: 15% 10%;
+    
+
     display: grid;
-    grid-template-columns: 1fr 2fr;
+    grid-template-rows: auto 1fr 1fr 1fr;
     justify-items: center;
     align-items: center;
 }
+.fh2 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    font-size: 2rem;
+    margin: 2%;
+    padding: 2% 0;
+    justify-self: left;
+}
+.fh2>p {
+    font-weight: bold;
+    color: #cdaf82;
+    display: inline-block;
+}
 
-.featurelist>p {
+.fpar{
+    font-family: 'Domine', serif;
+    font-size: 1.4rem;
     padding: 5%;
-    margin: 0;
-    text-align: left;
+    margin: 3%;
+    text-align: center;
+    height: 90%;
+    border: 1px solid #cdaf82;
+    /* background: linear-gradient(#000,#000,#000,#000,#000,#cdaf8248); */
 }
-
-.featurelist>img {
-    /* padding-left: 20%; */
-}
-
 .ficon {
-    width: 40px;
+    display: block;
+    width: 50px;
     height: auto;
+    margin: 5% auto;
 }
 
 /* tablet */
 
-@media (min-width:700px) and (max-width:1024px) {
-    .featurelist {
+@media (min-width:768px) and (max-width:1024px) {
+
+    .features {
         grid-template-columns: 1fr 1fr 1fr;
+        grid-template-rows: auto auto;
+    }
+    .fh2{
+        grid-column: 1/span 3;
+    }
+    .fpar {
+        height: 100%;
+    }
+    .ficon {
+        width: 22%;
+        height: auto;
+        margin: 10% auto;
     }
 }
-
 /* desktop */
 
-@media (min-width:1025px) {}
+@media (min-width:1025px) {
+    .features {
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-rows: auto auto;
+    }
+    .fh2{
+        grid-column: 1/span 3;
+    }
+    .fpar {
+        height: 100%;
+    }
+    .ficon {
+        width: 23%;
+        height: auto;
+        margin: 10% auto;
+    }
+}
