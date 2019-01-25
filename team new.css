@@ -3,8 +3,6 @@
 }
 
 html body {
-    /* font-family: 'Montserrat', sans-serif; */
-    /* font-family: 'Domine', serif; */
     background: black;
     color: white;
     margin: 0 auto;
@@ -13,82 +11,68 @@ html body {
 .team {
     font-family: 'Domine', serif;
     font-size: 20px;
-    margin: 15% 10%;
+    padding: 10%;
+    /* margin: 15% 10%; */
     display: grid;
-    grid-template-rows: 400px 400px 400px 400px;
+    grid-template-rows: auto auto auto auto;
+    grid-row-gap: 30px;
+    grid-column-gap: 30px;
     justify-items: center;
     align-items: center;
 }
 
-/* .fh2 {
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 500;
-    font-size: 2rem;
-    margin: 2%;
-    padding: 2% 0;
-    justify-self: left;
-} */
-
-/* .fh2>p {
-    font-weight: bold;
-    color: #cdaf82;
-    display: inline-block;
-} */
-
 .team_profile {
     font-family: 'Domine', serif;
     font-size: 1.4rem;
-    padding: 5%;
-    margin: 3%;
+    /* padding: 5%; */
+    /* margin: 5%; */
     text-align: center;
-    height: 90%;
+    /* height: 90%; */
+    width: 100%;
     border: 1px solid #cdaf82;
     /* background: linear-gradient(#000,#000,#000,#000,#000,#cdaf8248); */
 }
 
-.team_profile>img {
+.tprofilephoto {
+    border-radius: 500px;
     display: block;
-    width: 250px;
+    max-width: 250px;
     height: auto;
-    margin: 5% auto;
+    margin: 0 auto;
+    padding: 3%;
+}
+
+.linkedin, .webpage, .github {
+    display: inline;
+    width: 30px;
+    height: auto;
+    margin: 5%;
 }
 
 /* tablet */
 
 @media (min-width:768px) and (max-width:1024px) {
-    .features {
-        grid-template-columns: 1fr 1fr 1fr;
+    .team {
+        grid-template-columns: auto auto;
         grid-template-rows: auto auto;
     }
-    .fh2 {
-        grid-column: 1/span 3;
-    }
-    .fpar {
-        height: 100%;
-    }
-    .ficon {
-        width: 22%;
+    .linkedin, .webpage, .github {
+        width: 30px;
         height: auto;
-        margin: 10% auto;
+        /* margin: 10% auto; */
     }
 }
 
 /* desktop */
 
 @media (min-width:1025px) {
-    .features {
-        grid-template-columns: 1fr 1fr 1fr;
+    .team {
+        grid-template-columns: 1fr 1fr 1fr 1fr;
         grid-template-rows: auto auto;
     }
-    .fh2 {
-        grid-column: 1/span 3;
-    }
-    .fpar {
-        height: 100%;
-    }
-    .ficon {
-        width: 23%;
+    .linkedin, .webpage, .github {
+        width: 30px;
         height: auto;
-        margin: 10% auto;
+        /* margin: 10% auto; */
     }
 }
