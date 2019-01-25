@@ -23,10 +23,6 @@
     box-shadow: 0px 0px 119px -22px rgba(255, 255, 255, 1);
 }
 
-.team_profile h2 {
-    margin: 5px;
-}
-
 .team_profile a {
     text-decoration: none;
     color: white;
@@ -52,9 +48,6 @@
     border-radius: 50%;
 }
 
-.blank {
-    display: none;
-}
 
 @media (min-width:796px) {
     .team {
