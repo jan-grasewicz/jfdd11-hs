@@ -3,16 +3,16 @@
 
 <head>
 
-   <meta charset="UTF-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-   <link rel="stylesheet" href="features.css">
-   <link rel="stylesheet" href="form.css">
-   <link rel="stylesheet" type="text/css" href="./css/team.css">
-   <link href="https://fonts.googleapis.com/css?family=Domine:400,700|Montserrat:400,600,500,700&amp;subset=latin-ext"
-      rel="stylesheet">
-   <link rel="stylesheet" href="header.css">
-   <title>Brewio App website</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="features.css">
+    <link rel="stylesheet" href="form.css">
+    <link rel="stylesheet" type="text/css" href="team new.css">
+    <link href="https://fonts.googleapis.com/css?family=Domine:400,700|Montserrat:400,600,500,700&amp;subset=latin-ext"
+        rel="stylesheet">
+    <link rel="stylesheet" href="header.css">
+    <title>Brewio App website</title>
 </head>
 
 <body>
@@ -67,53 +67,58 @@
                <br>
                <label class="label_fill" for=" user_email">E-mail :</label>
                <br>
-               <input class="input_fill" type="myemail" name="user_email" id="user_email" required>
+               <input class="input_fill" type="email" name="user_email" id="email" required>
                <br>
-               <label class="checkbox_label"><input type="checkbox" class="checkbox" name="user_agreement" id="user_agreement">
+               <label class="checkbox_label"><input required type="checkbox" class="checkbox" name="user_agreement" id="user_agreement">
                   I agree
                   to the
                   <a href="https://www.freeprivacypolicy.com/privacy/view/16cb016e882e8cc6f31587582382a769" class="privacy_link"
-                     target="_blank">privacy</a> policy</label>
+                     target="_blank">privacy policy.</a> </label>
                <br>
-               <input class="subscribe_button" type="button" value="Subscribe">
+               <input class="subscribe_button" type="submit" value="Subscribe">
             </form>
          </div>
       </div>
-      <div class="team">
+      <div class="team" id="about-us">
+        <h2 class="team-title">Our <span>team:</span></h2>
 
-         <div class="team_profile team_profile-1">
-            <img src="#" class="hexagon" alt="Profile photo 1">
-            <h2>FILIP</h2>
-            <p><a href="https://finnfinito.github.io/finnfinito.github.io/"><img src="./img/WEB.png" alt="My Website"></a></p>
-            <p><a href=""><img src="./img/LIN.png" alt="My LinkedIn"></a></p>
-            <p><a href="#"><img class="github" src="./img/GIT.png" alt="My GitHub"></a></p>
-         </div>
+        <div class="team_profile team_profile-1">
+            <img src="./img/45480039.png" class="tprofilephoto" alt="Profile photo 1">
+            <h2>Filip</h2>
+            <a href="https://finnfinito.github.io/finnfinito.github.io/"><img class="webpage" src="./img/WEB.png"
+                    alt="My Website"></a>
+            <a href="https://www.linkedin.com/in/filip-chamier-cieminski/"><img class="linkedin" src="./img/LIN.png" alt="My LinkedIn"></a>
+            <a href="https://github.com/FinnFinito"><img class="github" src="./img/GIT.png" alt="My GitHub"></a>
+        </div>
 
-         <div class="team_profile team_profile-2">
-            <img src="./img/profileSQ.jpg" class="hexagon" alt="Profile photo 2">
-            <h2>JAN</h2>
-            <p><a href="https://finnfinito.github.io/finnfinito.github.io/"><img src="./img/WEB.png" alt="My Website"></a></p>
-            <p><a href=""><img src="./img/LIN.png" alt="My LinkedIn"></a></p>
-            <p><a href="https://github.com/jan-grasewicz"><img class="github" src="./img/GIT.png" alt="My GitHub"></a></p>
-         </div>
+        <div class="team_profile team_profile-2">
+            <img src="./img/profileSQ.jpg" class="tprofilephoto" alt="Profile photo 2">
+            <h2>Jan</h2>
+            <a href="https://jan-grasewicz.github.io/"><img class="webpage" src="./img/WEB.png"
+                    alt="My Website"></a>
+            <a href="https://www.linkedin.com/in/jan-grasewicz/"><img class="linkedin" src="./img/LIN.png" alt="My LinkedIn"></a>
+            <a href="https://github.com/jan-grasewicz"><img class="github" src="./img/GIT.png" alt="My GitHub"></a>
+        </div>
 
-         <div class="team_profile team_profile-3">
-            <img src="./img/michal.jpg" class="hexagon" alt="Profile photo 3">
-            <h2>MICHAŁ</h2>
-            <p><a href="https://finnfinito.github.io/finnfinito.github.io/"><img src="./img/WEB.png" alt="My Website"></a></p>
-            <p><a href=""><img src="./img/LIN.png" alt="My LinkedIn"></a></p>
-            <p><a href="https://github.com/mtrendel"><img class="github" src="./img/GIT.png" alt="My GitHub"></a></p>
-         </div>
+        <div class="team_profile team_profile-3">
+            <img src="./img/michal.jpg" class="tprofilephoto" alt="Profile photo 3">
+            <h2>Michał</h2>
+            <a href="https://mtrendel.github.io"><img class="webpage" src="./img/WEB.png"
+                    alt="My Website"></a>
+            <a href="https://www.linkedin.com/in/micha%C5%82-trendel-4b00a7177/"><img class="linkedin" src="./img/LIN.png" alt="My LinkedIn"></a>
+            <a href="https://github.com/mtrendel"><img class="github" src="./img/GIT.png" alt="My GitHub"></a>
+        </div>
 
-         <div class="team_profile team_profile-4">
-            <img src="./img/priv.jpeg" class="hexagon" alt="Profile photo 4">
-            <h2>ROBERT</h2>
-            <p><a href="https://finnfinito.github.io/finnfinito.github.io/"><img src="./img/WEB.png" alt="My Website"></a></p>
-            <p><a href=""><img src="./img/LIN.png" alt="My LinkedIn"></a></p>
-            <p><a href="https://github.com/robert-dopieralski"><img class="github" src="./img/GIT.png" alt="My GitHub"></a></p>
-         </div>
+        <div class="team_profile team_profile-4">
+            <img src="./img/square_blank.png" class="tprofilephoto" alt="Profile photo 4">
+            <h2>Robert</h2>
+            <a href="https://robert-dopieralski.github.io/"><img class="webpage" src="./img/WEB.png"
+                    alt="My Website"></a>
+            <a href="https://ar.linkedin.com/in/robert-dopieralski-0a8549177"><img class="linkedin" src="./img/LIN.png" alt="My LinkedIn"></a>
+            <a href="https://github.com/robert-dopieralski"><img class="github" src="./img/GIT.png" alt="My GitHub"></a>
+        </div>
 
-      </div>
+    </div>
    </div>
 
    </div>
