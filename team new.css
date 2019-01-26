@@ -9,10 +9,11 @@ html body {
 }
 
 .team {
+    /* background: white; */
     font-family: 'Domine', serif;
     font-size: 20px;
     width: 80%;
-    padding-top: 150px;
+    padding-top: 50px;
     margin: 0 auto;
     display: grid;
     grid-template-rows: auto auto auto auto auto;
@@ -71,7 +72,9 @@ footer{
     .team {
         grid-template-columns: auto auto;
         grid-template-rows: auto auto auto;
-        grid-gap: 5%;
+        grid-gap: 1.2rem;
+        padding-top: 50px;
+
     }
     .team-title{
         grid-column: 1/span 2;
@@ -79,6 +82,9 @@ footer{
     }
 
     
+    .tprofilephoto {
+        /* max-width: 150px; */
+    }
 
     .linkedin, .webpage, .github {
         width: 30px;
@@ -94,6 +100,8 @@ footer{
         grid-template-columns: 1fr 1fr 1fr 1fr;
         grid-template-rows: auto auto;
         grid-gap: 5%;
+        padding-top: 150px;
+
     }
 
     .team-title{
