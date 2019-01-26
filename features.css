@@ -3,16 +3,14 @@
 }
 
 html body {
-    /* font-family: 'Montserrat', sans-serif; */
-    /* font-family: 'Domine', serif; */
     background: black;
     color: white;
     margin: 0 auto;
 }
+
 .features {
-    font-family: 'Domine', serif;
+    font-family: 'Montserrat', sans-serif;
     font-size: 20px;
-    /* margin: 15% 10%; */
     width: 80%;
     padding-top: 50px;
     padding-bottom: 150px;
@@ -24,14 +22,14 @@ html body {
     justify-items: center;
     align-items: center;
 }
+
 .fh2 {
-    font-family: 'Montserrat', sans-serif;
     font-weight: 500;
     font-size: 2rem;
-    /* margin: 2%; */
     padding: 2%;
     justify-self: left;
 }
+
 .fh2>p {
     font-weight: bold;
     color: #cdaf82;
@@ -43,12 +41,11 @@ html body {
     font-family: 'Domine', serif;
     font-size: 1.4rem;
     padding: 5%;
-    /* margin: 3%; */
     text-align: center;
-    /* height: 90%; */
     border: 1px solid #cdaf82;
     /* background: linear-gradient(#000,#000,#000,#000,#000,#cdaf8248); */
 }
+
 .ficon {
     display: block;
     width: 50px;
@@ -65,12 +62,15 @@ html body {
         grid-template-columns: 1fr 1fr 1fr;
         grid-template-rows: auto auto;
     }
+
     .fh2{
         grid-column: 1/span 3;
     }
+
     .fpar {
         height: 100%;
     }
+
     .ficon {
         width: 22%;
         height: auto;
@@ -80,17 +80,21 @@ html body {
 /* desktop */
 
 @media (min-width:1025px) {
+
     .features {
         padding-top: 150px;
         grid-template-columns: 1fr 1fr 1fr;
         grid-template-rows: auto auto;
     }
+
     .fh2{
         grid-column: 1/span 3;
     }
+
     .fpar {
         height: 100%;
     }
+    
     .ficon {
         width: 23%;
         height: auto;

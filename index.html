@@ -16,113 +16,114 @@
 </head>
 
 <body>
-    <div class="container">
-        <nav>
+   <div class="container">
+      <nav>
+         <div>
+            <img src="img/brewio.svg" alt="">
+         </div>
+         <ul class="navbar-items">
+            <li><a href="#features">Features</a></li>
+            <li><a href="#subscribe">Subscribe</a></li>
+            <li><a href="#about-us">About us</a></li>
+         </ul>
+      </nav>
+
+      <header>
+         <div class="hero-text">
+            <h1>Going out with friends?</h1>
+            <h2><span class="font-color">Brewio</span> is here to help.</h2>
+            <a href="#subscribe">CHECK IT OUT</a>
             <div>
-                <img src="img/brewio.svg" alt="">
+               <a href="#features" class="arrow"></a>
             </div>
-            <ul class="navbar-items">
-                <li><a href="#features">Features</a></li>
-                <li><a href="#subscribe">Subscribe</a></li>
-                <li><a href="#about-us">About us</a></li>
-            </ul>
-        </nav>
+         </div>
+      </header>
+      <div class="features" id="features">
+         <h2 class="fh2">
+            <p>Brewio</p> will let you:
+         </h2>
+         <p class="fpar">
+            <img class="ficon" src="img/chair.svg">
+            Find Pubs with enough space for all your friends and book it.
+         </p>
+         <p class="fpar">
+            <img class="ficon" src="img/searching-magnifying-glass.svg">
+            Search for them from your current location or the place of your choosing.
+         </p>
+         <p class="fpar">
+            <img class="ficon" src="img/clock-circular-outline.svg">
+            Avoid the hassle of calling places one by one, on a Friday night, when the time is of the essence.
+         </p>
+      </div>
 
-        <header>
-            <div class="hero-text">
-                <h1>Going out with friends?</h1>
-                <h2><span class="font-color">Brewio</span> is here to help.</h2>
-                <a href="#subscribe">CHECK IT OUT</a>
-                <div>
-                    <a href="#features" class="arrow"></a>
-                </div>
-            </div>
-        </header>
-        <div class="features" id="features">
-            <h2 class="fh2">
-                <p>Brewio</p> will let you:
-            </h2>
-            <p class="fpar">
-                <img class="ficon" src="img/chair.svg">
-                Find Pubs with enough space for all your friends and book it.
-            </p>
-            <p class="fpar">
-                <img class="ficon" src="img/searching-magnifying-glass.svg">
-                Search for them from your current location or the place of your choosing.
-            </p>
-            <p class="fpar">
-                <img class="ficon" src="img/clock-circular-outline.svg">
-                Avoid the hassle of calling places one by one, on a Friday night, when the time is of the essence.
-            </p>
+      <div class="form_container" id="subscribe">
+         <div class="form_container--field">
+            <h3>Subscribe to <span>Brewio</span> </h3>
+            <p class="notification_info">We will send you only one e-mail with notification of our app release.</p>
+            <form class="form" action="" class="subscribe_form">
+               <label class="label_fill" for="subscriber_name">Your Name :</label>
+               <br>
+               <input class="input_fill" type="text" name="user_name" id="user_name">
+               <br>
+               <label class="label_fill" for=" user_email">E-mail :</label>
+               <br>
+               <input class="input_fill" type="email" name="user_email" id="email" required>
+               <br>
+               <label class="checkbox_label"><input required type="checkbox" class="checkbox" name="user_agreement" id="user_agreement">
+                  I agree
+                  to the
+                  <a href="https://www.freeprivacypolicy.com/privacy/view/16cb016e882e8cc6f31587582382a769" class="privacy_link"
+                     target="_blank">privacy policy.</a> </label>
+               <br>
+               <input class="subscribe_button" type="submit" value="Subscribe">
+            </form>
+         </div>
+      </div>
+      <div class="team" id="about-us">
+        <h2 class="team-title">Our <span>team:</span></h2>
+
+        <div class="team_profile team_profile-1">
+            <img src="./img/45480039.png" class="tprofilephoto" alt="Profile photo 1">
+            <h2>Filip</h2>
+            <a href="https://finnfinito.github.io/finnfinito.github.io/"><img class="webpage" src="./img/WEB.png"
+                    alt="My Website"></a>
+            <a href=""><img class="linkedin" src="./img/LIN.png" alt="My LinkedIn"></a>
+            <a href="#"><img class="github" src="./img/GIT.png" alt="My GitHub"></a>
         </div>
 
-        <div class="form_container" id="subscribe">
-            <div class="form_container--field">
-                <h3>Subscribe to <span>Brewio</span> </h3>
-                <p class="notification_info">We will send you only one e-mail with notification of our app release.</p>
-                <form class="form" action="" class="subscribe_form">
-                    <label class="label_fill" for="subscriber_name">Your Name :</label>
-                    <br>
-                    <input class="input_fill" type="text" name="user_name" id="user_name">
-                    <br>
-                    <label class="label_fill" for=" user_email">E-mail :</label>
-                    <br>
-                    <input class="input_fill" type="email" name="user_email" id="email" required>
-                    <br>
-                    <label class="checkbox_label"><input required type="checkbox" class="checkbox" name="user_agreement"
-                            id="user_agreement">
-                        I agree
-                        to the
-                        privacy terms</label>
-                    <br>
-                    <input class="subscribe_button" type="submit" value="Subscribe">
-                </form>
-            </div>
+        <div class="team_profile team_profile-2">
+            <img src="./img/profileSQ.jpg" class="tprofilephoto" alt="Profile photo 2">
+            <h2>Jan</h2>
+            <a href="https://finnfinito.github.io/finnfinito.github.io/"><img class="webpage" src="./img/WEB.png"
+                    alt="My Website"></a>
+            <a href=""><img class="linkedin" src="./img/LIN.png" alt="My LinkedIn"></a>
+            <a href="https://github.com/jan-grasewicz"><img class="github" src="./img/GIT.png" alt="My GitHub"></a>
         </div>
-        <div class="team" id="about-us">
-            <h2 class="team-title">Our <span>team:</span></h2>
 
-            <div class="team_profile team_profile-1">
-                <img src="./img/45480039.png" class="tprofilephoto" alt="Profile photo 1">
-                <h2>Filip</h2>
-                <a href="https://finnfinito.github.io/finnfinito.github.io/"><img class="webpage" src="./img/WEB.png"
-                        alt="My Website"></a>
-                <a href=""><img class="linkedin" src="./img/LIN.png" alt="My LinkedIn"></a>
-                <a href="#"><img class="github" src="./img/GIT.png" alt="My GitHub"></a>
-            </div>
-
-            <div class="team_profile team_profile-2">
-                <img src="./img/profileSQ.jpg" class="tprofilephoto" alt="Profile photo 2">
-                <h2>Jan</h2>
-                <a href="https://finnfinito.github.io/finnfinito.github.io/"><img class="webpage" src="./img/WEB.png"
-                        alt="My Website"></a>
-                <a href=""><img class="linkedin" src="./img/LIN.png" alt="My LinkedIn"></a>
-                <a href="https://github.com/jan-grasewicz"><img class="github" src="./img/GIT.png" alt="My GitHub"></a>
-            </div>
-
-            <div class="team_profile team_profile-3">
-                <img src="./img/michal.jpg" class="tprofilephoto" alt="Profile photo 3">
-                <h2>Michał</h2>
-                <a href="https://finnfinito.github.io/finnfinito.github.io/"><img class="webpage" src="./img/WEB.png"
-                        alt="My Website"></a>
-                <a href=""><img class="linkedin" src="./img/LIN.png" alt="My LinkedIn"></a>
-                <a href="https://github.com/mtrendel"><img class="github" src="./img/GIT.png" alt="My GitHub"></a>
-            </div>
-
-            <div class="team_profile team_profile-4">
-                <img src="./img/square_blank.png" class="tprofilephoto" alt="Profile photo 4">
-                <h2>Robert</h2>
-                <a href="https://finnfinito.github.io/finnfinito.github.io/"><img class="webpage" src="./img/WEB.png"
-                        alt="My Website"></a>
-                <a href=""><img class="linkedin" src="./img/LIN.png" alt="My LinkedIn"></a>
-                <a href="https://github.com/robert-dopieralski"><img class="github" src="./img/GIT.png" alt="My GitHub"></a>
-            </div>
-
+        <div class="team_profile team_profile-3">
+            <img src="./img/michal.jpg" class="tprofilephoto" alt="Profile photo 3">
+            <h2>Michał</h2>
+            <a href="https://finnfinito.github.io/finnfinito.github.io/"><img class="webpage" src="./img/WEB.png"
+                    alt="My Website"></a>
+            <a href=""><img class="linkedin" src="./img/LIN.png" alt="My LinkedIn"></a>
+            <a href="https://github.com/mtrendel"><img class="github" src="./img/GIT.png" alt="My GitHub"></a>
         </div>
+
+        <div class="team_profile team_profile-4">
+            <img src="./img/square_blank.png" class="tprofilephoto" alt="Profile photo 4">
+            <h2>Robert</h2>
+            <a href="https://finnfinito.github.io/finnfinito.github.io/"><img class="webpage" src="./img/WEB.png"
+                    alt="My Website"></a>
+            <a href=""><img class="linkedin" src="./img/LIN.png" alt="My LinkedIn"></a>
+            <a href="https://github.com/robert-dopieralski"><img class="github" src="./img/GIT.png" alt="My GitHub"></a>
+        </div>
+
     </div>
+   </div>
 
-    <footer></footer>
-    <script src="script.js"></script>
+   </div>
+   </div>
+   <script src="script.js"></script>
 </body>
 
 </html>
