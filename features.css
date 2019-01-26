@@ -12,8 +12,11 @@ html body {
 .features {
     font-family: 'Domine', serif;
     font-size: 20px;
-    margin: 15% 10%;
-    
+    /* margin: 15% 10%; */
+    width: 80%;
+    padding-top: 150px;
+    padding-bottom: 150px;
+    margin: 0 auto;
 
     display: grid;
     grid-template-rows: auto 1fr 1fr 1fr;
@@ -24,8 +27,8 @@ html body {
     font-family: 'Montserrat', sans-serif;
     font-weight: 500;
     font-size: 2rem;
-    margin: 2%;
-    padding: 2% 0;
+    /* margin: 2%; */
+    padding: 2%;
     justify-self: left;
 }
 .fh2>p {

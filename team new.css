@@ -24,7 +24,7 @@ html body {
 .team-title{
     font-size: 2rem;
     justify-self: left;
-    padding: 3% 0;
+    padding: 2%;
 }
 .team-title>span{
     color: #cdaf82;
