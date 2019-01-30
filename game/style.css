@@ -1,0 +1,33 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+
+}
+
+.plansza{
+    height: 80vh;
+    background-color: black;
+    width: 80vh;
+}
+
+.lewo{
+    width: 30vh;
+    height: 80vh;
+    background-color: aqua;
+}
+
+/* .prawo{
+    width: 20vh;
+    height: 80vh;
+    background-color: aqua;
+} */
