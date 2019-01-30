@@ -68,7 +68,6 @@ function spawnPlayer() {
 }
 
 function detectRotation() {
-    console.log(game.player.rotation)
     if (game.player.rotateLeft === true) {
         game.player.rotation -= game.player.rotationSpeed
         if(game.player.rotation <=(-360)){
