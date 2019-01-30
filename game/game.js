@@ -22,10 +22,12 @@ const game = {
 //functions being launched here (CUZ SCOPE)
 spawnPlayer()
 setInterval(updateData, 16)
+function move(){
 
+}
 
 function updateData() {
-    detectRotation()
+    rotation()
     acceleration()
     //console.log(game.player.speed)
     player.style.transform = 'rotate(' + game.player.rotation + "deg)"
@@ -67,16 +69,16 @@ function spawnPlayer() {
     gameBoard.appendChild(player)
 }
 
-function detectRotation() {
+function rotation() {
     if (game.player.rotateLeft === true) {
-        game.player.rotation -= game.player.rotationSpeed
-        if(game.player.rotation <=(-360)){
+        game.player.rotation += game.player.rotationSpeed
+        if(game.player.rotation >=360){
             game.player.rotation = 0    
         }
     }
     if (game.player.rotateRight === true) {
-        game.player.rotation += game.player.rotationSpeed
-        if(game.player.rotation >=360){
+        game.player.rotation -= game.player.rotationSpeed
+        if(game.player.rotation <=(-360)){
             game.player.rotation = 0    
         }
     }
