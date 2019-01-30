@@ -8,7 +8,7 @@ const game = {
         rotation: 0,
         position: { x: 50, y: 50 },
         speed: 0,
-        maxSpeed: 18,
+        maxSpeed: 10,
         direction: { x: 0, y: 0 },
         acceleration: 0.35,
         rotateLeft: false,
@@ -21,13 +21,13 @@ const game = {
 
 //functions being launched here (CUZ SCOPE)
 spawnPlayer()
-setInterval(updatePosition, 16)
+setInterval(updateData, 16)
 
 
-function updatePosition() {
+function updateData() {
     detectRotation()
-    ifAccelerate()
-    console.log(game.player.speed)
+    acceleration()
+    //console.log(game.player.speed)
     player.style.transform = 'rotate(' + game.player.rotation + "deg)"
 }
 
@@ -76,15 +76,29 @@ function detectRotation() {
     }
 }
 
-function ifAccelerate() {
+function acceleration() {
     if (game.player.moveForward === true) {
         if (game.player.speed <= game.player.maxSpeed) {
             game.player.speed += game.player.acceleration
+            game.player.speed = Math.round(game.player.speed)
+        }
+    }
+    else {
+        if (game.player.speed > 0) {
+            game.player.speed -= game.player.acceleration
+            game.player.speed = Math.round(game.player.speed)
         }
     }
     if (game.player.moveBackward === true) {
         if (game.player.speed >= (game.player.maxSpeed * (-1))) {
             game.player.speed -= game.player.acceleration
+            game.player.speed = Math.round(game.player.speed)
+        }
+    }
+    else {
+        if (game.player.speed < 0) {
+            game.player.speed += game.player.acceleration
+            game.player.speed = Math.round(game.player.speed)
         }
     }
 }
