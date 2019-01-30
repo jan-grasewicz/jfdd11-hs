@@ -18,12 +18,21 @@
     height: 80vh;
     background-color: black;
     width: 80vh;
+    position: relative;
 }
 
 .lewo{
     width: 30vh;
     height: 80vh;
     background-color: aqua;
+}
+
+.player{
+    position: absolute;
+    width: 100px;
+    height: 30px;
+    background-color: red;
+    
 }
 
 /* .prawo{
