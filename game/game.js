@@ -3,12 +3,14 @@ let player = document.createElement('div')
 player.classList.add('player')
 
 
-let game = {
+const game = {
     player: {
         rotation: 0,
         position: { x: 50, y: 50 },
-        speed: { x: 0, y: 0 },
-        acceleration: { x: 0, y: 0 },
+        speed: 0,
+        maxSpeed: 18,
+        direction: { x: 0, y: 0 },
+        acceleration: 0.35,
         rotateLeft: false,
         rotateRight: false,
         moveForward: false,
@@ -17,15 +19,16 @@ let game = {
     }
 }
 
-//functions being launched here (scope)
+//functions being launched here (CUZ SCOPE)
 spawnPlayer()
-setInterval(updatePosition, 50)
+setInterval(updatePosition, 16)
 
 
 function updatePosition() {
     detectRotation()
+    ifAccelerate()
+    console.log(game.player.speed)
     player.style.transform = 'rotate(' + game.player.rotation + "deg)"
-    console.log(game.player.rotation + "deg")
 }
 
 window.addEventListener('keydown', function (event) {
@@ -70,5 +73,18 @@ function detectRotation() {
     }
     if (game.player.rotateRight === true) {
         game.player.rotation += game.player.rotationSpeed
+    }
+}
+
+function ifAccelerate() {
+    if (game.player.moveForward === true) {
+        if (game.player.speed <= game.player.maxSpeed) {
+            game.player.speed += game.player.acceleration
+        }
+    }
+    if (game.player.moveBackward === true) {
+        if (game.player.speed >= (game.player.maxSpeed * (-1))) {
+            game.player.speed -= game.player.acceleration
+        }
     }
 }
