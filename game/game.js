@@ -9,7 +9,7 @@ const game = {
         position: { x: 50, y: 50 },
         speed: 0,
         maxSpeed: 10,
-        direction: { x: 0, y: 0 },
+        direction: { x: 0, y: 0 }, //Current Speed Vector
         acceleration: 0.35,
         rotateLeft: false,
         rotateRight: false,
@@ -22,13 +22,13 @@ const game = {
 //functions being launched here (CUZ SCOPE)
 spawnPlayer()
 setInterval(updateData, 16)
-function move(){
 
-}
+
 
 function updateData() {
     rotation()
     acceleration()
+    calculateDirection()
     //console.log(game.player.speed)
     player.style.transform = 'rotate(' + game.player.rotation + "deg)"
 }
@@ -109,4 +109,10 @@ function acceleration() {
             game.player.speed = Math.round(game.player.speed)
         }
     }
+}
+
+function calculateDirection(){
+    let toRadians = game.player.speed*Math.PI/180
+    game.player.direction.x = game.player.speed*Math.cos(toRadians)
+    game.player.direction.y = game.player.speed*Math.sin(toRadians)
 }
