@@ -27,20 +27,27 @@ let popupBtn = document.createElement('a');
 let divInside = document.createElement('div');
 let bodyAdd = document.querySelector('body');
 let containerBlur = document.querySelector('.container');
+let formValid = document.querySelector('form');
 let popupFinal = document.body.appendChild(popupDiv).appendChild(divInside);
 
-btnSub.addEventListener('click', function() {
+formValid.addEventListener('submit', function(event) {
+    event.stopPropagation();
+    event.preventDefault()
     containerBlur.style.filter = 'blur(5px)';
     popupDiv.classList.add('popup');
     popupFinal.appendChild(popupText);
     popupFinal.appendChild(popupBtn);
-    popupText.innerText = 'Dziękujemy za zaufanie! W ramach podziękowania, przygotowaliśmy dla Ciebie małą niespodziankę. Wyjątkową piwną grę. Sprawdź!'
-    popupBtn.innerText = "Zagraj!"
+    popupText.innerText = 'Thank you for your trust! We have prepared a small surprise for you, tap the button and play our web game!'
+    popupBtn.innerText = "Play!"
     popupBtn.href = "#";
+    popupDiv.style.display = 'block';
+})
+
+popupDiv.addEventListener('click', function(event) {
+    event.stopPropagation();
 })
 
 containerBlur.addEventListener('click', function() {
-    // event.stopPropagation();
     popupDiv.style.display = 'none';
     containerBlur.style.filter = 'none'
 })
