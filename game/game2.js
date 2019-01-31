@@ -10,19 +10,24 @@ let game = {
         speed: 0,
         maxSpeed: 3,
         direction: { x: 0, y: 0 }, //Current Speed Vector 
-        acceleration: 1,
+        acceleration: 0.3,
         rotateLeft: false,
         rotateRight: false,
         moveForward: false,
         moveBackward: false,
         rotationSpeed: 6,
         rotationInRadians: 0,
+    },
+
+    board: {
+        width: gameBoard.clientWidth,
+        height: gameBoard.clientHeight
     }
 }
 
 //functions being launched here
 spawnPlayer()
-setInterval(animation, 25)
+setInterval(animation, 16)
 
 function animation() {
     rotation()
@@ -30,9 +35,11 @@ function animation() {
     computeDirection()
     accelerate()
     move()
-    
+
     //console.log(game.player.direction)
 }
+
+console.log(game.board)
 
 function accelerate() {
     if (game.player.moveForward === false && game.player.moveBackward === false || game.player.moveForward === true && game.player.moveBackward === true) {
@@ -53,14 +60,15 @@ function accelerate() {
             game.player.speed -= game.player.acceleration
         }
     }
-    console.log(game.player.speed)
 }
 
 function move() {
     game.player.position.x += (game.player.direction.x * Math.abs(game.player.speed))
     game.player.position.y += game.player.direction.y * Math.abs(game.player.speed)
-    player.style.top = game.player.position.y + "px"
-    player.style.left = game.player.position.x + "px"
+    if (game.player.position.x > 0 && game.player.position.y > 0 ){
+        player.style.top = game.player.position.y + "px"
+        player.style.left = game.player.position.x + "px"
+    }
 }
 
 function computeDirection() {
