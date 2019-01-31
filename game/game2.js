@@ -7,10 +7,11 @@ let game = {
     player: {
         rotation: 0,
         position: { x: 50, y: 50 },
+        startPosition: { x: 50, y: 50 },
         speed: 0,
-        maxSpeed: 3,
+        maxSpeed: 2,
         direction: { x: 0, y: 0 }, //Current Speed Vector 
-        acceleration: 0.3,
+        acceleration: 0.2,
         rotateLeft: false,
         rotateRight: false,
         moveForward: false,
@@ -18,28 +19,37 @@ let game = {
         rotationSpeed: 6,
         rotationInRadians: 0,
     },
-
     board: {
-        width: gameBoard.clientWidth,
-        height: gameBoard.clientHeight
+        //to miejsce nalezy wyregulowac po ustawieniu awatara gracza coby nie przechodził przez ściany!
+        width: gameBoard.offsetWidth - 70,
+        height: gameBoard.offsetHeight - 60,
     }
 }
-
 //functions being launched here
+
 spawnPlayer()
 setInterval(animation, 16)
 
 function animation() {
+
     rotation()
     rotationToRadians()
     computeDirection()
     accelerate()
     move()
+    detectWallCollision()
 
     //console.log(game.player.direction)
 }
 
-console.log(game.board)
+function detectWallCollision() {
+    if (game.player.position.x <= 0 || game.player.position.x >= game.board.width) {
+        spawnPlayer()
+    }
+    if (game.player.position.y <= 0 || game.player.position.y >= game.board.height) {
+        spawnPlayer()
+    }
+}
 
 function accelerate() {
     if (game.player.moveForward === false && game.player.moveBackward === false || game.player.moveForward === true && game.player.moveBackward === true) {
@@ -65,7 +75,7 @@ function accelerate() {
 function move() {
     game.player.position.x += (game.player.direction.x * Math.abs(game.player.speed))
     game.player.position.y += game.player.direction.y * Math.abs(game.player.speed)
-    if (game.player.position.x > 0 && game.player.position.y > 0 ){
+    if (game.player.position.x > 0 && game.player.position.y > 0) {
         player.style.top = game.player.position.y + "px"
         player.style.left = game.player.position.x + "px"
     }
@@ -98,8 +108,15 @@ function rotation() {
 }
 
 function spawnPlayer() {
-    player.style.top = game.player.position.y + "px"
-    player.style.left = game.player.position.x + "px"
+    game.player.direction.x = 0
+    game.player.direction.y = 0
+    game.player.speed = 0
+    game.player.rotation = 0
+    player.style.top = game.player.startPosition.x + "px"
+    player.style.left = game.player.startPosition.y + "px"
+    player.style.transform = "rotate(" + game.player.rotation + "deg)"
+    game.player.position.x = game.player.startPosition.x
+    game.player.position.y = game.player.startPosition.y
     gameBoard.appendChild(player)
 }
 
