@@ -29,8 +29,9 @@
 
 .player{
     position: absolute;
-    width: 30px;
-    height: 100px;
+    width: 75px;
+    height: 50px;
+    border-radius: 0%;
     background-color: red;
     rotate: 0 deg;
     
