@@ -149,3 +149,39 @@ window.addEventListener('keyup', function (event) {
         game.player.moveBackward = false
     }
 })
+
+// countdown
+
+let countdown;
+const timerDisplay = document.querySelector('.secs')
+
+function timer(seconds) {
+    const now = Date.now();
+    const then = now + seconds * 1000;
+    displayTimeLeft(seconds);
+
+    countdown = setInterval(() => {
+        const secondsLeft = Math.round((then - Date.now()) / 1000);
+
+        if (secondsLeft < 0) {
+            clearInterval(countdown);
+            timerDisplay.style.fontSize = `22px`;
+            timerDisplay.style.color = 'red';
+            timerDisplay.style.fontWeight = 'bold';
+            timerDisplay.innerHTML = 'Failed to get DRUNK'
+            return;
+        }
+
+        displayTimeLeft(secondsLeft);
+    }, 1000)
+
+    function displayTimeLeft(seconds) {
+        const minutes = Math.floor(seconds / 60);
+        const secondsLeft = seconds % 60;
+        const display = `${minutes}: ${secondsLeft < 10 ? '0' : ''}${secondsLeft}`;
+        timerDisplay.innerHTML = display;
+
+    }
+}
+
+timer(2);
