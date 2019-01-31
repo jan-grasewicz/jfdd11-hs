@@ -29,15 +29,9 @@
 
 .player{
     position: absolute;
-    width: 100px;
-    height: 30px;
+    width: 30px;
+    height: 100px;
     background-color: red;
     rotate: 0 deg;
     
 }
-
-/* .prawo{
-    width: 20vh;
-    height: 80vh;
-    background-color: aqua;
-} */
