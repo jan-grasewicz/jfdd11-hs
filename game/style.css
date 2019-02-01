@@ -17,15 +17,14 @@ body {
     height: 100vh;
 }
 
-.plansza {
+.board{
     height: 80vh;
     background-color: black;
     width: 80vh;
     position: relative;
 }
 
-.lewo {
-    position: relative;
+.left-side{
     width: 30vh;
     height: 80vh;
     background-color: aqua;
