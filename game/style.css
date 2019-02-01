@@ -8,6 +8,54 @@ body {
     font-family: 'domine';
 }
 
+.beer{
+    width: 200px;
+    height: 300px;
+    background-color: yellow;
+    border: 5px solid black;
+    position: absolute;
+    top: 450px;
+    left: 20px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+.beer::after{
+    display: block;
+    border-radius: 50%;
+    content: '';
+    background-color: rgba(255, 255, 255, 0.582);
+    width: 40px;
+    height: 280px;
+    position: absolute;
+    top: 6px;
+    left: 10px;
+
+}
+
+.beer-ear{
+    width: 80px;
+    height: 100px;
+    background-color:  black;
+    border: 5px solid black;
+    position: absolute;
+    top: 80px;
+    left: 180px;
+    border-top-right-radius: 50%;
+    border-bottom-right-radius: 50%;
+
+}
+.beer-ear::before{
+    display: block;
+    border-top-right-radius: 50%;
+    border-bottom-right-radius: 50%;
+    content: '';
+    background-color: rgb(196, 194, 194);
+    width: 65px;
+    height: 89px;
+    top: 0;
+}
+
 .container {
     display: flex;
     flex-direction: row;
@@ -18,16 +66,20 @@ body {
 }
 
 .board{
-    height: 80vh;
+    background-image: url(plansza.jpg);
+    background-position: center;
+    background-size: cover;
+    height: 850px;
     background-color: black;
-    width: 80vh;
+    width: 850px;
     position: relative;
 }
 
 .left-side{
-    width: 30vh;
-    height: 80vh;
-    background-color: aqua;
+    position: relative;
+    width: 310px;
+    height: 850px;
+    background-color: rgb(196, 194, 194);
 }
 
 .player {
