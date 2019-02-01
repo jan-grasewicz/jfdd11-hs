@@ -42,24 +42,6 @@ body {
 
 /* CSS LICZNIKA CZASU */
 
-/* .timeContainer {
-    position: absolute;
-    top: 15%;
-    left: 10%;
-    right: 10%;
-    width: 80%;
-    height: 30%;
-    background-color: red;
-} */
-
-.info {
-    margin-top: 2rem;
-    text-transform: uppercase;
-    font-size: 1.6rem;
-    text-align: center;
-    font-weight: 700;
-}
-
 .timeContainer {
     position: absolute;
     top: 15%;
@@ -70,6 +52,14 @@ body {
     background-color: white;
     border: 10px solid black;
     border-radius: 50%;
+}
+
+.info {
+    margin-top: 2rem;
+    text-transform: uppercase;
+    font-size: 1.6rem;
+    text-align: center;
+    font-weight: 700;
 }
 
 .secs {
