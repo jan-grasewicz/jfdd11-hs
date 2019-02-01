@@ -1,38 +1,73 @@
-*{
+* {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
-.container{
+body {
+    font-family: 'domine';
+}
+
+.container {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
     width: 100%;
     height: 100vh;
-
 }
 
-.plansza{
+.plansza {
     height: 80vh;
     background-color: black;
     width: 80vh;
     position: relative;
 }
 
-.lewo{
+.lewo {
+    position: relative;
     width: 30vh;
     height: 80vh;
     background-color: aqua;
 }
 
-.player{
+.player {
     position: absolute;
     width: 75px;
     height: 50px;
     border-radius: 0%;
     background-color: red;
     rotate: 0 deg;
-    
+}
+
+/* CSS LICZNIKA CZASU */
+
+.timeContainer {
+    position: absolute;
+    top: 15%;
+    left: 20%;
+    right: 20%;
+    width: 60%;
+    height: 20%;
+    background-color: white;
+    border: 10px solid black;
+    border-radius: 50%;
+}
+
+.info {
+    margin-top: 2rem;
+    text-transform: uppercase;
+    font-size: 1.6rem;
+    text-align: center;
+    font-weight: 700;
+}
+
+.secs {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    font-size: 3rem;
 }
