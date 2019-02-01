@@ -184,4 +184,4 @@ function timer(seconds) {
     }
 }
 
-timer(2);
+timer(60);
