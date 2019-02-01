@@ -160,15 +160,26 @@ let normalizedPositions = flatPositions.map(pos => ({ x: pos.x * 10 + 10, y: pos
 let cssPositions = normalizedPositions.map(pos => ({ x: pos.x + '%', y: pos.y + '%' }))
 
 
-var items = cssPositions;
-var result = []
-for (let i = 0; i < 5; i++) {
-    result.push(
-        items.splice(
-            Math.floor(Math.random() * items.length),
-            1
-        )
-    )
+// function randomBeerPosition(){
+// var result = []
+// for (let i = 0; i < 5; i++) {
+//     result.push(
+//         items.splice(
+//             Math.floor(Math.random() *  cssPositions.length),
+//             1
+//         )
+//     )
+// }
+// }
+function spawnBeer() {
+    createBeer(randomBeerPosition()) //create chce node a dostaje pozycje xy
+}
+
+
+
+function randomBeerPosition() {
+    let positions = cssPositions
+    return positions.splice(Math.floor(Math.random() * positions.length), 1)
 }
 
 function createBeer(whereNode) {
