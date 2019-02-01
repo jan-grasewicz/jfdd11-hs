@@ -113,3 +113,9 @@ for (let i = 0; i < 5; i++) {
         )
     )
 }
+
+function createBeer(whereNode) {
+    const beerNode = document.createElement("div");
+    beerNode.classList.add("beer");
+    whereNode.appendChild(rawCakeNode);
+}
