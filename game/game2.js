@@ -1,4 +1,4 @@
-let gameBoard = document.querySelector('.plansza')
+let gameBoard = document.querySelector('.board')
 let player = document.createElement('div')
 player.classList.add('player')
 

@@ -14,14 +14,14 @@
 
 }
 
-.plansza{
+.board{
     height: 80vh;
     background-color: black;
     width: 80vh;
     position: relative;
 }
 
-.lewo{
+.left-side{
     width: 30vh;
     height: 80vh;
     background-color: aqua;
