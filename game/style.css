@@ -96,6 +96,10 @@ body {
     display: none;
 }
 
+.failMsg {
+    display: none;
+}
+
 .gz {
     display: block;
     margin-top: 50px;
@@ -139,10 +143,6 @@ body {
 .playAgain:hover {
     background-color: #cdaf82;
     color: black;
-}
-
-.failMsg {
-    display: none;
 }
 
 .fail {
