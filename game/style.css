@@ -8,10 +8,9 @@ body {
     font-family: 'domine';
 }
 
-
 /* beer */
 
-.beerCont{
+.beerCont {
     width: 200px;
     height: 300px;
     position: absolute;
@@ -19,7 +18,7 @@ body {
     left: 20px;
 }
 
-.beerCont::after{
+.beerCont::after {
     display: block;
     border-radius: 50%;
     content: '';
@@ -30,13 +29,12 @@ body {
     top: 14px;
     left: 10px;
     z-index: 1;
-
 }
 
-.beer-ear{
+.beer-ear {
     width: 80px;
     height: 100px;
-    background-color:  black;
+    background-color: black;
     border: 5px solid black;
     position: absolute;
     top: 80px;
@@ -44,9 +42,9 @@ body {
     border-top-right-radius: 50%;
     border-bottom-right-radius: 50%;
     z-index: 1;
-
 }
-.beer-ear::before{
+
+.beer-ear::before {
     display: block;
     border-top-right-radius: 50%;
     border-bottom-right-radius: 50%;
@@ -77,13 +75,13 @@ progress {
 progress::-webkit-progress-value {
     border-bottom-left-radius: 20px;
     border-top-left-radius: 20px;
-    background-image: linear-gradient(to right, rgb(239,208,7) 15%,rgb(239,210,21) 65%,rgb(254,252,234) 86%,rgb(254,252,234) 86%);
+    background-image: linear-gradient(to right, rgb(239, 208, 7) 15%, rgb(239, 210, 21) 65%, rgb(254, 252, 234) 86%, rgb(254, 252, 234) 86%);
 }
 
 progress::-moz-progress-bar {
     border-bottom-left-radius: 20px;
     border-top-left-radius: 20px;
-    background-image: linear-gradient(to right, rgb(239,208,7) 15%,rgb(239,210,21) 65%,rgb(254,252,234) 86%,rgb(254,252,234) 86%);
+    background-image: linear-gradient(to right, rgb(239, 208, 7) 15%, rgb(239, 210, 21) 65%, rgb(254, 252, 234) 86%, rgb(254, 252, 234) 86%);
 }
 
 /* */
@@ -97,7 +95,7 @@ progress::-moz-progress-bar {
     height: 100vh;
 }
 
-.board{
+.board {
     background-image: url(plansza.jpg);
     background-position: center;
     background-size: cover;
@@ -107,7 +105,7 @@ progress::-moz-progress-bar {
     position: relative;
 }
 
-.left-side{
+.left-side {
     position: relative;
     width: 310px;
     height: 850px;
@@ -159,8 +157,10 @@ progress::-moz-progress-bar {
 
 .beer {
     position: absolute;
-    width: 6%;
-    height: 6%;
-    background: yellow;
+    width: 50px;
+    height: 50px;
+    background-color: yellow;
+    background: #6c5021 url("../img/brewio.svg") no-repeat center/contain;
     border-radius: 50%;
+    /* cdaf82 */
 }

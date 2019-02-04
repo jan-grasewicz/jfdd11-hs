@@ -198,10 +198,10 @@ function detectBeerCollision() {
     let beerNodeList = document.querySelectorAll('.beer')
     beerNodeList.forEach((beer) => {
         // console.log(beer.style.top)
-        let beerTop = beer.offsetTop 
+        let beerTop = beer.offsetTop
         let beerLeft = beer.offsetLeft
         if (game.player.catchRadius + game.beer.catchRadius > Math.hypot(
-            game.player.position.x - beerLeft, 
+            game.player.position.x - beerLeft,
             game.player.position.y - beerTop)
         ) {
             beer.parentElement.removeChild(beer)
