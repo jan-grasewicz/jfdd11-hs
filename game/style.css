@@ -108,6 +108,7 @@ progress::-moz-progress-bar {
 }
 
 .left-side{
+    font-family: 'Monserrat', sans-serif;
     position: relative;
     width: 310px;
     height: 850px;
