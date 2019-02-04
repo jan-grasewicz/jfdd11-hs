@@ -76,7 +76,7 @@ body {
 /* css pop-up'ów game over i epic win */
 
 .popup {
-    display: flex;
+    display: none;
     justify-content: center;
     position: absolute;
     top: 50%;
@@ -90,6 +90,10 @@ body {
     border: solid 5px #cdaf82;
     background-color: white;
     z-index: 1;
+}
+
+.winMsg {
+    display: none;
 }
 
 .gz {
@@ -133,6 +137,38 @@ body {
 }
 
 .playAgain:hover {
+    background-color: #cdaf82;
+    color: black;
+}
+
+.failMsg {
+    display: none;
+}
+
+.fail {
+    font-size: 3rem;
+    color: rgb(216, 29, 29);
+    margin-top: 10px;
+    font-weight: bold;
+    text-shadow: 1px 2px 5px black;
+}
+
+.tryAgain {
+    display: block;
+    font-size: 1.3rem;
+    border: 2px solid black;
+    margin: 30px auto;
+    border-radius: 10px;
+    width: 200px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    text-decoration: none;
+    text-align: center;
+    transition: background-color 0.5s;
+    color: black;
+}
+
+.tryAgain:hover {
     background-color: #cdaf82;
     color: black;
 }
