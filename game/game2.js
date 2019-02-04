@@ -151,42 +151,50 @@ window.addEventListener('keyup', function (event) {
 })
 
 
-///feature/23
+///feature/23 - spawn beers
 //81 positions on a map written in %
 let range = Array.from({ length: 9 }, (_, i) => i)
 let nestedPositions = range.map(y => range.map(x => ({ x, y })))
 let flatPositions = nestedPositions.reduce((result, next) => result.concat(next), [])
 let normalizedPositions = flatPositions.map(pos => ({ x: pos.x * 10 + 10, y: pos.y * 10 + 10 }))
-let cssPositions = normalizedPositions.map(pos => ({ x: pos.x + '%', y: pos.y + '%' }))
+let cssPositions = normalizedPositions.map(pos => ({ left: pos.x + '%', top: pos.y + '%' }))
+let randomPositions = []
 
-
-// function randomBeerPosition(){
-// var result = []
-// for (let i = 0; i < 5; i++) {
-//     result.push(
-//         items.splice(
-//             Math.floor(Math.random() *  cssPositions.length),
-//             1
-//         )
-//     )
-// }
-// }
-function spawnBeer() {
-    createBeer(randomBeerPosition()) //create chce node a dostaje pozycje xy
-}
-
-
-
-function randomBeerPosition() {
-    let positions = cssPositions
-    return positions.splice(Math.floor(Math.random() * positions.length), 1)
-}
-
-function createBeer(whereNode) {
+function createBeer(whereNode, top, left) {
     const beerNode = document.createElement("div");
     beerNode.classList.add("beer");
+    //console.log(top, left);
+    //beerNode.style.position = 'absolute';
+    beerNode.style.top = top;
+    beerNode.style.left = left;
     whereNode.appendChild(beerNode);
 }
+
+
+function spawnBeers(howMany) {
+    randomBeerPosition(howMany).forEach(pos => createBeer(gameBoard, pos.top, pos.left))
+}
+
+function randomBeerPosition(howMany) {
+
+    for (let i = 0; i < howMany; i++) {
+        randomPositions = randomPositions.concat(
+            cssPositions.splice(
+                Math.floor(Math.random() * cssPositions.length),
+                1
+            )
+        )
+    }
+
+    return randomPositions
+}
+spawnBeers(10)
+
+
+
+
+
+
 // countdown
 
 let countdown;
