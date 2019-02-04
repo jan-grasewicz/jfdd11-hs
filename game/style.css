@@ -8,10 +8,9 @@ body {
     font-family: 'domine';
 }
 
-
 /* beer */
 
-.beerCont{
+.beerCont {
     width: 200px;
     height: 300px;
     position: absolute;
@@ -19,7 +18,7 @@ body {
     left: 20px;
 }
 
-.beerCont::after{
+.beerCont::after {
     display: block;
     border-radius: 50%;
     content: '';
@@ -30,13 +29,12 @@ body {
     top: 14px;
     left: 10px;
     z-index: 1;
-
 }
 
-.beer-ear{
+.beer-ear {
     width: 80px;
     height: 100px;
-    background-color:  black;
+    background-color: black;
     border: 5px solid black;
     position: absolute;
     top: 80px;
@@ -44,9 +42,9 @@ body {
     border-top-right-radius: 50%;
     border-bottom-right-radius: 50%;
     z-index: 1;
-
 }
-.beer-ear::before{
+
+.beer-ear::before {
     display: block;
     border-top-right-radius: 50%;
     border-bottom-right-radius: 50%;
@@ -77,13 +75,13 @@ progress {
 progress::-webkit-progress-value {
     border-bottom-left-radius: 20px;
     border-top-left-radius: 20px;
-    background-image: linear-gradient(to right, rgb(239,208,7) 15%,rgb(239,210,21) 65%,rgb(254,252,234) 86%,rgb(254,252,234) 86%);
+    background-image: linear-gradient(to right, rgb(239, 208, 7) 15%, rgb(239, 210, 21) 65%, rgb(254, 252, 234) 86%, rgb(254, 252, 234) 86%);
 }
 
 progress::-moz-progress-bar {
     border-bottom-left-radius: 20px;
     border-top-left-radius: 20px;
-    background-image: linear-gradient(to right, rgb(239,208,7) 15%,rgb(239,210,21) 65%,rgb(254,252,234) 86%,rgb(254,252,234) 86%);
+    background-image: linear-gradient(to right, rgb(239, 208, 7) 15%, rgb(239, 210, 21) 65%, rgb(254, 252, 234) 86%, rgb(254, 252, 234) 86%);
 }
 
 /* */
@@ -97,7 +95,7 @@ progress::-moz-progress-bar {
     height: 100vh;
 }
 
-.board{
+.board {
     background-image: url(plansza.jpg);
     background-position: center;
     background-size: cover;
@@ -154,6 +152,106 @@ progress::-moz-progress-bar {
     transform: translate(-50%, -50%);
     text-align: center;
     font-size: 3rem;
+}
+
+/* css pop-up'ów game over i epic win */
+
+.popup {
+    display: none;
+    justify-content: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    height: 60%;
+    font-family: 'montserrat';
+    font-weight: bold;
+    text-align: center;
+    border: solid 5px #cdaf82;
+    background-color: white;
+    z-index: 1;
+}
+
+.winMsg {
+    display: none;
+}
+
+.failMsg {
+    display: none;
+}
+
+.gz {
+    display: block;
+    margin-top: 50px;
+    font-size: 2.5rem;
+    text-shadow: 1px 2px 5px black;
+    text-transform: uppercase;
+}
+
+.victory {
+    font-size: 3rem;
+    color: rgb(27, 187, 27);
+    margin-top: 10px;
+    font-weight: bold;
+    text-shadow: 1px 2px 5px black;
+}
+
+.brewio {
+    color: #cdaf82;
+}
+
+.thx {
+    margin: 30px 30px 0 30px;
+    font-size: 1.5rem;
+}
+
+.playAgain {
+    display: block;
+    font-size: 1.3rem;
+    border: 2px solid black;
+    margin: 30px auto;
+    border-radius: 10px;
+    width: 200px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    text-decoration: none;
+    text-align: center;
+    transition: background-color 0.5s;
+    color: black;
+}
+
+.playAgain:hover {
+    background-color: #cdaf82;
+    color: black;
+}
+
+.fail {
+    font-size: 3rem;
+    color: rgb(216, 29, 29);
+    margin-top: 10px;
+    font-weight: bold;
+    text-shadow: 1px 2px 5px black;
+}
+
+.tryAgain {
+    display: block;
+    font-size: 1.3rem;
+    border: 2px solid black;
+    margin: 30px auto;
+    border-radius: 10px;
+    width: 200px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    text-decoration: none;
+    text-align: center;
+    transition: background-color 0.5s;
+    color: black;
+}
+
+.tryAgain:hover {
+    background-color: #cdaf82;
+    color: black;
 }
 
 /* feature 23 */
