@@ -18,20 +18,26 @@ let game = {
         moveBackward: false,
         rotationSpeed: 6,
         rotationInRadians: 0,
+        catchRadius: 25,
+        score: 0
     },
     board: {
         //to miejsce nalezy wyregulowac po ustawieniu awatara gracza coby nie przechodził przez ściany!
         width: gameBoard.offsetWidth - 70,
         height: gameBoard.offsetHeight - 60,
+    },
+    beer: {
+        catchRadius: 25,
     }
 }
 //functions being launched here
 
 spawnPlayer()
+
 setInterval(animation, 16)
 
 function animation() {
-
+    detectBeerCollision()
     rotation()
     rotationToRadians()
     computeDirection()
@@ -158,13 +164,10 @@ let nestedPositions = range.map(y => range.map(x => ({ x, y })))
 let flatPositions = nestedPositions.reduce((result, next) => result.concat(next), [])
 let normalizedPositions = flatPositions.map(pos => ({ x: pos.x * 10 + 10, y: pos.y * 10 + 10 }))
 let cssPositions = normalizedPositions.map(pos => ({ ...pos, left: (pos.x - 3) + '%', top: (pos.y - 3) + '%' }))
-let randomPositions = []
 
 function createBeer(whereNode, top, left) {
     const beerNode = document.createElement("div");
     beerNode.classList.add("beer");
-    //console.log(top, left);
-    //beerNode.style.position = 'absolute';
     beerNode.style.top = top;
     beerNode.style.left = left;
     whereNode.appendChild(beerNode);
@@ -176,9 +179,9 @@ function spawnBeers(howMany) {
 }
 
 function randomBeerPosition(howMany) {
-
+    let positions = []
     for (let i = 0; i < howMany; i++) {
-        randomPositions = randomPositions.concat(
+        positions = positions.concat(
             cssPositions.splice(
                 Math.floor(Math.random() * cssPositions.length),
                 1
@@ -186,20 +189,29 @@ function randomBeerPosition(howMany) {
         )
     }
 
-    return randomPositions
+    return positions
 }
-spawnBeers(1)
 
-// function spawningBeers() {
-//     spawnBeers(5)
-//     window.setInterval({
-//         if(beersOnBoard < 5) {
-//             spawnBeers(1)
-//         }
-//     }
-//         , 500);
+spawnBeers(5)
 
-// }
+function detectBeerCollision() {
+    let beerNodeList = document.querySelectorAll('.beer')
+    beerNodeList.forEach((beer) => {
+        // console.log(beer.style.top)
+        let beerTop = beer.offsetTop 
+        let beerLeft = beer.offsetLeft
+        if (game.player.catchRadius + game.beer.catchRadius > Math.hypot(
+            game.player.position.x - beerLeft, 
+            game.player.position.y - beerTop)
+        ) {
+            beer.parentElement.removeChild(beer)
+            console.log(beer)
+            game.player.score += 1
+            console.log('chlup score: ' + game.player.score)
+            spawnBeers(1)
+        }
+    })
+}
 
 
 //`calc(${pos.x}% - 25px)`
