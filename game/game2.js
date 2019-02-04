@@ -4,33 +4,33 @@ player.classList.add('player')
 
 
 let game = {
-    player: {
-        rotation: 0,
-        position: { x: 50, y: 50 },
-        startPosition: { x: 50, y: 50 },
-        speed: 0,
-        maxSpeed: 2,
-        direction: { x: 0, y: 0 }, //Current Speed Vector 
-        acceleration: 0.2,
-        rotateLeft: false,
-        rotateRight: false,
-        moveForward: false,
-        moveBackward: false,
-        rotationSpeed: 6,
-        rotationInRadians: 0,
-        catchRadius: 25,
-        score: 0
-    },
-    board: {
-        //to miejsce nalezy wyregulowac po ustawieniu awatara gracza coby nie przechodził przez ściany!
-        width: gameBoard.offsetWidth - 70,
-        height: gameBoard.offsetHeight - 60,
-    },
-    beer: {
-        catchRadius: 25,
+        player: {
+            rotation: 0,
+            position: { x: 50, y: 50 },
+            startPosition: { x: 50, y: 50 },
+            speed: 0,
+            maxSpeed: 2,
+            direction: { x: 0, y: 0 }, //Current Speed Vector 
+            acceleration: 0.2,
+            rotateLeft: false,
+            rotateRight: false,
+            moveForward: false,
+            moveBackward: false,
+            rotationSpeed: 6,
+            rotationInRadians: 0,
+            catchRadius: 25,
+            score: 0
+        },
+        board: {
+            //to miejsce nalezy wyregulowac po ustawieniu awatara gracza coby nie przechodził przez ściany!
+            width: gameBoard.offsetWidth - 70,
+            height: gameBoard.offsetHeight - 60,
+        },
+        beer: {
+            catchRadius: 25,
+        }
     }
-}
-//functions being launched here
+    //functions being launched here
 
 spawnPlayer()
 
@@ -126,7 +126,7 @@ function spawnPlayer() {
     gameBoard.appendChild(player)
 }
 
-window.addEventListener('keydown', function (event) {
+window.addEventListener('keydown', function(event) {
     if (event.code === 'ArrowRight') {
         game.player.rotateRight = true
     }
@@ -141,7 +141,7 @@ window.addEventListener('keydown', function (event) {
     }
 })
 
-window.addEventListener('keyup', function (event) {
+window.addEventListener('keyup', function(event) {
     if (event.code === 'ArrowRight') {
         game.player.rotateRight = false
     }
@@ -163,7 +163,7 @@ let range = Array.from({ length: 9 }, (_, i) => i)
 let nestedPositions = range.map(y => range.map(x => ({ x, y })))
 let flatPositions = nestedPositions.reduce((result, next) => result.concat(next), [])
 let normalizedPositions = flatPositions.map(pos => ({ x: pos.x * 10 + 10, y: pos.y * 10 + 10 }))
-let cssPositions = normalizedPositions.map(pos => ({ ...pos, left: (pos.x - 3) + '%', top: (pos.y - 3) + '%' }))
+let cssPositions = normalizedPositions.map(pos => ({...pos, left: (pos.x - 3) + '%', top: (pos.y - 3) + '%' }))
 
 
 function createBeer(whereNode, top, left) {
@@ -199,12 +199,11 @@ function detectBeerCollision() {
     let beerNodeList = document.querySelectorAll('.beer')
     beerNodeList.forEach((beer) => {
         // console.log(beer.style.top)
-        let beerTop = beer.offsetTop 
+        let beerTop = beer.offsetTop
         let beerLeft = beer.offsetLeft
         if (game.player.catchRadius + game.beer.catchRadius > Math.hypot(
-            game.player.position.x - beerLeft, 
-            game.player.position.y - beerTop)
-        ) {
+                game.player.position.x - beerLeft,
+                game.player.position.y - beerTop)) {
             beer.parentElement.removeChild(beer)
             console.log(beer)
             game.player.score += 1
@@ -217,27 +216,56 @@ function detectBeerCollision() {
 
 // beer indicator and "make it harder" function!
 
-let blurBody = document.querySelector('.container');
+let blurBody = document.querySelector('.board');
+let drinkingMsgDiv = document.createElement('div');
+let drinkingMsgText = document.createElement('h1');
 
-function makeItHarder(number){
-    blurBody.style.filter = 'blur' + '(' + number + 'px' + ')'
+
+function makeItHarder(number) {
+    blurBody.style.filter = `blur(${number}px)`;
 }
 
-function beerProgressUp(){
-    document.querySelector('progress').value = game.player.score * 2;
-    if(game.player.score > 10 && game.player.score < 20){
-        makeItHarder(2);
+function drinkingMessage(msg) {
+    if (msg.length > 0) {
+        drinkingMsgDiv.classList.add('drinking-msg')
+        document.querySelector('body').appendChild(drinkingMsgDiv);
+        document.querySelector('.drinking-msg').appendChild(drinkingMsgText);
+        drinkingMsgText.innerText = msg;
     }
-    if(game.player.score > 20 && game.player.score < 30){
+    setTimeout(stopDrinkingMsg, 1500);
+}
+
+function stopDrinkingMsg() {
+    document.querySelector('.drinking-msg').removeChild(drinkingMsgText);
+}
+
+function beerProgressUp() {
+    document.querySelector('progress').value = game.player.score * 2;
+    if (game.player.score > 5 && game.player.score < 10) {
+        makeItHarder(1);
+    } else if (game.player.score === 5) {
+        drinkingMessage('You are getting drunk!')
+    }
+    if (game.player.score > 10 && game.player.score < 20) {
         makeItHarder(3);
     }
-    if(game.player.score > 30 && game.player.score < 51){
-        makeItHarder(5);
-        game.player.acceleration = 0.3;
-        game.player.maxSpeed = 4;
+    if (game.player.score > 20 && game.player.score < 30) {
+        makeItHarder(4);
+    } else if (game.player.score === 20) {
+        drinkingMessage('Slow down bro...')
     }
-    if(game.player.score === 51){
-        alert('YOU WON!')  // dodać popup
+    if (game.player.score > 30 && game.player.score < 40) {
+        makeItHarder(5);
+    }
+    if (game.player.score > 40 && game.player.score < 51) {
+        makeItHarder(8);
+        game.player.acceleration = 0.2;
+        game.player.maxSpeed = 3;
+    } else if (game.player.score === 40) {
+        drinkingMessage('I hope you can make it..')
+    }
+    if (game.player.score === 51) {
+        drinkingMessage('GET TO DA TAXXAA!')
     }
 }
 
@@ -277,4 +305,3 @@ function timer(seconds) {
 }
 
 timer(60);
-

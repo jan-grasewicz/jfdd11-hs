@@ -8,6 +8,7 @@ body {
     font-family: 'domine';
 }
 
+
 /* beer */
 
 .beerCont {
@@ -84,6 +85,7 @@ progress::-moz-progress-bar {
     background-image: linear-gradient(to right, rgb(239, 208, 7) 15%, rgb(239, 210, 21) 65%, rgb(254, 252, 234) 86%, rgb(254, 252, 234) 86%);
 }
 
+
 /* */
 
 .container {
@@ -93,6 +95,7 @@ progress::-moz-progress-bar {
     align-items: center;
     width: 100%;
     height: 100vh;
+    position: relative;
 }
 
 .board {
@@ -105,7 +108,7 @@ progress::-moz-progress-bar {
     position: relative;
 }
 
-.left-side{
+.left-side {
     font-family: 'Monserrat', sans-serif;
     position: relative;
     width: 310px;
@@ -121,6 +124,7 @@ progress::-moz-progress-bar {
     background-color: red;
     rotate: 0 deg;
 }
+
 
 /* CSS LICZNIKA CZASU */
 
@@ -153,6 +157,7 @@ progress::-moz-progress-bar {
     text-align: center;
     font-size: 3rem;
 }
+
 
 /* css pop-up'ów game over i epic win */
 
@@ -254,6 +259,7 @@ progress::-moz-progress-bar {
     color: black;
 }
 
+
 /* feature 23 */
 
 .beer {
@@ -262,4 +268,19 @@ progress::-moz-progress-bar {
     height: 50px;
     background: yellow;
     border-radius: 50%;
+}
+
+.drinking-msg {
+    text-align: center;
+    position: fixed;
+    top: 50%;
+    left: 60%;
+    transform: translate(-50%, -60%);
+    font-size: 25px;
+}
+
+.drinking-msg>h1 {
+    font-size: 55px;
+    font-family: 'Monserrat', sans-serif;
+    color: white;
 }
