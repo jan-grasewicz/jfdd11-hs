@@ -11,7 +11,7 @@ body {
 
 /* beer */
 
-.beer{
+.beerCont{
     width: 200px;
     height: 300px;
     position: absolute;
@@ -19,7 +19,7 @@ body {
     left: 20px;
 }
 
-.beer::after{
+.beerCont::after{
     display: block;
     border-radius: 50%;
     content: '';
