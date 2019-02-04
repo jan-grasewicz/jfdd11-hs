@@ -8,16 +8,15 @@ body {
     font-family: 'domine';
 }
 
+
+/* beer */
+
 .beer{
     width: 200px;
     height: 300px;
-    background-color: yellow;
-    border: 5px solid black;
     position: absolute;
     top: 450px;
     left: 20px;
-    border-bottom-left-radius: 20px;
-    border-bottom-right-radius: 20px;
 }
 
 .beer::after{
@@ -28,8 +27,9 @@ body {
     width: 40px;
     height: 280px;
     position: absolute;
-    top: 6px;
+    top: 14px;
     left: 10px;
+    z-index: 1;
 
 }
 
@@ -43,6 +43,7 @@ body {
     left: 180px;
     border-top-right-radius: 50%;
     border-bottom-right-radius: 50%;
+    z-index: 1;
 
 }
 .beer-ear::before{
@@ -54,7 +55,38 @@ body {
     width: 65px;
     height: 89px;
     top: 0;
+    z-index: 1;
 }
+
+progress {
+    background-color: #f3f3f3;
+    border: 0;
+    bottom: 45px;
+    left: -55px;
+    position: absolute;
+    width: 300px;
+    height: 200px;
+    border-radius: 2px;
+    transform: rotate(-90deg);
+    z-index: 1;
+    border: 5px solid black;
+    border-bottom-left-radius: 20px;
+    border-top-left-radius: 20px;
+}
+
+progress::-webkit-progress-value {
+    border-bottom-left-radius: 20px;
+    border-top-left-radius: 20px;
+    background-image: linear-gradient(to right, rgb(239,208,7) 15%,rgb(239,210,21) 65%,rgb(254,252,234) 86%,rgb(254,252,234) 86%);
+}
+
+progress::-moz-progress-bar {
+    border-bottom-left-radius: 20px;
+    border-top-left-radius: 20px;
+    background-image: linear-gradient(to right, rgb(239,208,7) 15%,rgb(239,210,21) 65%,rgb(254,252,234) 86%,rgb(254,252,234) 86%);
+}
+
+/* */
 
 .container {
     display: flex;
