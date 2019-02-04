@@ -163,7 +163,7 @@ let nestedPositions = range.map(y => range.map(x => ({ x, y })))
 let flatPositions = nestedPositions.reduce((result, next) => result.concat(next), [])
 let normalizedPositions = flatPositions.map(pos => ({ x: pos.x * 10 + 10, y: pos.y * 10 + 10 }))
 let cssPositions = normalizedPositions.map(pos => ({ left: pos.x + '%', top: pos.y + '%' }))
-let randomPositions = []
+
 
 function createBeer(whereNode, top, left) {
     const beerNode = document.createElement("div");
@@ -179,9 +179,9 @@ function spawnBeers(howMany) {
 }
 
 function randomBeerPosition(howMany) {
-
+    let positions = []
     for (let i = 0; i < howMany; i++) {
-        randomPositions = randomPositions.concat(
+        positions = positions.concat(
             cssPositions.splice(
                 Math.floor(Math.random() * cssPositions.length),
                 1
@@ -189,9 +189,9 @@ function randomBeerPosition(howMany) {
         )
     }
 
-    return randomPositions
+    return positions
 }
-spawnBeers(10)
+spawnBeers(5)
 
 function detectBeerCollision() {
     let beerNodeList = document.querySelectorAll('.beer')
@@ -204,8 +204,10 @@ function detectBeerCollision() {
             game.player.position.y - beerTop)
         ) {
             beer.parentElement.removeChild(beer)
+            console.log(beer)
             game.player.score += 1
             console.log('chlup score: ' + game.player.score)
+            spawnBeers(1)
         }
     })
 }
