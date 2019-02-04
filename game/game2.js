@@ -18,11 +18,16 @@ let game = {
         moveBackward: false,
         rotationSpeed: 6,
         rotationInRadians: 0,
+        catchRadius: 25,
+        score: 0
     },
     board: {
         //to miejsce nalezy wyregulowac po ustawieniu awatara gracza coby nie przechodził przez ściany!
         width: gameBoard.offsetWidth - 70,
         height: gameBoard.offsetHeight - 60,
+    },
+    beer: {
+        catchRadius: 25,
     }
 }
 //functions being launched here
@@ -31,7 +36,7 @@ spawnPlayer()
 setInterval(animation, 16)
 
 function animation() {
-
+    detectBeerCollision()
     rotation()
     rotationToRadians()
     computeDirection()
@@ -163,8 +168,6 @@ let randomPositions = []
 function createBeer(whereNode, top, left) {
     const beerNode = document.createElement("div");
     beerNode.classList.add("beer");
-    //console.log(top, left);
-    //beerNode.style.position = 'absolute';
     beerNode.style.top = top;
     beerNode.style.left = left;
     whereNode.appendChild(beerNode);
@@ -190,7 +193,22 @@ function randomBeerPosition(howMany) {
 }
 spawnBeers(10)
 
-
+function detectBeerCollision() {
+    let beerNodeList = document.querySelectorAll('.beer')
+    beerNodeList.forEach((beer) => {
+        // console.log(beer.style.top)
+        let beerTop = beer.offsetTop 
+        let beerLeft = beer.offsetLeft
+        if (game.player.catchRadius + game.beer.catchRadius > Math.hypot(
+            game.player.position.x - beerLeft, 
+            game.player.position.y - beerTop)
+        ) {
+            beer.parentElement.removeChild(beer)
+            game.player.score += 1
+            console.log('chlup score: ' + game.player.score)
+        }
+    })
+}
 
 
 
