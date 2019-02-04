@@ -17,14 +17,15 @@ body {
     height: 100vh;
 }
 
-.board{
+.board {
     height: 80vh;
     background-color: black;
     width: 80vh;
     position: relative;
 }
 
-.left-side{
+.left-side {
+    position: relative;
     width: 30vh;
     height: 80vh;
     background-color: aqua;
