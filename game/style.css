@@ -25,6 +25,7 @@ body {
 }
 
 .left-side {
+    font-family: 'montserrat';
     position: relative;
     width: 30vh;
     height: 80vh;
@@ -70,4 +71,68 @@ body {
     transform: translate(-50%, -50%);
     text-align: center;
     font-size: 3rem;
+}
+
+/* css pop-up'ów game over i epic win */
+
+.popup {
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    height: 60%;
+    font-family: 'montserrat';
+    font-weight: bold;
+    text-align: center;
+    border: solid 5px #cdaf82;
+    background-color: white;
+    z-index: 1;
+}
+
+.gz {
+    display: block;
+    margin-top: 50px;
+    font-size: 2.5rem;
+    text-shadow: 1px 2px 5px black;
+    text-transform: uppercase;
+}
+
+.victory {
+    font-size: 3rem;
+    color: rgb(27, 187, 27);
+    margin-top: 10px;
+    font-weight: bold;
+    text-shadow: 1px 2px 5px black;
+}
+
+.brewio {
+    color: #cdaf82;
+}
+
+.thx {
+    margin: 30px 30px 0 30px;
+    font-size: 1.5rem;
+}
+
+.playAgain {
+    display: block;
+    font-size: 1.3rem;
+    border: 2px solid black;
+    margin: 30px auto;
+    border-radius: 10px;
+    width: 200px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    text-decoration: none;
+    text-align: center;
+    transition: background-color 0.5s;
+    color: black;
+}
+
+.playAgain:hover {
+    background-color: #cdaf82;
+    color: black;
 }
