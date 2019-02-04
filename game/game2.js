@@ -33,6 +33,7 @@ let game = {
 //functions being launched here
 
 spawnPlayer()
+
 setInterval(animation, 16)
 
 function animation() {
@@ -162,7 +163,7 @@ let range = Array.from({ length: 9 }, (_, i) => i)
 let nestedPositions = range.map(y => range.map(x => ({ x, y })))
 let flatPositions = nestedPositions.reduce((result, next) => result.concat(next), [])
 let normalizedPositions = flatPositions.map(pos => ({ x: pos.x * 10 + 10, y: pos.y * 10 + 10 }))
-let cssPositions = normalizedPositions.map(pos => ({ left: pos.x + '%', top: pos.y + '%' }))
+let cssPositions = normalizedPositions.map(pos => ({ ...pos, left: (pos.x - 3) + '%', top: (pos.y - 3) + '%' }))
 
 
 function createBeer(whereNode, top, left) {
@@ -191,6 +192,7 @@ function randomBeerPosition(howMany) {
 
     return positions
 }
+
 spawnBeers(5)
 
 function detectBeerCollision() {
