@@ -157,7 +157,7 @@ let range = Array.from({ length: 9 }, (_, i) => i)
 let nestedPositions = range.map(y => range.map(x => ({ x, y })))
 let flatPositions = nestedPositions.reduce((result, next) => result.concat(next), [])
 let normalizedPositions = flatPositions.map(pos => ({ x: pos.x * 10 + 10, y: pos.y * 10 + 10 }))
-let cssPositions = normalizedPositions.map(pos => ({ left: pos.x + '%', top: pos.y + '%' }))
+let cssPositions = normalizedPositions.map(pos => ({ ...pos, left: (pos.x - 3) + '%', top: (pos.y - 3) + '%' }))
 let randomPositions = []
 
 function createBeer(whereNode, top, left) {
@@ -188,11 +188,21 @@ function randomBeerPosition(howMany) {
 
     return randomPositions
 }
-spawnBeers(10)
+spawnBeers(1)
+
+// function spawningBeers() {
+//     spawnBeers(5)
+//     window.setInterval({
+//         if(beersOnBoard < 5) {
+//             spawnBeers(1)
+//         }
+//     }
+//         , 500);
+
+// }
 
 
-
-
+//`calc(${pos.x}% - 25px)`
 
 
 // countdown
