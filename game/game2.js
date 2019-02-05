@@ -1,5 +1,8 @@
 let gameBoard = document.querySelector('.board')
 let player = document.createElement('div')
+let taxiBoard = document.querySelector('.taxi-board')
+let taxi = document.createElement('div')
+taxi.classList.add('taxi')
 player.classList.add('player')
 
 
@@ -31,11 +34,26 @@ let game = {
         amountToSpawn: 5,
         expiration: 3,
     },
+    taxi: {
+        position: { x: 0 },
+        direction: { x: 0 },
+        speed: 0,
+        catchRadius: 25,
+        timeToArrive: 2,
+        isComing: false,
+    },
+    taxiboard: {
+        width: taxiBoard.offsetWidth,
+        nextToDoor: 0,
+    },
     time: {
-        gameTime: 60
-    }
+        gameTime: 60,
+    },
 }
 //functions being launched here
+
+
+computeNextToDoor()
 
 spawnPlayer()
 
@@ -50,6 +68,9 @@ function animation() {
     accelerate()
     move()
     detectWallCollision()
+    computeTaxiSpeed()
+    taxiIsComing()
+
     beerDisappear()
     //console.log(game.player.direction)
 }
@@ -232,30 +253,86 @@ function detectBeerCollision() {
     })
 }
 
+// taxi coming function //
+
+function computeNextToDoor() {
+    let margins = window.innerWidth - 1400;
+    game.taxiboard.nextToDoor = margins / 2 + 735;
+}
+
+
+function computeTaxiSpeed() {
+    game.taxi.speed = (game.taxiboard.nextToDoor/(game.taxi.timeToArrive * 60));
+}
+
+function taxiIsComing() {
+    if (game.taxi.isComing === true) {
+        game.taxi.position.x += game.taxi.speed;
+        taxi.style.left = game.taxi.position.x + "px";
+        if(game.taxi.position.x > game.taxiboard.nextToDoor) {
+            taxi.style.left = game.taxiboard.nextToDoor + "px"
+            return;
+        }
+    }
+
+}
+
 // beer indicator and "make it harder" function!
 
-//`calc(${pos.x}% - 25px)`
-let blurBody = document.querySelector('.container');
+let blurBody = document.querySelector('.board');
+let drinkingMsgDiv = document.createElement('div');
+let drinkingMsgText = document.createElement('h1');
+
 
 function makeItHarder(number) {
-    blurBody.style.filter = 'blur' + '(' + number + 'px' + ')'
+    blurBody.style.filter = `blur(${number}px)`;
+}
+
+function drinkingMessage(msg) {
+    if (msg.length > 0) {
+        drinkingMsgDiv.classList.add('drinking-msg')
+        document.querySelector('body').appendChild(drinkingMsgDiv);
+        document.querySelector('.drinking-msg').appendChild(drinkingMsgText);
+        drinkingMsgText.innerText = msg;
+    }
+    setTimeout(stopDrinkingMsg, 1500);
+}
+
+function stopDrinkingMsg() {
+    document.querySelector('.drinking-msg').removeChild(drinkingMsgText);
 }
 
 function beerProgressUp() {
     document.querySelector('progress').value = game.player.score * 2;
-    if (game.player.score > 10 && game.player.score < 20) {
-        makeItHarder(2);
+    if (game.player.score > 5 && game.player.score < 10) {
+        makeItHarder(1);
+    } if (game.player.score === 6) {
+        drinkingMessage('You are getting drunk!')
     }
-    if (game.player.score > 20 && game.player.score < 30) {
+    if (game.player.score > 10 && game.player.score < 20) {
         makeItHarder(3);
     }
-    if (game.player.score > 30 && game.player.score < 51) {
+    if (game.player.score > 20 && game.player.score < 30) {
+        makeItHarder(4);
+    } if (game.player.score === 22) {
+        drinkingMessage('Slow down bro...')
+    }
+    if (game.player.score > 30 && game.player.score < 40) {
         makeItHarder(5);
-        game.player.acceleration = 0.3;
-        game.player.maxSpeed = 4;
+    }
+    if (game.player.score > 40 && game.player.score < 51) {
+        makeItHarder(8);
+        game.player.acceleration = 0.2;
+        game.player.maxSpeed = 3;
+    } if (game.player.score === 40) {
+        drinkingMessage('I hope you can make it...')
     }
     if (game.player.score === 51) {
-        alert('YOU WON!')  // dodać popup
+        taxiBoard.appendChild(taxi);
+        game.time.gameTime += 10;
+        game.taxi.isComing = true;
+        taxiIsComing();
+        drinkingMessage('GET TO DA TAXXAA!')
     }
 }
 
@@ -268,22 +345,23 @@ function timer(seconds) {
     const timerDisplay = document.querySelector('.secs')
     const now = Date.now();
     const then = now + seconds * 1000;
-    displayTimeLeft(seconds);
+    displayTimeLeft(game.time.gameTime);
 
     countdown = setInterval(() => {
-        const secondsLeft = Math.round((then - Date.now()) / 1000);
+        //const secondsLeft = Math.round((then - Date.now()) / 1000);
 
-        if (secondsLeft < 0) {
+        if (game.time.gameTime <= 0) {
             clearInterval(countdown);
             timerDisplay.style.fontSize = `22px`;
             timerDisplay.style.color = 'red';
             timerDisplay.style.fontWeight = 'bold';
-            alert('YOU LOSE')
             timerDisplay.innerHTML = 'Failed to get DRUNK'
+            game.player.speed = 0;
+            game.player.maxSpeed = 0;
             return;
         }
 
-        displayTimeLeft(secondsLeft);
+        displayTimeLeft(game.time.gameTime);
         game.time.gameTime--
     }, 1000)
 
