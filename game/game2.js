@@ -209,13 +209,37 @@ function detectBeerCollision() {
             game.player.score += 1
             console.log('chlup score: ' + game.player.score)
             spawnBeers(1)
+            beerProgressUp()
         }
     })
 }
 
+// beer indicator and "make it harder" function!
 
 //`calc(${pos.x}% - 25px)`
+let blurBody = document.querySelector('.container');
 
+function makeItHarder(number){
+    blurBody.style.filter = 'blur' + '(' + number + 'px' + ')'
+}
+
+function beerProgressUp(){
+    document.querySelector('progress').value = game.player.score * 2;
+    if(game.player.score > 10 && game.player.score < 20){
+        makeItHarder(2);
+    }
+    if(game.player.score > 20 && game.player.score < 30){
+        makeItHarder(3);
+    }
+    if(game.player.score > 30 && game.player.score < 51){
+        makeItHarder(5);
+        game.player.acceleration = 0.3;
+        game.player.maxSpeed = 4;
+    }
+    if(game.player.score === 51){
+        alert('YOU WON!')  // dodać popup
+    }
+}
 
 // countdown
 
@@ -235,6 +259,7 @@ function timer(seconds) {
             timerDisplay.style.fontSize = `22px`;
             timerDisplay.style.color = 'red';
             timerDisplay.style.fontWeight = 'bold';
+            alert('YOU LOSE')
             timerDisplay.innerHTML = 'Failed to get DRUNK'
             return;
         }
@@ -252,3 +277,4 @@ function timer(seconds) {
 }
 
 timer(60);
+

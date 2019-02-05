@@ -19,14 +19,33 @@
             <div class="beerCont">
                 <div class="beer-ear">
                 </div>
-                <progress max="100" value="100"></progress>
+                <progress max="100" value="0"></progress>
             </div>
         </div>
         <div class="board">
-
+            <!-- POP-UP GAME OVER / EPIC WIN BELOW -->
+            <div class="popup">
+                <div class="winMsg">
+                    <span class="gz brewio">congratulations!!</span>
+                    <p class="victory">You have WON</p>
+                    <p class="thx">Thank you for playing <span class="brewio">Brewio</span> mini-game. Next info from
+                        Us will be e-mail with
+                        notification of
+                        our app release!</p>
+                    <a class="playAgain" href="#">Play again</a>
+                </div>
+                <div class="failMsg">
+                    <span class="gz brewio">Ewww, we're sorry...</span>
+                    <p class="fail">You have FAILED</p>
+                    <p class="thx">Unfortunately you did not manage to catch enough <span class="brewio">BEERS </span>on
+                        time or get to the <span class="brewio">TAXI</span></p>
+                    <a class="tryAgain" href="#">Try again</a>
+                </div>
+            </div>
         </div>
 
-        <script src="game2.js"></script>
+    </div>
+    <script src="game2.js"></script>
 </body>
 
 </html>
