@@ -1,36 +1,54 @@
 let gameBoard = document.querySelector('.board')
 let player = document.createElement('div')
+let taxiBoard = document.querySelector('.taxi-board')
+let taxi = document.createElement('div')
+taxi.classList.add('taxi')
 player.classList.add('player')
 
 
 let game = {
-        player: {
-            rotation: 0,
-            position: { x: 50, y: 50 },
-            startPosition: { x: 50, y: 50 },
-            speed: 0,
-            maxSpeed: 2,
-            direction: { x: 0, y: 0 }, //Current Speed Vector 
-            acceleration: 0.2,
-            rotateLeft: false,
-            rotateRight: false,
-            moveForward: false,
-            moveBackward: false,
-            rotationSpeed: 6,
-            rotationInRadians: 0,
-            catchRadius: 25,
-            score: 0
-        },
-        board: {
-            //to miejsce nalezy wyregulowac po ustawieniu awatara gracza coby nie przechodził przez ściany!
-            width: gameBoard.offsetWidth - 70,
-            height: gameBoard.offsetHeight - 60,
-        },
-        beer: {
-            catchRadius: 25,
-        }
-    }
-    //functions being launched here
+    player: {
+        rotation: 0,
+        position: { x: 50, y: 50 },
+        startPosition: { x: 50, y: 50 },
+        speed: 0,
+        maxSpeed: 2,
+        direction: { x: 0, y: 0 }, //Current Speed Vector 
+        acceleration: 0.2,
+        rotateLeft: false,
+        rotateRight: false,
+        moveForward: false,
+        moveBackward: false,
+        rotationSpeed: 6,
+        rotationInRadians: 0,
+        catchRadius: 25,
+        score: 0
+    },
+    board: {
+        //to miejsce nalezy wyregulowac po ustawieniu awatara gracza coby nie przechodził przez ściany!
+        width: gameBoard.offsetWidth - 70,
+        height: gameBoard.offsetHeight - 60,
+    },
+    beer: {
+        catchRadius: 25,
+    },
+    taxi: {
+        position: { x: 0 },
+        direction: { x: 0 },
+        speed: 0,
+        catchRadius: 25,
+        timeToArrive: 2,
+        isComing: false,
+    },
+    taxiboard: {
+        width: taxiBoard.offsetWidth,
+        nextToDoor: 0,
+    },
+}
+//functions being launched here
+
+
+computeNextToDoor()
 
 spawnPlayer()
 
@@ -44,6 +62,9 @@ function animation() {
     accelerate()
     move()
     detectWallCollision()
+    computeTaxiSpeed()
+
+    taxiIsComing()
 
     //console.log(game.player.direction)
 }
@@ -126,7 +147,7 @@ function spawnPlayer() {
     gameBoard.appendChild(player)
 }
 
-window.addEventListener('keydown', function(event) {
+window.addEventListener('keydown', function (event) {
     if (event.code === 'ArrowRight') {
         game.player.rotateRight = true
     }
@@ -141,7 +162,7 @@ window.addEventListener('keydown', function(event) {
     }
 })
 
-window.addEventListener('keyup', function(event) {
+window.addEventListener('keyup', function (event) {
     if (event.code === 'ArrowRight') {
         game.player.rotateRight = false
     }
@@ -163,7 +184,7 @@ let range = Array.from({ length: 9 }, (_, i) => i)
 let nestedPositions = range.map(y => range.map(x => ({ x, y })))
 let flatPositions = nestedPositions.reduce((result, next) => result.concat(next), [])
 let normalizedPositions = flatPositions.map(pos => ({ x: pos.x * 10 + 10, y: pos.y * 10 + 10 }))
-let cssPositions = normalizedPositions.map(pos => ({...pos, left: (pos.x - 3) + '%', top: (pos.y - 3) + '%' }))
+let cssPositions = normalizedPositions.map(pos => ({ ...pos, left: (pos.x - 3) + '%', top: (pos.y - 3) + '%' }))
 
 
 function createBeer(whereNode, top, left) {
@@ -202,8 +223,8 @@ function detectBeerCollision() {
         let beerTop = beer.offsetTop
         let beerLeft = beer.offsetLeft
         if (game.player.catchRadius + game.beer.catchRadius > Math.hypot(
-                game.player.position.x - beerLeft,
-                game.player.position.y - beerTop)) {
+            game.player.position.x - beerLeft,
+            game.player.position.y - beerTop)) {
             beer.parentElement.removeChild(beer)
             console.log(beer)
             game.player.score += 1
@@ -212,6 +233,32 @@ function detectBeerCollision() {
             beerProgressUp()
         }
     })
+}
+
+// taxi coming function //
+
+function computeNextToDoor() {
+    let margins = window.innerWidth - 1160;
+    game.taxiboard.nextToDoor = margins / 2 + 735;
+}
+
+
+function computeTaxiSpeed() {
+    game.taxi.speed = (game.taxiboard.nextToDoor/(game.taxi.timeToArrive * 60));
+}
+
+function taxiIsComing() {
+    if (game.taxi.isComing === true) {
+        taxiBoard.appendChild(taxi);
+        game.taxi.position.x += game.taxi.speed;
+        // console.log(game.taxi.speed, game.taxiboard.nextToDoor)
+        taxi.style.left = game.taxi.position.x + "px";
+        if(game.taxi.position.x === game.taxiboard.nextToDoor) {
+            console.log(game.taxi.position.x, game.taxiboard.nextToDoor)
+            game.taxi.speed = 0;
+        }
+    }
+
 }
 
 // beer indicator and "make it harder" function!
@@ -243,7 +290,7 @@ function beerProgressUp() {
     document.querySelector('progress').value = game.player.score * 2;
     if (game.player.score > 5 && game.player.score < 10) {
         makeItHarder(1);
-    } else if (game.player.score === 5) {
+    } if (game.player.score === 6) {
         drinkingMessage('You are getting drunk!')
     }
     if (game.player.score > 10 && game.player.score < 20) {
@@ -251,7 +298,7 @@ function beerProgressUp() {
     }
     if (game.player.score > 20 && game.player.score < 30) {
         makeItHarder(4);
-    } else if (game.player.score === 20) {
+    } if (game.player.score === 22) {
         drinkingMessage('Slow down bro...')
     }
     if (game.player.score > 30 && game.player.score < 40) {
@@ -261,11 +308,13 @@ function beerProgressUp() {
         makeItHarder(8);
         game.player.acceleration = 0.2;
         game.player.maxSpeed = 3;
-    } else if (game.player.score === 40) {
-        drinkingMessage('I hope you can make it..')
+    } if (game.player.score === 40) {
+        drinkingMessage('I hope you can make it...')
     }
-    if (game.player.score === 51) {
+    if (game.player.score === 3 && game.taxi.isComing === false) {
+        taxiIsComing();
         drinkingMessage('GET TO DA TAXXAA!')
+        game.taxi.isComing = true;
     }
 }
 
@@ -282,13 +331,13 @@ function timer(seconds) {
     countdown = setInterval(() => {
         const secondsLeft = Math.round((then - Date.now()) / 1000);
 
-        if (secondsLeft < 0) {
+        if (secondsLeft < 0 && game.player.score < 50) {
             clearInterval(countdown);
             timerDisplay.style.fontSize = `22px`;
             timerDisplay.style.color = 'red';
             timerDisplay.style.fontWeight = 'bold';
-            alert('YOU LOSE')
             timerDisplay.innerHTML = 'Failed to get DRUNK'
+            game.player.maxSpeed = 0;
             return;
         }
 
