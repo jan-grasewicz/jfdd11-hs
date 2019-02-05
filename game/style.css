@@ -88,6 +88,10 @@ progress::-moz-progress-bar {
 
 /* */
 
+.taxi-board{
+    position: relative;
+    height: 50px;
+}
 
 .taxi{
     position: absolute;
@@ -99,7 +103,6 @@ progress::-moz-progress-bar {
 }
 
 .container {
-    margin-top: 50px;
     display: flex;
     flex-direction: row;
     justify-content: center;

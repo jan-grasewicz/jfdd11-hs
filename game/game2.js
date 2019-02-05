@@ -63,7 +63,6 @@ function animation() {
     move()
     detectWallCollision()
     computeTaxiSpeed()
-
     taxiIsComing()
 
     //console.log(game.player.direction)
@@ -238,7 +237,7 @@ function detectBeerCollision() {
 // taxi coming function //
 
 function computeNextToDoor() {
-    let margins = window.innerWidth - 1160;
+    let margins = window.innerWidth - 1400;
     game.taxiboard.nextToDoor = margins / 2 + 735;
 }
 
@@ -249,13 +248,11 @@ function computeTaxiSpeed() {
 
 function taxiIsComing() {
     if (game.taxi.isComing === true) {
-        taxiBoard.appendChild(taxi);
         game.taxi.position.x += game.taxi.speed;
-        // console.log(game.taxi.speed, game.taxiboard.nextToDoor)
         taxi.style.left = game.taxi.position.x + "px";
-        if(game.taxi.position.x === game.taxiboard.nextToDoor) {
-            console.log(game.taxi.position.x, game.taxiboard.nextToDoor)
-            game.taxi.speed = 0;
+        if(game.taxi.position.x > game.taxiboard.nextToDoor) {
+            taxi.style.left = game.taxiboard.nextToDoor + "px"
+            return;
         }
     }
 
@@ -311,7 +308,8 @@ function beerProgressUp() {
     } if (game.player.score === 40) {
         drinkingMessage('I hope you can make it...')
     }
-    if (game.player.score === 3 && game.taxi.isComing === false) {
+    if (game.player.score === 51 && game.taxi.isComing === false) {
+        taxiBoard.appendChild(taxi);
         taxiIsComing();
         drinkingMessage('GET TO DA TAXXAA!')
         game.taxi.isComing = true;
