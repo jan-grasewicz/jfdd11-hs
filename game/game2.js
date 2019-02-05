@@ -31,6 +31,8 @@ let game = {
     },
     beer: {
         catchRadius: 25,
+        amountToSpawn: 5,
+        expiration: 3,
     },
     taxi: {
         position: { x: 0 },
@@ -44,6 +46,9 @@ let game = {
         width: taxiBoard.offsetWidth,
         nextToDoor: 0,
     },
+    time: {
+        gameTime: 60,
+    },
 }
 //functions being launched here
 
@@ -53,7 +58,8 @@ computeNextToDoor()
 spawnPlayer()
 
 setInterval(animation, 16)
-
+timer(game.time.gameTime);
+spawnBeers(game.beer.amountToSpawn)
 function animation() {
     detectBeerCollision()
     rotation()
@@ -65,6 +71,7 @@ function animation() {
     computeTaxiSpeed()
     taxiIsComing()
 
+    beerDisappear()
     //console.log(game.player.direction)
 }
 
@@ -178,28 +185,28 @@ window.addEventListener('keyup', function (event) {
 
 
 ///feature/23 - spawn beers
-//81 positions on a map written in %
-let range = Array.from({ length: 9 }, (_, i) => i)
-let nestedPositions = range.map(y => range.map(x => ({ x, y })))
-let flatPositions = nestedPositions.reduce((result, next) => result.concat(next), [])
-let normalizedPositions = flatPositions.map(pos => ({ x: pos.x * 10 + 10, y: pos.y * 10 + 10 }))
-let cssPositions = normalizedPositions.map(pos => ({ ...pos, left: (pos.x - 3) + '%', top: (pos.y - 3) + '%' }))
-
-
 function createBeer(whereNode, top, left) {
     const beerNode = document.createElement("div");
     beerNode.classList.add("beer");
     beerNode.style.top = top;
     beerNode.style.left = left;
+    beerNode.prefixs = game.time.gameTime
     whereNode.appendChild(beerNode);
 }
-
 
 function spawnBeers(howMany) {
     randomBeerPosition(howMany).forEach(pos => createBeer(gameBoard, pos.top, pos.left))
 }
 
 function randomBeerPosition(howMany) {
+    //81 positions on a map written in %
+
+    let range = Array.from({ length: 9 }, (_, i) => i)
+    let nestedPositions = range.map(y => range.map(x => ({ x, y })))
+    let flatPositions = nestedPositions.reduce((result, next) => result.concat(next), [])
+    let normalizedPositions = flatPositions.map(pos => ({ x: pos.x * 10 + 10, y: pos.y * 10 + 10 }))
+    let cssPositions = normalizedPositions.map(pos => ({ ...pos, left: (pos.x - 3) + '%', top: (pos.y - 3) + '%' }))
+    //choosing position at random
     let positions = []
     for (let i = 0; i < howMany; i++) {
         positions = positions.concat(
@@ -209,11 +216,22 @@ function randomBeerPosition(howMany) {
             )
         )
     }
-
     return positions
 }
+//feature/31- beers disappear
+function beerDisappear() {
+    let beerList = document.querySelectorAll('.beer')
+    for (i = 0; i < beerList.length; i++) {
+        let beer = beerList[i]
+        let beerCreated = (beer.prefixs)
+        if (beerCreated - game.time.gameTime >= game.beer.expiration) {
+            beer.parentElement.removeChild(beer)
+            spawnBeers(1)
+        }
+    }
+}
 
-spawnBeers(5)
+
 
 function detectBeerCollision() {
     let beerNodeList = document.querySelectorAll('.beer')
@@ -223,7 +241,8 @@ function detectBeerCollision() {
         let beerLeft = beer.offsetLeft
         if (game.player.catchRadius + game.beer.catchRadius > Math.hypot(
             game.player.position.x - beerLeft,
-            game.player.position.y - beerTop)) {
+            game.player.position.y - beerTop)
+        ) {
             beer.parentElement.removeChild(beer)
             console.log(beer)
             game.player.score += 1
@@ -308,38 +327,42 @@ function beerProgressUp() {
     } if (game.player.score === 40) {
         drinkingMessage('I hope you can make it...')
     }
-    if (game.player.score === 51 && game.taxi.isComing === false) {
+    if (game.player.score === 51) {
         taxiBoard.appendChild(taxi);
+        game.time.gameTime += 10;
+        game.taxi.isComing = true;
         taxiIsComing();
         drinkingMessage('GET TO DA TAXXAA!')
-        game.taxi.isComing = true;
     }
 }
 
 // countdown
 
-let countdown;
-const timerDisplay = document.querySelector('.secs')
+
 
 function timer(seconds) {
+    let countdown;
+    const timerDisplay = document.querySelector('.secs')
     const now = Date.now();
     const then = now + seconds * 1000;
-    displayTimeLeft(seconds);
+    displayTimeLeft(game.time.gameTime);
 
     countdown = setInterval(() => {
-        const secondsLeft = Math.round((then - Date.now()) / 1000);
+        //const secondsLeft = Math.round((then - Date.now()) / 1000);
 
-        if (secondsLeft < 0 && game.player.score < 50) {
+        if (game.time.gameTime <= 0) {
             clearInterval(countdown);
             timerDisplay.style.fontSize = `22px`;
             timerDisplay.style.color = 'red';
             timerDisplay.style.fontWeight = 'bold';
             timerDisplay.innerHTML = 'Failed to get DRUNK'
+            game.player.speed = 0;
             game.player.maxSpeed = 0;
             return;
         }
 
-        displayTimeLeft(secondsLeft);
+        displayTimeLeft(game.time.gameTime);
+        game.time.gameTime--
     }, 1000)
 
     function displayTimeLeft(seconds) {
@@ -351,4 +374,5 @@ function timer(seconds) {
     }
 }
 
-timer(60);
+
+
