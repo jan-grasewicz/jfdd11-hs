@@ -165,7 +165,6 @@ let flatPositions = nestedPositions.reduce((result, next) => result.concat(next)
 let normalizedPositions = flatPositions.map(pos => ({ x: pos.x * 10 + 10, y: pos.y * 10 + 10 }))
 let cssPositions = normalizedPositions.map(pos => ({ ...pos, left: (pos.x - 3) + '%', top: (pos.y - 3) + '%' }))
 
-
 function createBeer(whereNode, top, left) {
     const beerNode = document.createElement("div");
     beerNode.classList.add("beer");
@@ -199,10 +198,10 @@ function detectBeerCollision() {
     let beerNodeList = document.querySelectorAll('.beer')
     beerNodeList.forEach((beer) => {
         // console.log(beer.style.top)
-        let beerTop = beer.offsetTop 
+        let beerTop = beer.offsetTop
         let beerLeft = beer.offsetLeft
         if (game.player.catchRadius + game.beer.catchRadius > Math.hypot(
-            game.player.position.x - beerLeft, 
+            game.player.position.x - beerLeft,
             game.player.position.y - beerTop)
         ) {
             beer.parentElement.removeChild(beer)
@@ -217,6 +216,7 @@ function detectBeerCollision() {
 
 // beer indicator and "make it harder" function!
 
+//`calc(${pos.x}% - 25px)`
 let blurBody = document.querySelector('.container');
 
 function makeItHarder(number){
