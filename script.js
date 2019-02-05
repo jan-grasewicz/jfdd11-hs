@@ -39,7 +39,7 @@ formValid.addEventListener('submit', function(event) {
     popupFinal.appendChild(popupBtn);
     popupText.innerText = 'Thank you for your trust! We have prepared a small surprise for you, tap the button and play our web game!'
     popupBtn.innerText = "Play!"
-    popupBtn.href = "#";
+    popupBtn.href = "game/index.html";
     popupDiv.style.display = 'block';
 })
 
