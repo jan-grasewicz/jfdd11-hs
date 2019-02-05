@@ -188,6 +188,7 @@ function randomBeerPosition(howMany) {
     //choosing position at random
     let positions = []
     for (let i = 0; i < howMany; i++) {
+
         positions = positions.concat(
             cssPositions.splice(
                 Math.floor(Math.random() * cssPositions.length),
