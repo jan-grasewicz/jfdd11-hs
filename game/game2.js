@@ -28,6 +28,11 @@ let game = {
     },
     beer: {
         catchRadius: 25,
+        amountToSpawn: 5,
+        expiration: 3,
+    },
+    time: {
+        gameTime: 60
     }
 }
 //functions being launched here
@@ -35,7 +40,8 @@ let game = {
 spawnPlayer()
 
 setInterval(animation, 16)
-
+timer(game.time.gameTime);
+spawnBeers(game.beer.amountToSpawn)
 function animation() {
     detectBeerCollision()
     rotation()
@@ -44,7 +50,7 @@ function animation() {
     accelerate()
     move()
     detectWallCollision()
-
+    beerDisappear()
     //console.log(game.player.direction)
 }
 
@@ -158,27 +164,28 @@ window.addEventListener('keyup', function (event) {
 
 
 ///feature/23 - spawn beers
-//81 positions on a map written in %
-let range = Array.from({ length: 9 }, (_, i) => i)
-let nestedPositions = range.map(y => range.map(x => ({ x, y })))
-let flatPositions = nestedPositions.reduce((result, next) => result.concat(next), [])
-let normalizedPositions = flatPositions.map(pos => ({ x: pos.x * 10 + 10, y: pos.y * 10 + 10 }))
-let cssPositions = normalizedPositions.map(pos => ({ ...pos, left: (pos.x - 3) + '%', top: (pos.y - 3) + '%' }))
-
 function createBeer(whereNode, top, left) {
     const beerNode = document.createElement("div");
     beerNode.classList.add("beer");
     beerNode.style.top = top;
     beerNode.style.left = left;
+    beerNode.prefixs = game.time.gameTime
     whereNode.appendChild(beerNode);
 }
-
 
 function spawnBeers(howMany) {
     randomBeerPosition(howMany).forEach(pos => createBeer(gameBoard, pos.top, pos.left))
 }
 
 function randomBeerPosition(howMany) {
+    //81 positions on a map written in %
+
+    let range = Array.from({ length: 9 }, (_, i) => i)
+    let nestedPositions = range.map(y => range.map(x => ({ x, y })))
+    let flatPositions = nestedPositions.reduce((result, next) => result.concat(next), [])
+    let normalizedPositions = flatPositions.map(pos => ({ x: pos.x * 10 + 10, y: pos.y * 10 + 10 }))
+    let cssPositions = normalizedPositions.map(pos => ({ ...pos, left: (pos.x - 3) + '%', top: (pos.y - 3) + '%' }))
+    //choosing position at random
     let positions = []
     for (let i = 0; i < howMany; i++) {
         positions = positions.concat(
@@ -188,11 +195,22 @@ function randomBeerPosition(howMany) {
             )
         )
     }
-
     return positions
 }
+//feature/31- beers disappear
+function beerDisappear() {
+    let beerList = document.querySelectorAll('.beer')
+    for (i = 0; i < beerList.length; i++) {
+        let beer = beerList[i]
+        let beerCreated = (beer.prefixs)
+        if (beerCreated - game.time.gameTime >= game.beer.expiration) {
+            beer.parentElement.removeChild(beer)
+            spawnBeers(1)
+        }
+    }
+}
 
-spawnBeers(5)
+
 
 function detectBeerCollision() {
     let beerNodeList = document.querySelectorAll('.beer')
@@ -219,34 +237,35 @@ function detectBeerCollision() {
 //`calc(${pos.x}% - 25px)`
 let blurBody = document.querySelector('.container');
 
-function makeItHarder(number){
+function makeItHarder(number) {
     blurBody.style.filter = 'blur' + '(' + number + 'px' + ')'
 }
 
-function beerProgressUp(){
+function beerProgressUp() {
     document.querySelector('progress').value = game.player.score * 2;
-    if(game.player.score > 10 && game.player.score < 20){
+    if (game.player.score > 10 && game.player.score < 20) {
         makeItHarder(2);
     }
-    if(game.player.score > 20 && game.player.score < 30){
+    if (game.player.score > 20 && game.player.score < 30) {
         makeItHarder(3);
     }
-    if(game.player.score > 30 && game.player.score < 51){
+    if (game.player.score > 30 && game.player.score < 51) {
         makeItHarder(5);
         game.player.acceleration = 0.3;
         game.player.maxSpeed = 4;
     }
-    if(game.player.score === 51){
+    if (game.player.score === 51) {
         alert('YOU WON!')  // dodać popup
     }
 }
 
 // countdown
 
-let countdown;
-const timerDisplay = document.querySelector('.secs')
+
 
 function timer(seconds) {
+    let countdown;
+    const timerDisplay = document.querySelector('.secs')
     const now = Date.now();
     const then = now + seconds * 1000;
     displayTimeLeft(seconds);
@@ -265,6 +284,7 @@ function timer(seconds) {
         }
 
         displayTimeLeft(secondsLeft);
+        game.time.gameTime--
     }, 1000)
 
     function displayTimeLeft(seconds) {
@@ -276,5 +296,5 @@ function timer(seconds) {
     }
 }
 
-timer(60);
+
 
