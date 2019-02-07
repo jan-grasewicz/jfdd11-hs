@@ -16,7 +16,7 @@ body {
     height: 300px;
     position: absolute;
     top: 450px;
-    left: 20px;
+    left: 35px;
 }
 
 .beerCont::after {
@@ -33,8 +33,8 @@ body {
 }
 
 .beer-ear {
-    width: 80px;
-    height: 100px;
+    width: 70px;
+    height: 120px;
     background-color: lightgray;
     border: 5px solid white;
     position: absolute;
@@ -52,8 +52,8 @@ body {
     content: '';
     /* background-color: rgb(196, 194, 194); */
     background: rgb(27, 27, 27);
-    width: 65px;
-    height: 89px;
+    width: 55px;
+    height: 109px;
     top: 0;
     z-index: 1;
 }
@@ -125,7 +125,7 @@ progress::-moz-progress-bar {
     height: 850px;
     background-color: #cdaf82;
     position: relative;
-    border: 2px #cdaf82 solid;  
+    border: 3px #cdaf82 solid;
 }
 
 .left-side {
@@ -136,7 +136,7 @@ progress::-moz-progress-bar {
     /* background-color: rgb(196, 194, 194); */
     background: rgb(27, 27, 27);
     margin-right: 20px;
-    border: 2px #cdaf82 solid
+    border: 3px #cdaf82 solid
 }
 
 .player {
@@ -158,7 +158,7 @@ progress::-moz-progress-bar {
     width: 60%;
     height: 20%;
     background-color: blackrgb(27, 27, 27);
-    border: 2px solid #cdaf82;
+    border: 3px solid #cdaf82;
     border-radius: 50%;
 }
 
