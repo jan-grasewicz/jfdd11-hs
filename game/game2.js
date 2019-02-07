@@ -98,6 +98,7 @@ function reset() {
     game.player.score = 0
     game.taxi.isComing = false
     game.taxi.position.x = 0
+    game.time.gameTime = 60
     if(document.querySelector('.taxi') !== null){
         taxiBoard.removeChild(taxi);
     }
