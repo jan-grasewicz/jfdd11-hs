@@ -4,14 +4,14 @@ let taxiBoard = document.querySelector('.taxi-board')
 let taxi = document.createElement('div')
 taxi.classList.add('taxi')
 player.classList.add('player')
-let everyPopup = document.querySelector('.popup');
+let everyPopup = document.querySelector('.popup')
 let popupFail = document.querySelector('.failMsg')
 let popupWin = document.querySelector('.winMsg')
 let popupStart = document.querySelector('.startMsg')
 let startGameBtn = document.querySelector('#start-game')
 let tryAgainBtn = document.querySelector('.tryAgain')
 const timerDisplay = document.querySelector('.secs')
-
+let countdown
 
 let game = {
     player: {
@@ -29,7 +29,7 @@ let game = {
         rotationSpeed: 6,
         rotationInRadians: 0,
         catchRadius: 25,
-        score: 0
+        score: 0,
     },
     board: {
         //to miejsce nalezy wyregulowac po ustawieniu awatara gracza coby nie przechodził przez ściany!
@@ -57,9 +57,8 @@ let game = {
         gameTime: 0,
     },
 }
+
 //functions being launched here
-
-
 startGameBtn.addEventListener('click', startGame)
 tryAgainBtn.addEventListener('click', startGame)
 
@@ -98,7 +97,6 @@ function reset() {
 
 }
 
-
 function animation() {
     detectBeerCollision()
     rotation()
@@ -110,6 +108,7 @@ function animation() {
     computeTaxiSpeed()
     taxiIsComing()
     beerDisappear()
+    detectTaxiCollision()
     //console.log(game.player.direction)
 }
 
@@ -193,10 +192,10 @@ function spawnPlayer() {
 
 window.addEventListener('keydown', function (event) {
     if (event.code === 'ArrowRight') {
-        game.player.rotateRight = true
+        game.player.rotateLeft = true
     }
     if (event.code === 'ArrowLeft') {
-        game.player.rotateLeft = true
+        game.player.rotateRight = true
     }
     if (event.code === 'ArrowUp') {
         game.player.moveForward = true
@@ -208,10 +207,10 @@ window.addEventListener('keydown', function (event) {
 
 window.addEventListener('keyup', function (event) {
     if (event.code === 'ArrowRight') {
-        game.player.rotateRight = false
+        game.player.rotateLeft = false
     }
     if (event.code === 'ArrowLeft') {
-        game.player.rotateLeft = false
+        game.player.rotateRight = false
     }
     if (event.code === 'ArrowUp') {
         game.player.moveForward = false
@@ -221,8 +220,6 @@ window.addEventListener('keyup', function (event) {
     }
 })
 
-
-///feature/23 - spawn beers
 function createBeer(whereNode, top, left) {
     const beerNode = document.createElement("div");
     beerNode.classList.add("beer");
@@ -237,14 +234,12 @@ function spawnBeers(howMany) {
 }
 
 function randomBeerPosition(howMany) {
-    //81 positions on a map written in %
 
     let range = Array.from({ length: 9 }, (_, i) => i)
     let nestedPositions = range.map(y => range.map(x => ({ x, y })))
     let flatPositions = nestedPositions.reduce((result, next) => result.concat(next), [])
     let normalizedPositions = flatPositions.map(pos => ({ x: pos.x * 10 + 10, y: pos.y * 10 + 10 }))
     let cssPositions = normalizedPositions.map(pos => ({ ...pos, left: (pos.x - 3) + '%', top: (pos.y - 3) + '%' }))
-    //choosing position at random
     let positions = []
     for (let i = 0; i < howMany; i++) {
 
@@ -257,7 +252,7 @@ function randomBeerPosition(howMany) {
     }
     return positions
 }
-//feature/31- beers disappear
+
 function beerDisappear() {
     let beerList = document.querySelectorAll('.beer')
     for (i = 0; i < beerList.length; i++) {
@@ -269,8 +264,6 @@ function beerDisappear() {
         }
     }
 }
-
-
 
 function detectBeerCollision() {
     let beerNodeList = document.querySelectorAll('.beer')
@@ -292,13 +285,10 @@ function detectBeerCollision() {
     })
 }
 
-// taxi coming function //
-
 function computeNextToDoor() {
     let margins = window.innerWidth - 1400;
     game.taxiboard.nextToDoor = margins / 2 + 735;
 }
-
 
 function computeTaxiSpeed() {
     game.taxi.speed = (game.taxiboard.nextToDoor / (game.taxi.timeToArrive * 60));
@@ -313,15 +303,12 @@ function taxiIsComing() {
             return;
         }
     }
-
 }
 
 // beer indicator and "make it harder" function!
-
 let blurBody = document.querySelector('.board');
 let drinkingMsgDiv = document.createElement('div');
 let drinkingMsgText = document.createElement('h1');
-
 
 function makeItHarder(number) {
     blurBody.style.filter = `blur(${number}px)`;
@@ -384,18 +371,12 @@ function beerProgressUp() {
 }
 
 // countdown
-
-
-
 function timer(seconds) {
-    let countdown;
-
     const now = Date.now();
     const then = now + seconds * 1000;
     displayTimeLeft(game.time.gameTime);
 
     countdown = setInterval(() => {
-        //const secondsLeft = Math.round((then - Date.now()) / 1000);
 
         if (game.time.gameTime <= 0) {
             clearInterval(countdown);
@@ -420,9 +401,32 @@ function timer(seconds) {
         const secondsLeft = seconds % 60;
         const display = `${minutes}:${secondsLeft < 10 ? '0' : ''}${secondsLeft}`;
         timerDisplay.innerHTML = display;
-
     }
 }
 
-
-
+function detectTaxiCollision() {
+    if (player !== null) {
+        let margins = window.innerWidth - (310 + 850)
+        let margin = margins / 2
+        let playerAbsolutePositionX = margin + 310 + game.player.position.x
+        let doorMinX = margin + 310 + 350
+        let doorMaxX = margin + 310 + 450
+        if (playerAbsolutePositionX <= doorMaxX && playerAbsolutePositionX >= doorMinX && game.player.position.y <= 20) {
+            player.parentElement.removeChild(player)
+            beers = document.querySelectorAll('.beer')
+            beers.forEach(beer => {
+                beer.parentElement.removeChild(beer)
+            })
+            game.player.maxSpeed = 0
+            game.player.rotationSpeed = 0
+            game.taxi.speed = (window.innerWidth - game.taxiboard.nextToDoor) / game.taxi.timeToArrive
+            game.taxi.position.x += game.taxi.speed
+            taxi.style.left = game.taxi.position.x + "px"
+            if (game.taxi.position.x >= window.innerWidth) {
+                taxi.parentElement.removeChild(taxi)
+                clearInterval(animationId)
+                clearInterval(countdown)
+            }
+        }
+    }
+}
