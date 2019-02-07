@@ -4,6 +4,13 @@ let taxiBoard = document.querySelector('.taxi-board')
 let taxi = document.createElement('div')
 taxi.classList.add('taxi')
 player.classList.add('player')
+let everyPopup = document.querySelector('.popup');
+let popupFail = document.querySelector('.failMsg')
+let popupWin = document.querySelector('.winMsg')
+let popupStart = document.querySelector('.startMsg')
+let startGameBtn = document.querySelector('#start-game')
+let tryAgainBtn = document.querySelector('.tryAgain')
+const timerDisplay = document.querySelector('.secs')
 
 
 let game = {
@@ -47,19 +54,51 @@ let game = {
         nextToDoor: 0,
     },
     time: {
-        gameTime: 60,
+        gameTime: 0,
     },
 }
 //functions being launched here
 
 
-computeNextToDoor()
+startGameBtn.addEventListener('click', startGame)
+tryAgainBtn.addEventListener('click', startGame)
 
-spawnPlayer()
+let animationId = 0;
+function startGame() {
+    reset();
+    everyPopup.style.display = 'none';
+    popupStart.style.display = 'none';
+    timer(game.time.gameTime);
+    timerDisplay.style.fontSize = `3rem`;
+    timerDisplay.style.color = 'black';
+    timerDisplay.style.fontWeight = 'normal';
+    computeNextToDoor()
+    spawnPlayer()
+    clearInterval(animationId);
+    animationId = setInterval(animation, 16)
+    spawnBeers(game.beer.amountToSpawn)
+}
 
-setInterval(animation, 16)
-timer(game.time.gameTime);
-spawnBeers(game.beer.amountToSpawn)
+function reset() {
+    beers = document.querySelectorAll('.beer')
+    beers.forEach(beer => {
+    beer.parentElement.removeChild(beer)
+    })
+    game.player.maxSpeed = 2
+    game.player.acceleration = 0.2
+    game.player.rotationSpeed = 6
+    game.player.score = 0
+    game.taxi.isComing = false
+    if(document.querySelector('.taxi') !== null){
+        taxiBoard.removeChild(taxi);
+    }
+    game.time.gameTime = 10
+    blurBody.style.filter = 'none'
+    document.querySelector('progress').value = 0;
+
+}
+
+
 function animation() {
     detectBeerCollision()
     rotation()
@@ -70,7 +109,6 @@ function animation() {
     detectWallCollision()
     computeTaxiSpeed()
     taxiIsComing()
-
     beerDisappear()
     //console.log(game.player.direction)
 }
@@ -262,14 +300,14 @@ function computeNextToDoor() {
 
 
 function computeTaxiSpeed() {
-    game.taxi.speed = (game.taxiboard.nextToDoor/(game.taxi.timeToArrive * 60));
+    game.taxi.speed = (game.taxiboard.nextToDoor / (game.taxi.timeToArrive * 60));
 }
 
 function taxiIsComing() {
     if (game.taxi.isComing === true) {
         game.taxi.position.x += game.taxi.speed;
         taxi.style.left = game.taxi.position.x + "px";
-        if(game.taxi.position.x > game.taxiboard.nextToDoor) {
+        if (game.taxi.position.x > game.taxiboard.nextToDoor) {
             taxi.style.left = game.taxiboard.nextToDoor + "px"
             return;
         }
@@ -327,7 +365,7 @@ function beerProgressUp() {
     } if (game.player.score === 40) {
         drinkingMessage('I hope you can make it...')
     }
-    if (game.player.score === 51) {
+    if (game.player.score === 3) {
         taxiBoard.appendChild(taxi);
         game.time.gameTime += 10;
         game.taxi.isComing = true;
@@ -342,7 +380,7 @@ function beerProgressUp() {
 
 function timer(seconds) {
     let countdown;
-    const timerDisplay = document.querySelector('.secs')
+   
     const now = Date.now();
     const then = now + seconds * 1000;
     displayTimeLeft(game.time.gameTime);
@@ -358,6 +396,9 @@ function timer(seconds) {
             timerDisplay.innerHTML = 'Failed to get DRUNK'
             game.player.speed = 0;
             game.player.maxSpeed = 0;
+            everyPopup.style.display = 'block';
+            popupFail.style.display = 'block';
+            gameBoard.style.filter = 'blur(10px)'
             return;
         }
 

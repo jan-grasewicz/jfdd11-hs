@@ -106,7 +106,11 @@ progress::-moz-progress-bar {
     justify-content: center;
     align-items: center;
     width: 100%;
-    /* height: 100vh; */
+    position: relative;
+}
+
+.board-wrapper {
+    width: 850px;
     position: relative;
 }
 
@@ -116,7 +120,7 @@ progress::-moz-progress-bar {
     background-size: cover;
     height: 850px;
     background-color: black;
-    width: 850px;
+   
     position: relative;
     animation: shake 2s infinite linear;
 }
@@ -173,7 +177,7 @@ progress::-moz-progress-bar {
 /* css pop-up'ów game over i epic win */
 
 .popup {
-    display: none;
+    display: block;
     justify-content: center;
     position: absolute;
     top: 50%;
@@ -187,6 +191,10 @@ progress::-moz-progress-bar {
     border: solid 5px #cdaf82;
     background-color: white;
     z-index: 1;
+}
+
+.startMsg{
+     display: block;
 }
 
 .winMsg {
@@ -222,7 +230,8 @@ progress::-moz-progress-bar {
     font-size: 1.5rem;
 }
 
-.playAgain {
+.playAgain,
+#start-game {
     display: block;
     font-size: 1.3rem;
     border: 2px solid black;
@@ -237,7 +246,8 @@ progress::-moz-progress-bar {
     color: black;
 }
 
-.playAgain:hover {
+.playAgain:hover,
+#start-game:hover {
     background-color: #cdaf82;
     color: black;
 }
