@@ -15,7 +15,6 @@ const audioTagBackground = document.querySelector('audio')
 const audioTagBeerUp = document.querySelector('#beer-up')
 const audioStop = document.querySelector('.audio-stop')
 let audioPlay = false
-
 let countdown
 
 let game = {
