@@ -54,7 +54,7 @@ let game = {
         nextToDoor: 0,
     },
     time: {
-        gameTime: 0,
+        gameTime: 60,
     },
 }
 
@@ -91,7 +91,6 @@ function reset() {
     if (document.querySelector('.taxi') !== null) {
         taxiBoard.removeChild(taxi);
     }
-    game.time.gameTime = 10
     blurBody.style.filter = 'none'
     document.querySelector('progress').value = 0;
 
