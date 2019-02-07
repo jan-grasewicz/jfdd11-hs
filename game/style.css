@@ -4,23 +4,29 @@
     padding: 0;
 }
 
+@font-face {
+    font-family: "Pixel";
+    src: url(INVASION2000.TTF) format("truetype");
+}
+
 body {
-    font-family: 'domine';
+    font-family: 'Pixel';
     background-color: black;
 }
 
-.audio-stop{
+.audio-stop {
     width: 50px;
     height: 50px;
     position: absolute;
-    bottom: 10px;
-    left: 17px;
+    bottom: 15px;
+    left: 30px;
     background-image: url(icon.png);
     border-radius: 50%;
     border: 2px solid white;
     background-position: center;
     background-size: cover;
 }
+
 
 /* beer */
 
@@ -100,22 +106,23 @@ progress::-moz-progress-bar {
     background-image: linear-gradient(to right, rgb(239, 208, 7) 15%, rgb(239, 210, 21) 65%, rgb(254, 252, 234) 86%, rgb(254, 252, 234) 86%);
 }
 
+
 /* */
 
 .taxi-board {
     position: relative;
-    height: 50px;
+    height: 958px;
+    width: 200px;
 }
 
-.taxi{
+.taxi {
     background-image: url(taxi.png);
     background-position: center;
     background-size: cover;
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 200px;
-    height: 50px;
+    bottom: 0;
+    width: 120px;
+    height: 240px;
 }
 
 .container {
@@ -133,7 +140,8 @@ progress::-moz-progress-bar {
 }
 
 .board {
-    background: url(parkiet.jpg);
+    background: url(plansza.jpg);
+    /* background: url(parkiet.jpg); */
     /* background-image: url(plansza.jpg); */
     /* background-position: center; */
     background-size: contain;
@@ -144,7 +152,7 @@ progress::-moz-progress-bar {
 }
 
 .left-side {
-    font-family: 'Monserrat', sans-serif;
+    font-family: 'Pixel';
     position: relative;
     width: 310px;
     height: 850px;
@@ -162,6 +170,7 @@ progress::-moz-progress-bar {
     background-color: red;
     rotate: 0 deg;
 }
+
 
 /* CSS LICZNIKA CZASU */
 
@@ -197,6 +206,7 @@ progress::-moz-progress-bar {
     font-size: 3rem;
 }
 
+
 /* css pop-up'ów game over i epic win */
 
 .popup {
@@ -208,7 +218,7 @@ progress::-moz-progress-bar {
     transform: translate(-50%, -50%);
     width: 80%;
     height: 60%;
-    font-family: 'montserrat';
+    font-family: 'Pixel';
     font-weight: bold;
     text-align: center;
     border: solid 5px #cdaf82;
@@ -248,12 +258,19 @@ progress::-moz-progress-bar {
     color: #cdaf82;
 }
 
+.instructions {
+    line-height: 30px;
+    margin: 30px 30px 0 30px;
+    font-size: 1.5rem;
+}
+
 .thx {
     margin: 30px 30px 0 30px;
     font-size: 1.5rem;
 }
 
-.playAgain, #start-game {
+.playAgain,
+#start-game {
     display: block;
     font-size: 1.3rem;
     border: 2px solid black;
@@ -268,7 +285,8 @@ progress::-moz-progress-bar {
     color: black;
 }
 
-.playAgain:hover, #start-game:hover {
+.playAgain:hover,
+#start-game:hover {
     background-color: #cdaf82;
     color: black;
 }
@@ -301,6 +319,7 @@ progress::-moz-progress-bar {
     color: black;
 }
 
+
 /* feature 23 */
 
 .beer {
@@ -324,7 +343,7 @@ progress::-moz-progress-bar {
 
 .drinking-msg>h1 {
     font-size: 55px;
-    font-family: 'Monserrat', sans-serif;
+    font-family: 'Pixel';
     color: white;
 }
 
