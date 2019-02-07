@@ -120,9 +120,8 @@ progress::-moz-progress-bar {
     background-size: cover;
     height: 850px;
     background-color: black;
-   
     position: relative;
-    animation: shake 2s infinite linear;
+    /* animation: shake 5s linear; */
 }
 
 .left-side {
@@ -193,8 +192,8 @@ progress::-moz-progress-bar {
     z-index: 1;
 }
 
-.startMsg{
-     display: block;
+.startMsg {
+    display: block;
 }
 
 .winMsg {
@@ -230,8 +229,7 @@ progress::-moz-progress-bar {
     font-size: 1.5rem;
 }
 
-.playAgain,
-#start-game {
+.playAgain, #start-game {
     display: block;
     font-size: 1.3rem;
     border: 2px solid black;
@@ -246,8 +244,7 @@ progress::-moz-progress-bar {
     color: black;
 }
 
-.playAgain:hover,
-#start-game:hover {
+.playAgain:hover, #start-game:hover {
     background-color: #cdaf82;
     color: black;
 }
@@ -292,23 +289,6 @@ progress::-moz-progress-bar {
     /* cdaf82 */
 }
 
-/*  board shake */
-
-@keyframes shake {
-    10%, 90% {
-        transform: translate(-4px, -2px), ;
-    }
-    20%, 80% {
-        transform: translate(1px, -2px);
-    }
-    30%, 50%, 70% {
-        transform: translate(3px, -2px);
-    }
-    40%, 60% {
-        transform: translate(-2px, 4px);
-    }
-}
-
 .drinking-msg {
     text-align: center;
     position: fixed;
@@ -322,4 +302,20 @@ progress::-moz-progress-bar {
     font-size: 55px;
     font-family: 'Monserrat', sans-serif;
     color: white;
+}
+
+.shakeAnimation {
+    animation: shake 2s linear;
+}
+
+@keyframes shake {
+    10% {
+        transform: translate(-1px, -4px), ;
+    }
+    50% {
+        transform: translate(2px, 4px);
+    }
+    90% {
+        transform: translate(-2px, -4px);
+    }
 }
