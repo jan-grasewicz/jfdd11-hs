@@ -11,6 +11,10 @@ let popupStart = document.querySelector('.startMsg')
 let startGameBtn = document.querySelector('#start-game')
 let tryAgainBtn = document.querySelector('.tryAgain')
 const timerDisplay = document.querySelector('.secs')
+const audioTagBackground = document.querySelector('audio')
+const audioTagBeerUp = document.querySelector('#beer-up')
+const audioStop = document.querySelector('.audio-stop')
+let audioPlay = true
 
 
 let game = {
@@ -62,10 +66,13 @@ let game = {
 
 startGameBtn.addEventListener('click', startGame)
 tryAgainBtn.addEventListener('click', startGame)
+audioStop.addEventListener('click', toggleAudioBackground)
 
 let animationId = 0;
+
 function startGame() {
     reset();
+    audioTagBackground.play()
     everyPopup.style.display = 'none';
     popupStart.style.display = 'none';
     timer(game.time.gameTime);
@@ -77,6 +84,7 @@ function startGame() {
     clearInterval(animationId);
     animationId = setInterval(animation, 16)
     spawnBeers(game.beer.amountToSpawn)
+    
 }
 
 function reset() {
@@ -89,13 +97,13 @@ function reset() {
     game.player.rotationSpeed = 6
     game.player.score = 0
     game.taxi.isComing = false
+    game.taxi.position.x = 0
     if(document.querySelector('.taxi') !== null){
         taxiBoard.removeChild(taxi);
     }
     game.time.gameTime = 10
     blurBody.style.filter = 'none'
     document.querySelector('progress').value = 0;
-
 }
 
 
@@ -111,6 +119,19 @@ function animation() {
     taxiIsComing()
     beerDisappear()
     //console.log(game.player.direction)
+}
+
+function toggleAudioBackground(){
+    if(audioPlay === true){
+        audioPlay = false
+        audioTagBackground.play()
+        audioStop.style.backgroundImage = 'url(icon.png)'
+    }
+    else if(audioPlay === false){
+        audioTagBackground.pause()
+        audioPlay = true
+        audioStop.style.backgroundImage = 'url(iconplay.png)'
+    }
 }
 
 function detectWallCollision() {
@@ -281,6 +302,7 @@ function detectBeerCollision() {
             game.player.position.x - beerLeft,
             game.player.position.y - beerTop)
         ) {
+            audioTagBeerUp.play()
             beer.parentElement.removeChild(beer)
             console.log(beer)
             game.player.score += 1
