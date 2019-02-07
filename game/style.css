@@ -6,6 +6,7 @@
 
 body {
     font-family: 'domine';
+    background-color: black;
 }
 
 .audio-stop{
@@ -28,7 +29,7 @@ body {
     height: 300px;
     position: absolute;
     top: 450px;
-    left: 20px;
+    left: 35px;
 }
 
 .beerCont::after {
@@ -45,10 +46,10 @@ body {
 }
 
 .beer-ear {
-    width: 80px;
-    height: 100px;
-    background-color: black;
-    border: 5px solid black;
+    width: 70px;
+    height: 120px;
+    background-color: lightgray;
+    border: 5px solid white;
     position: absolute;
     top: 80px;
     left: 180px;
@@ -62,15 +63,17 @@ body {
     border-top-right-radius: 50%;
     border-bottom-right-radius: 50%;
     content: '';
-    background-color: rgb(196, 194, 194);
-    width: 65px;
-    height: 89px;
+    /* background-color: rgb(196, 194, 194); */
+    background: rgb(27, 27, 27);
+    width: 55px;
+    height: 109px;
     top: 0;
     z-index: 1;
 }
 
 progress {
-    background-color: #f3f3f3;
+    /* background-color: #f3f3f3; */
+    background: rgb(27, 27, 27);
     border: 0;
     bottom: 45px;
     left: -55px;
@@ -80,27 +83,26 @@ progress {
     border-radius: 2px;
     transform: rotate(-90deg);
     z-index: 1;
-    border: 5px solid black;
+    border: 5px solid white;
     border-bottom-left-radius: 20px;
     border-top-left-radius: 20px;
 }
 
 progress::-webkit-progress-value {
-    border-bottom-left-radius: 20px;
-    border-top-left-radius: 20px;
+    border-bottom-left-radius: 10px;
+    border-top-left-radius: 10px;
     background-image: linear-gradient(to right, rgb(239, 208, 7) 15%, rgb(239, 210, 21) 65%, rgb(254, 252, 234) 86%, rgb(254, 252, 234) 86%);
 }
 
 progress::-moz-progress-bar {
-    border-bottom-left-radius: 20px;
-    border-top-left-radius: 20px;
+    border-bottom-left-radius: 10px;
+    border-top-left-radius: 10px;
     background-image: linear-gradient(to right, rgb(239, 208, 7) 15%, rgb(239, 210, 21) 65%, rgb(254, 252, 234) 86%, rgb(254, 252, 234) 86%);
 }
 
-
 /* */
 
-.taxi-board{
+.taxi-board {
     position: relative;
     height: 50px;
 }
@@ -131,13 +133,14 @@ progress::-moz-progress-bar {
 }
 
 .board {
-    background-image: url(plansza.jpg);
-    background-position: center;
-    background-size: cover;
+    background: url(parkiet.jpg);
+    /* background-image: url(plansza.jpg); */
+    /* background-position: center; */
+    background-size: contain;
     height: 850px;
-    background-color: black;
-   
+    background-color: #cdaf82;
     position: relative;
+    border: 3px #cdaf82 solid;
 }
 
 .left-side {
@@ -145,7 +148,10 @@ progress::-moz-progress-bar {
     position: relative;
     width: 310px;
     height: 850px;
-    background-color: rgb(196, 194, 194);
+    /* background-color: rgb(196, 194, 194); */
+    background: rgb(27, 27, 27);
+    margin-right: 20px;
+    border: 3px #cdaf82 solid
 }
 
 .player {
@@ -157,7 +163,6 @@ progress::-moz-progress-bar {
     rotate: 0 deg;
 }
 
-
 /* CSS LICZNIKA CZASU */
 
 .timeContainer {
@@ -167,20 +172,22 @@ progress::-moz-progress-bar {
     right: 20%;
     width: 60%;
     height: 20%;
-    background-color: white;
-    border: 10px solid black;
+    background-color: blackrgb(27, 27, 27);
+    border: 3px solid #cdaf82;
     border-radius: 50%;
 }
 
 .info {
+    color: white;
     margin-top: 2rem;
     text-transform: uppercase;
-    font-size: 1.6rem;
+    font-size: 1.7rem;
     text-align: center;
     font-weight: 700;
 }
 
 .secs {
+    color: white;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -189,7 +196,6 @@ progress::-moz-progress-bar {
     text-align: center;
     font-size: 3rem;
 }
-
 
 /* css pop-up'ów game over i epic win */
 
@@ -210,8 +216,8 @@ progress::-moz-progress-bar {
     z-index: 1;
 }
 
-.startMsg{
-     display: block;
+.startMsg {
+    display: block;
 }
 
 .winMsg {
@@ -247,8 +253,7 @@ progress::-moz-progress-bar {
     font-size: 1.5rem;
 }
 
-.playAgain,
-#start-game {
+.playAgain, #start-game {
     display: block;
     font-size: 1.3rem;
     border: 2px solid black;
@@ -263,8 +268,7 @@ progress::-moz-progress-bar {
     color: black;
 }
 
-.playAgain:hover,
-#start-game:hover {
+.playAgain:hover, #start-game:hover {
     background-color: #cdaf82;
     color: black;
 }
@@ -297,7 +301,6 @@ progress::-moz-progress-bar {
     color: black;
 }
 
-
 /* feature 23 */
 
 .beer {
@@ -307,6 +310,7 @@ progress::-moz-progress-bar {
     background-color: yellow;
     background: #6c5021 url("../img/brewio.svg") no-repeat center/contain;
     border-radius: 50%;
+    /* cdaf82 */
 }
 
 .drinking-msg {
@@ -322,4 +326,20 @@ progress::-moz-progress-bar {
     font-size: 55px;
     font-family: 'Monserrat', sans-serif;
     color: white;
+}
+
+.shakeAnimation {
+    animation: shake 2s linear;
+}
+
+@keyframes shake {
+    10% {
+        transform: translate(-1px, -4px), ;
+    }
+    50% {
+        transform: translate(2px, 4px);
+    }
+    90% {
+        transform: translate(-2px, -4px);
+    }
 }
