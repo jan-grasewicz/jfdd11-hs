@@ -69,7 +69,7 @@ function startGame() {
     popupStart.style.display = 'none';
     timer(game.time.gameTime);
     timerDisplay.style.fontSize = `3rem`;
-    timerDisplay.style.color = 'black';
+    timerDisplay.style.color = 'white';
     timerDisplay.style.fontWeight = 'normal';
     computeNextToDoor()
     spawnPlayer()
@@ -241,6 +241,7 @@ function randomBeerPosition(howMany) {
     let cssPositions = normalizedPositions.map(pos => ({ ...pos, left: (pos.x - 3) + '%', top: (pos.y - 3) + '%' }))
     let positions = []
     for (let i = 0; i < howMany; i++) {
+
         positions = positions.concat(
             cssPositions.splice(
                 Math.floor(Math.random() * cssPositions.length),
@@ -274,9 +275,7 @@ function detectBeerCollision() {
             game.player.position.y - beerTop)
         ) {
             beer.parentElement.removeChild(beer)
-            console.log(beer)
             game.player.score += 1
-            console.log('chlup score: ' + game.player.score)
             spawnBeers(1)
             beerProgressUp()
         }
@@ -359,7 +358,7 @@ function beerProgressUp() {
     } if (game.player.score === 40) {
         drinkingMessage('I hope you can make it...')
     }
-    if (game.player.score === 3) {
+    if (game.player.score === 51) {
         taxiBoard.appendChild(taxi);
         game.time.gameTime += 10;
         game.taxi.isComing = true;
@@ -397,7 +396,7 @@ function timer(seconds) {
     function displayTimeLeft(seconds) {
         const minutes = Math.floor(seconds / 60);
         const secondsLeft = seconds % 60;
-        const display = `${minutes}: ${secondsLeft < 10 ? '0' : ''}${secondsLeft}`;
+        const display = `${minutes}:${secondsLeft < 10 ? '0' : ''}${secondsLeft}`;
         timerDisplay.innerHTML = display;
     }
 }
