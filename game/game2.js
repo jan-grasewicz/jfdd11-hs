@@ -17,7 +17,7 @@ let game = {
     player: {
         rotation: 0,
         position: { x: 50, y: 50 },
-        startPosition: { x: 50, y: 50 },
+        startPosition: { x: 390, y: 600 },
         speed: 0,
         maxSpeed: 2,
         direction: { x: 0, y: 0 }, //Current Speed Vector 
@@ -327,12 +327,20 @@ function makeItHarder(number) {
     blurBody.style.filter = `blur(${number}px)`;
 }
 
+//  function shakeYourBoomBoom
+function shakeYourBoomBoom() {
+    player.classList.toggle('shakeAnimation');
+
+}
+
 function drinkingMessage(msg) {
     if (msg.length > 0) {
         drinkingMsgDiv.classList.add('drinking-msg')
         document.querySelector('body').appendChild(drinkingMsgDiv);
         document.querySelector('.drinking-msg').appendChild(drinkingMsgText);
         drinkingMsgText.innerText = msg;
+        shakeYourBoomBoom();
+        setTimeout(shakeYourBoomBoom, 3000);
     }
     setTimeout(stopDrinkingMsg, 1500);
 }

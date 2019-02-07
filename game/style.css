@@ -125,7 +125,7 @@ progress::-moz-progress-bar {
     height: 850px;
     background-color: #cdaf82;
     position: relative;
-    border: 2px #cdaf82 solid
+    border: 2px #cdaf82 solid;  
 }
 
 .left-side {
@@ -295,6 +295,7 @@ progress::-moz-progress-bar {
     background-color: yellow;
     background: #6c5021 url("../img/brewio.svg") no-repeat center/contain;
     border-radius: 50%;
+    /* cdaf82 */
 }
 
 .drinking-msg {
@@ -310,4 +311,20 @@ progress::-moz-progress-bar {
     font-size: 55px;
     font-family: 'Monserrat', sans-serif;
     color: white;
+}
+
+.shakeAnimation {
+    animation: shake 2s linear;
+}
+
+@keyframes shake {
+    10% {
+        transform: translate(-1px, -4px), ;
+    }
+    50% {
+        transform: translate(2px, 4px);
+    }
+    90% {
+        transform: translate(-2px, -4px);
+    }
 }
