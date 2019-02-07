@@ -70,7 +70,7 @@ function startGame() {
     popupStart.style.display = 'none';
     timer(game.time.gameTime);
     timerDisplay.style.fontSize = `3rem`;
-    timerDisplay.style.color = 'black';
+    timerDisplay.style.color = 'white';
     timerDisplay.style.fontWeight = 'normal';
     computeNextToDoor()
     spawnPlayer()
@@ -82,14 +82,14 @@ function startGame() {
 function reset() {
     beers = document.querySelectorAll('.beer')
     beers.forEach(beer => {
-    beer.parentElement.removeChild(beer)
+        beer.parentElement.removeChild(beer)
     })
     game.player.maxSpeed = 2
     game.player.acceleration = 0.2
     game.player.rotationSpeed = 6
     game.player.score = 0
     game.taxi.isComing = false
-    if(document.querySelector('.taxi') !== null){
+    if (document.querySelector('.taxi') !== null) {
         taxiBoard.removeChild(taxi);
     }
     game.time.gameTime = 10
@@ -381,7 +381,7 @@ function beerProgressUp() {
 
 function timer(seconds) {
     let countdown;
-   
+
     const now = Date.now();
     const then = now + seconds * 1000;
     displayTimeLeft(game.time.gameTime);
@@ -410,7 +410,7 @@ function timer(seconds) {
     function displayTimeLeft(seconds) {
         const minutes = Math.floor(seconds / 60);
         const secondsLeft = seconds % 60;
-        const display = `${minutes}: ${secondsLeft < 10 ? '0' : ''}${secondsLeft}`;
+        const display = `${minutes}:${secondsLeft < 10 ? '0' : ''}${secondsLeft}`;
         timerDisplay.innerHTML = display;
 
     }
