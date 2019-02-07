@@ -17,7 +17,7 @@ let game = {
     player: {
         rotation: 0,
         position: { x: 50, y: 50 },
-        startPosition: { x: 50, y: 50 },
+        startPosition: { x: 390, y: 600 },
         speed: 0,
         maxSpeed: 2,
         direction: { x: 0, y: 0 }, //Current Speed Vector 
@@ -82,14 +82,14 @@ function startGame() {
 function reset() {
     beers = document.querySelectorAll('.beer')
     beers.forEach(beer => {
-    beer.parentElement.removeChild(beer)
+        beer.parentElement.removeChild(beer)
     })
     game.player.maxSpeed = 2
     game.player.acceleration = 0.2
     game.player.rotationSpeed = 6
     game.player.score = 0
     game.taxi.isComing = false
-    if(document.querySelector('.taxi') !== null){
+    if (document.querySelector('.taxi') !== null) {
         taxiBoard.removeChild(taxi);
     }
     game.time.gameTime = 10
@@ -326,12 +326,20 @@ function makeItHarder(number) {
     blurBody.style.filter = `blur(${number}px)`;
 }
 
+//  function shakeYourBoomBoom
+function shakeYourBoomBoom() {
+    player.classList.toggle('shakeAnimation');
+
+}
+
 function drinkingMessage(msg) {
     if (msg.length > 0) {
         drinkingMsgDiv.classList.add('drinking-msg')
         document.querySelector('body').appendChild(drinkingMsgDiv);
         document.querySelector('.drinking-msg').appendChild(drinkingMsgText);
         drinkingMsgText.innerText = msg;
+        shakeYourBoomBoom();
+        setTimeout(shakeYourBoomBoom, 3000);
     }
     setTimeout(stopDrinkingMsg, 1500);
 }
@@ -380,7 +388,7 @@ function beerProgressUp() {
 
 function timer(seconds) {
     let countdown;
-   
+
     const now = Date.now();
     const then = now + seconds * 1000;
     displayTimeLeft(game.time.gameTime);
