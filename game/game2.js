@@ -29,7 +29,7 @@ let game = {
         rotationSpeed: 6,
         rotationInRadians: 0,
         catchRadius: 25,
-        score: 0
+        score: 0,
     },
     board: {
         //to miejsce nalezy wyregulowac po ustawieniu awatara gracza coby nie przechodził przez ściany!
@@ -77,19 +77,20 @@ function startGame() {
     clearInterval(animationId);
     animationId = setInterval(animation, 16)
     spawnBeers(game.beer.amountToSpawn)
+
 }
 
 function reset() {
     beers = document.querySelectorAll('.beer')
     beers.forEach(beer => {
-    beer.parentElement.removeChild(beer)
+        beer.parentElement.removeChild(beer)
     })
     game.player.maxSpeed = 2
     game.player.acceleration = 0.2
     game.player.rotationSpeed = 6
     game.player.score = 0
     game.taxi.isComing = false
-    if(document.querySelector('.taxi') !== null){
+    if (document.querySelector('.taxi') !== null) {
         taxiBoard.removeChild(taxi);
     }
     game.time.gameTime = 10
@@ -110,6 +111,7 @@ function animation() {
     computeTaxiSpeed()
     taxiIsComing()
     beerDisappear()
+    detectTaxiCollision()
     //console.log(game.player.direction)
 }
 
@@ -290,14 +292,12 @@ function detectBeerCollision() {
         }
     })
 }
-
 // taxi coming function //
 
 function computeNextToDoor() {
     let margins = window.innerWidth - 1400;
     game.taxiboard.nextToDoor = margins / 2 + 735;
 }
-
 
 function computeTaxiSpeed() {
     game.taxi.speed = (game.taxiboard.nextToDoor / (game.taxi.timeToArrive * 60));
@@ -312,15 +312,12 @@ function taxiIsComing() {
             return;
         }
     }
-
 }
 
 // beer indicator and "make it harder" function!
-
 let blurBody = document.querySelector('.board');
 let drinkingMsgDiv = document.createElement('div');
 let drinkingMsgText = document.createElement('h1');
-
 
 function makeItHarder(number) {
     blurBody.style.filter = `blur(${number}px)`;
@@ -375,12 +372,8 @@ function beerProgressUp() {
 }
 
 // countdown
-
-
-
 function timer(seconds) {
     let countdown;
-   
     const now = Date.now();
     const then = now + seconds * 1000;
     displayTimeLeft(game.time.gameTime);
@@ -415,5 +408,24 @@ function timer(seconds) {
     }
 }
 
-
-
+function detectTaxiCollision() {
+    if (player !== null) {
+        let margins = window.innerWidth - (310 + 850)
+        let margin = margins / 2
+        let playerAbsolutePositionX = margin + 310 + game.player.position.x
+        console.log(playerAbsolutePositionX)
+        let doorMinX = margin + 310 + 350
+        let doorMaxX = margin + 310 + 450
+        console.log("min " + doorMinX + " max " + doorMaxX)
+        if (playerAbsolutePositionX <= doorMaxX && playerAbsolutePositionX >= doorMinX && game.player.position.y <= 20) {
+            player.parentElement.removeChild(player)
+            game.taxi.speed = (window.innerWidth - game.taxiboard.nextToDoor) / game.taxi.timeToArrive
+            game.taxi.position.x += game.taxi.speed
+            taxi.style.left = game.taxi.position.x + "px"
+            if (game.taxi.position.x >= window.innerWidth) {
+                taxi.parentElement.removeChild(taxi)
+                reset()
+            }
+        }
+    }
+}
