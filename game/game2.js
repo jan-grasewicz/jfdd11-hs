@@ -74,6 +74,7 @@ function startGame() {
     toggleAudioBackground()
     // audioTagBackground.play()
     everyPopup.style.display = 'none';
+    popupFail.style.display = 'none'
     popupStart.style.display = 'none';
     timer(game.time.gameTime);
     timerDisplay.style.fontSize = `3rem`;
@@ -404,6 +405,7 @@ function timer(seconds) {
 
         if (game.time.gameTime <= 0) {
             clearInterval(countdown);
+            debugger;
             timerDisplay.style.fontSize = `22px`;
             timerDisplay.style.color = 'red';
             timerDisplay.style.fontWeight = 'bold';
