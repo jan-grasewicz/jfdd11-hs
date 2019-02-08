@@ -244,9 +244,9 @@ progress::-moz-progress-bar {
 }
 
 .victory {
-    font-size: 3rem;
+    font-size: 4rem;
     color: rgb(27, 187, 27);
-    margin-top: 10px;
+    margin-top: 50px;
     font-weight: bold;
     text-shadow: 1px 2px 5px black;
 }
@@ -270,7 +270,7 @@ progress::-moz-progress-bar {
     display: block;
     font-size: 1.3rem;
     border: 2px solid black;
-    margin: 30px auto;
+    margin: 50px auto 0 auto;
     border-radius: 10px;
     width: 200px;
     padding-top: 15px;
