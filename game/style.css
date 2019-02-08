@@ -199,10 +199,10 @@ progress::-moz-progress-bar {
 .secs {
     color: white;
     position: absolute;
-    top: 50%;
+    top: 44%;
     left: 50%;
     width: 100%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -40%);
     text-align: center;
     font-size: 3rem;
 }
@@ -336,8 +336,8 @@ progress::-moz-progress-bar {
     text-align: center;
     position: fixed;
     top: 50%;
-    left: 60%;
-    transform: translate(-50%, -60%);
+    left: 55%;
+    transform: translate(-50%, -50%);
     font-size: 25px;
 }
 
