@@ -118,7 +118,7 @@ function animation() {
     taxiIsComing()
     beerDisappear()
 
-    console.log("x: " + game.player.position.x + "|| y: " + game.player.position.y)
+    // console.log("x: " + game.player.position.x + "|| y: " + game.player.position.y)
     //console.log(game.player.direction)
 }
 
@@ -384,7 +384,7 @@ function beerProgressUp() {
     if (game.player.score === 40) {
         drinkingMessage('I hope you can make it...')
     }
-    if (game.player.score === 1) {
+    if (game.player.score === 51) {
         taxiBoard.appendChild(taxi);
         game.time.gameTime += 10;
         game.taxi.isComing = true;
