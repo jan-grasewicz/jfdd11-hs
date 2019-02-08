@@ -14,6 +14,8 @@ const timerDisplay = document.querySelector('.secs')
 const audioTagBackground = document.querySelector('audio')
 const audioTagBeerUp = document.querySelector('#beer-up')
 const audioStop = document.querySelector('.audio-stop')
+const taxiSoundDrive = document.querySelector('#taxi-drive')
+const taxiSoundHonk = document.querySelector('#taxi-honk')
 let audioPlay = true
 let countdown
 
@@ -385,11 +387,12 @@ function beerProgressUp() {
     if (game.player.score === 40) {
         drinkingMessage('I hope you can make it...')
     }
-    if (game.player.score === 51) {
+    if (game.player.score === 3) {
         taxiBoard.appendChild(taxi);
         game.time.gameTime += 10;
         game.taxi.isComing = true;
         taxiIsComing();
+        taxiSoundDrive.play()
         drinkingMessage('GET TO DA TAXXAA!')
     }
 }
