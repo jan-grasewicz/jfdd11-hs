@@ -14,7 +14,7 @@ const timerDisplay = document.querySelector('.secs')
 const audioTagBackground = document.querySelector('audio')
 const audioTagBeerUp = document.querySelector('#beer-up')
 const audioStop = document.querySelector('.audio-stop')
-let audioPlay = false
+let audioPlay = true
 let countdown
 
 let game = {
@@ -71,7 +71,8 @@ let animationId = 0;
 
 function startGame() {
     reset();
-    audioTagBackground.play()
+    toggleAudioBackground()
+    // audioTagBackground.play()
     everyPopup.style.display = 'none';
     popupStart.style.display = 'none';
     timer(game.time.gameTime);
@@ -125,11 +126,11 @@ function animation() {
 function toggleAudioBackground() {
     if (audioPlay === true) {
         audioTagBackground.play()
-        audioStop.style.backgroundImage = 'url(icon.png)'
+        audioStop.style.backgroundImage = 'url(iconplay.png)'
         audioPlay = false
     } else if (audioPlay === false) {
         audioTagBackground.pause()
-        audioStop.style.backgroundImage = 'url(iconplay.png)'
+        audioStop.style.backgroundImage = 'url(icon.png)'
         audioPlay = true
     }
 }

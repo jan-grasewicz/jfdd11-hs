@@ -143,8 +143,9 @@ progress::-moz-progress-bar {
     background: url(plansza.jpg);
     /* background: url(parkiet.jpg); */
     /* background-image: url(plansza.jpg); */
-    /* background-position: center; */
-    background-size: contain;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
     height: 850px;
     background-color: #cdaf82;
     position: relative;
@@ -198,10 +199,10 @@ progress::-moz-progress-bar {
 .secs {
     color: white;
     position: absolute;
-    top: 50%;
+    top: 44%;
     left: 50%;
     width: 100%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -40%);
     text-align: center;
     font-size: 3rem;
 }
@@ -326,9 +327,8 @@ progress::-moz-progress-bar {
     position: absolute;
     width: 50px;
     height: 50px;
-    background-color: yellow;
-    background: #6c5021 url("../img/brewio.svg") no-repeat center/contain;
-    border-radius: 50%;
+    background:url("piwko.png") no-repeat center/contain;
+    /* border-radius: 50%; */
     /* cdaf82 */
 }
 
@@ -336,8 +336,8 @@ progress::-moz-progress-bar {
     text-align: center;
     position: fixed;
     top: 50%;
-    left: 60%;
-    transform: translate(-50%, -60%);
+    left: 55%;
+    transform: translate(-50%, -50%);
     font-size: 25px;
 }
 
