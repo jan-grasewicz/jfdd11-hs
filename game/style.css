@@ -330,9 +330,8 @@ progress::-moz-progress-bar {
     text-align: center;
     position: fixed;
     top: 50%;
-    left: 55%;
-    transform: translate(-50%, -50%);
-    font-size: 25px;
+    left: 53%;
+    transform: translate(-35%, -50%);
 }
 
 .drinking-msg>h1 {
