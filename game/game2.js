@@ -54,7 +54,7 @@ let game = {
         nextToDoor: 0,
     },
     time: {
-        gameTime: 0,
+        gameTime: 60,
     },
 }
 
@@ -91,7 +91,6 @@ function reset() {
     if (document.querySelector('.taxi') !== null) {
         taxiBoard.removeChild(taxi);
     }
-    game.time.gameTime = 10
     blurBody.style.filter = 'none'
     document.querySelector('progress').value = 0;
 
@@ -276,9 +275,7 @@ function detectBeerCollision() {
             game.player.position.y - beerTop)
         ) {
             beer.parentElement.removeChild(beer)
-            console.log(beer)
             game.player.score += 1
-            console.log('chlup score: ' + game.player.score)
             spawnBeers(1)
             beerProgressUp()
         }
@@ -361,7 +358,7 @@ function beerProgressUp() {
     } if (game.player.score === 40) {
         drinkingMessage('I hope you can make it...')
     }
-    if (game.player.score === 3) {
+    if (game.player.score === 51) {
         taxiBoard.appendChild(taxi);
         game.time.gameTime += 10;
         game.taxi.isComing = true;
