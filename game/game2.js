@@ -14,6 +14,8 @@ const timerDisplay = document.querySelector('.secs')
 const audioTagBackground = document.querySelector('audio')
 const audioTagBeerUp = document.querySelector('#beer-up')
 const audioStop = document.querySelector('.audio-stop')
+const taxiSoundDrive = document.querySelector('#taxi-drive')
+const taxiSoundHonk = document.querySelector('#taxi-honk')
 let audioPlay = true
 let countdown
 
@@ -358,38 +360,39 @@ function stopDrinkingMsg() {
 }
 
 function beerProgressUp() {
-    document.querySelector('progress').value = game.player.score * 2;
+    document.querySelector('progress').value = game.player.score * 2.5;
     if (game.player.score > 5 && game.player.score < 10) {
         makeItHarder(1);
     }
     if (game.player.score === 6) {
         drinkingMessage('You are getting drunk!')
     }
-    if (game.player.score > 10 && game.player.score < 20) {
+    if (game.player.score > 8 && game.player.score < 15) {
         makeItHarder(3);
     }
-    if (game.player.score > 20 && game.player.score < 30) {
+    if (game.player.score > 15 && game.player.score < 25) {
         makeItHarder(4);
     }
-    if (game.player.score === 22) {
+    if (game.player.score === 16) {
         drinkingMessage('Slow down bro...')
     }
-    if (game.player.score > 30 && game.player.score < 40) {
+    if (game.player.score > 25 && game.player.score < 35) {
         makeItHarder(5);
     }
-    if (game.player.score > 40 && game.player.score < 51) {
+    if (game.player.score > 35 && game.player.score < 40) {
         makeItHarder(8);
         game.player.acceleration = 0.2;
         game.player.maxSpeed = 3;
     }
-    if (game.player.score === 40) {
+    if (game.player.score === 35) {
         drinkingMessage('I hope you can make it...')
     }
-    if (game.player.score === 51) {
+    if (game.player.score === 40) {
         taxiBoard.appendChild(taxi);
         game.time.gameTime += 10;
         game.taxi.isComing = true;
         taxiIsComing();
+        taxiSoundDrive.play()
         drinkingMessage('GET TO DA TAXXAA!')
     }
 }
