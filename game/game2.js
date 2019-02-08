@@ -119,7 +119,7 @@ function animation() {
     taxiIsComing()
     beerDisappear()
 
-    console.log("x: " + game.player.position.x + "|| y: " + game.player.position.y)
+    // console.log("x: " + game.player.position.x + "|| y: " + game.player.position.y)
     //console.log(game.player.direction)
 }
 
@@ -440,5 +440,7 @@ function detectTaxiCollision2() {
         taxi.parentElement.removeChild(taxi)
         clearInterval(animationId)
         clearInterval(countdown)
+        everyPopup.style.display = 'block'
+        popupWin.style.display = 'block'
     }
 }
