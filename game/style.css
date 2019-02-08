@@ -163,10 +163,10 @@ progress::-moz-progress-bar {
 
 .player {
     position: absolute;
-    width: 75px;
-    height: 50px;
+    width: 80px;
+    height: 80px;
     border-radius: 0%;
-    background-color: red;
+    background: url('playerHLM.png') no-repeat center;
     rotate: 0 deg;
 }
 
@@ -174,7 +174,7 @@ progress::-moz-progress-bar {
 
 .timeContainer {
     position: absolute;
-    top: 15%;
+    top: 20%;
     left: 20%;
     right: 20%;
     width: 60%;
@@ -186,7 +186,7 @@ progress::-moz-progress-bar {
 
 .info {
     color: white;
-    margin-top: 2rem;
+    margin-top: 3.5rem;
     text-transform: uppercase;
     font-size: 1.7rem;
     text-align: center;
