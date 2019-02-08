@@ -27,7 +27,6 @@ body {
     background-size: cover;
 }
 
-
 /* beer */
 
 .beerCont {
@@ -106,7 +105,6 @@ progress::-moz-progress-bar {
     background-image: linear-gradient(to right, rgb(239, 208, 7) 15%, rgb(239, 210, 21) 65%, rgb(254, 252, 234) 86%, rgb(254, 252, 234) 86%);
 }
 
-
 /* */
 
 .taxi-board {
@@ -171,7 +169,6 @@ progress::-moz-progress-bar {
     rotate: 0 deg;
 }
 
-
 /* CSS LICZNIKA CZASU */
 
 .timeContainer {
@@ -206,7 +203,6 @@ progress::-moz-progress-bar {
     font-size: 3rem;
 }
 
-
 /* css pop-up'ów game over i epic win */
 
 .popup {
@@ -236,6 +232,7 @@ progress::-moz-progress-bar {
 
 .failMsg {
     display: none;
+    margin-top: 80px
 }
 
 .gz {
@@ -265,12 +262,11 @@ progress::-moz-progress-bar {
 }
 
 .thx {
-    margin: 30px 30px 0 30px;
+    margin: 50px 30px 0 30px;
     font-size: 1.5rem;
 }
 
-.playAgain,
-#start-game {
+.playAgain, #start-game {
     display: block;
     font-size: 1.3rem;
     border: 2px solid black;
@@ -285,8 +281,7 @@ progress::-moz-progress-bar {
     color: black;
 }
 
-.playAgain:hover,
-#start-game:hover {
+.playAgain:hover, #start-game:hover {
     background-color: #cdaf82;
     color: black;
 }
@@ -294,7 +289,7 @@ progress::-moz-progress-bar {
 .fail {
     font-size: 3rem;
     color: rgb(216, 29, 29);
-    margin-top: 10px;
+    margin-top: 50px;
     font-weight: bold;
     text-shadow: 1px 2px 5px black;
 }
@@ -303,7 +298,7 @@ progress::-moz-progress-bar {
     display: block;
     font-size: 1.3rem;
     border: 2px solid black;
-    margin: 30px auto;
+    margin: 50px auto 0 auto;
     border-radius: 10px;
     width: 200px;
     padding-top: 15px;
@@ -318,7 +313,6 @@ progress::-moz-progress-bar {
     background-color: #cdaf82;
     color: black;
 }
-
 
 /* feature 23 */
 
