@@ -1,0 +1,357 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+@font-face {
+    font-family: "Pixel";
+    src: url(INVASION2000.TTF) format("truetype");
+}
+
+body {
+    font-family: 'Pixel';
+    background-color: black;
+}
+
+.audio-stop {
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    bottom: 15px;
+    left: 30px;
+    background-image: url(icon.png);
+    border-radius: 50%;
+    border: 2px solid white;
+    background-position: center;
+    background-size: cover;
+}
+
+/* beer */
+
+.beerCont {
+    width: 200px;
+    height: 300px;
+    position: absolute;
+    top: 450px;
+    left: 35px;
+}
+
+.beerCont::after {
+    display: block;
+    border-radius: 50%;
+    content: '';
+    background-color: rgba(255, 255, 255, 0.582);
+    width: 40px;
+    height: 280px;
+    position: absolute;
+    top: 14px;
+    left: 10px;
+    z-index: 1;
+}
+
+.beer-ear {
+    width: 70px;
+    height: 120px;
+    background-color: lightgray;
+    border: 5px solid white;
+    position: absolute;
+    top: 80px;
+    left: 180px;
+    border-top-right-radius: 50%;
+    border-bottom-right-radius: 50%;
+    z-index: 1;
+}
+
+.beer-ear::before {
+    display: block;
+    border-top-right-radius: 50%;
+    border-bottom-right-radius: 50%;
+    content: '';
+    /* background-color: rgb(196, 194, 194); */
+    background: rgb(27, 27, 27);
+    width: 55px;
+    height: 109px;
+    top: 0;
+    z-index: 1;
+}
+
+progress {
+    /* background-color: #f3f3f3; */
+    background: rgb(27, 27, 27);
+    border: 0;
+    bottom: 45px;
+    left: -55px;
+    position: absolute;
+    width: 300px;
+    height: 200px;
+    border-radius: 2px;
+    transform: rotate(-90deg);
+    z-index: 1;
+    border: 5px solid white;
+    border-bottom-left-radius: 20px;
+    border-top-left-radius: 20px;
+}
+
+progress::-webkit-progress-value {
+    border-bottom-left-radius: 10px;
+    border-top-left-radius: 10px;
+    background-image: linear-gradient(to right, rgb(239, 208, 7) 15%, rgb(239, 210, 21) 65%, rgb(254, 252, 234) 86%, rgb(254, 252, 234) 86%);
+}
+
+progress::-moz-progress-bar {
+    border-bottom-left-radius: 10px;
+    border-top-left-radius: 10px;
+    background-image: linear-gradient(to right, rgb(239, 208, 7) 15%, rgb(239, 210, 21) 65%, rgb(254, 252, 234) 86%, rgb(254, 252, 234) 86%);
+}
+
+/* */
+
+.taxi-board {
+    position: relative;
+}
+
+.taxi {
+    background-image: url(taxi.png);
+    background-position: center;
+    background-size: cover;
+    position: absolute;
+    bottom: -250px;
+    width: 120px;
+    height: 240px;
+}
+
+.container {
+    margin-top: 50px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: stretch;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.board-wrapper {
+    width: 850px;
+    position: relative;
+}
+
+.board {
+    background: url(plansza.jpg);
+    /* background: url(parkiet.jpg); */
+    /* background-image: url(plansza.jpg); */
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 850px;
+    background-color: #cdaf82;
+    position: relative;
+    border: 3px #cdaf82 solid;
+}
+
+.left-side {
+    font-family: 'Pixel';
+    position: relative;
+    width: 310px;
+    height: 850px;
+    /* background-color: rgb(196, 194, 194); */
+    background: rgb(27, 27, 27);
+    margin-right: 20px;
+    border: 3px #cdaf82 solid
+}
+
+.player {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    border-radius: 0%;
+    background: url('playerHLM.png') no-repeat center;
+    rotate: 0 deg;
+}
+
+/* CSS LICZNIKA CZASU */
+
+.timeContainer {
+    position: absolute;
+    top: 20%;
+    left: 20%;
+    right: 20%;
+    width: 60%;
+    height: 20%;
+    background-color: blackrgb(27, 27, 27);
+    border: 3px solid #cdaf82;
+    border-radius: 50%;
+}
+
+.info {
+    color: white;
+    margin-top: 3.5rem;
+    text-transform: uppercase;
+    font-size: 1.7rem;
+    text-align: center;
+    font-weight: 700;
+}
+
+.secs {
+    color: white;
+    position: absolute;
+    top: 44%;
+    left: 50%;
+    width: 100%;
+    transform: translate(-50%, -40%);
+    text-align: center;
+    font-size: 3rem;
+}
+
+/* css pop-up'ów game over i epic win */
+
+.popup {
+    display: block;
+    justify-content: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    height: 60%;
+    font-family: 'Pixel';
+    font-weight: bold;
+    text-align: center;
+    border: solid 5px #cdaf82;
+    background-color: white;
+    z-index: 1;
+}
+
+.startMsg {
+    display: block;
+}
+
+.winMsg {
+    display: none;
+}
+
+.failMsg {
+    display: none;
+    margin-top: 80px
+}
+
+.gz {
+    display: block;
+    margin-top: 50px;
+    font-size: 2.5rem;
+    text-shadow: 1px 2px 5px black;
+    text-transform: uppercase;
+}
+
+.victory {
+    font-size: 4rem;
+    color: rgb(27, 187, 27);
+    margin-top: 50px;
+    font-weight: bold;
+    text-shadow: 1px 2px 5px black;
+}
+
+.brewio {
+    color: #cdaf82;
+}
+
+.instructions {
+    line-height: 30px;
+    margin: 30px 30px 0 30px;
+    font-size: 1.5rem;
+}
+
+.thx {
+    margin: 50px 30px 0 30px;
+    font-size: 1.5rem;
+}
+
+.playAgain, #start-game {
+    display: block;
+    font-size: 1.3rem;
+    border: 2px solid black;
+    margin: 50px auto 0 auto;
+    border-radius: 10px;
+    width: 200px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    text-decoration: none;
+    text-align: center;
+    transition: background-color 0.5s;
+    color: black;
+}
+
+.playAgain:hover, #start-game:hover {
+    background-color: #cdaf82;
+    color: black;
+}
+
+.fail {
+    font-size: 3rem;
+    color: rgb(216, 29, 29);
+    margin-top: 50px;
+    font-weight: bold;
+    text-shadow: 1px 2px 5px black;
+}
+
+.tryAgain {
+    display: block;
+    font-size: 1.3rem;
+    border: 2px solid black;
+    margin: 50px auto 0 auto;
+    border-radius: 10px;
+    width: 200px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    text-decoration: none;
+    text-align: center;
+    transition: background-color 0.5s;
+    color: black;
+}
+
+.tryAgain:hover {
+    background-color: #cdaf82;
+    color: black;
+}
+
+/* feature 23 */
+
+.beer {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background:url("piwko.png") no-repeat center/contain;
+    /* border-radius: 50%; */
+    /* cdaf82 */
+}
+
+.drinking-msg {
+    text-align: center;
+    position: fixed;
+    top: 50%;
+    left: 53%;
+    transform: translate(-35%, -50%);
+}
+
+.drinking-msg>h1 {
+    font-size: 55px;
+    font-family: 'Pixel';
+    color: white;
+}
+
+.shakeAnimation {
+    animation: shake 2s linear;
+}
+
+@keyframes shake {
+    10% {
+        transform: translate(-1px, -4px), ;
+    }
+    50% {
+        transform: translate(2px, 4px);
+    }
+    90% {
+        transform: translate(-2px, -4px);
+    }
+}

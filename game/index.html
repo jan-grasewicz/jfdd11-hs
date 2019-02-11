@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=Domine:400,700|Montserrat:400,600,500,700&amp;subset=latin-ext" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <title>Brewio game</title>
+</head>
+
+<body>
+
+    <audio src="music/background.wav" type="audio/wav" loop></audio>
+    <audio id="beer-up" src="music/beerup.mp3" type="audio/mp3"></audio>
+    <audio id="taxi-drive" src="music/car.mp3" type="audio/mp3"></audio>
+    <audio id="taxi-honk" src="music/horn.mp3" type="audio/mp3"></audio>
+
+    <div class="container">
+        <div class="left-side">
+            <p class="info">time<br> to get drunk</p>
+            <div class="timeContainer"><span class="secs"></span></div>
+            <div class="beerCont">
+                <div class="beer-ear">
+                </div>
+                <progress max="100" value="0"></progress>
+            </div>
+            <div class="audio-stop"></div>
+        </div>
+        <div class="board-wrapper">
+            <div class="board">
+
+            </div>
+            <!-- POP-UP GAME OVER / EPIC WIN BELOW -->
+            <div class="popup">
+                <div class="startMsg">
+                    <span class="gz brewio">WELCOME!</span>
+                    <!-- <p class="victory">HERE IS OUR LITTLE SURPRISE</p> -->
+                    <p class="instructions">Your task is simple - drink up all the beers have a great night and try to reach taxi before it's too late! Play using keyboard arrows. Be aware that too much alcohol makes you kinda, you know... dizzy, and reckless. Oh, We hope you
+                        won't have hangover</p>
+                    <a id="start-game">Start</a>
+                </div>
+                <div class="winMsg">
+                    <span class="gz brewio">congratulations!!</span>
+                    <p class="victory">You have WON</p>
+                    <p class="thx">Thank you for playing <span class="brewio">Brewio</span> mini-game! If you want to play more, try another level!</p>
+                    <a class="playAgain" id="next-level" href="#">Next level</a>
+                </div>
+                <div class="failMsg">
+                    <span class="gz brewio">Ewww, we're sorry...</span>
+                    <p class="fail">You have FAILED</p>
+                    <p class="thx">Unfortunately you did not manage to catch enough <span class="brewio">BEERS </span>on time or get to the <span class="brewio">TAXI</span></p>
+                    <a class="tryAgain">Try again</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="taxi-board">
+            <!-- <div class="taxi"></div>
+
+        </div> -->
+        </div>
+
+        <script src="game2.js"></script>
+</body>
+
+</html>
