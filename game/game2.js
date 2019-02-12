@@ -121,7 +121,7 @@ function animation() {
     taxiIsComing()
     beerDisappear()
 
-    // console.log("x: " + game.player.position.x + "|| y: " + game.player.position.y)
+    console.log("x: " + game.player.position.x + "|| y: " + game.player.position.y)
     //console.log(game.player.direction)
 }
 
@@ -432,7 +432,7 @@ function timer(seconds) {
 }
 
 function detectTaxiCollision2() {
-    if (player !== null && game.player.position.x >= 780 && game.player.position.y >= 420 && game.player.position.y <= 470 && game.taxi.isComing === true) {
+    if (player !== null && game.player.position.x >= 780 && game.player.position.y >= 330 && game.player.position.y <= 365 && game.taxi.isComing === true) {
         player.parentElement.removeChild(player)
         beers = document.querySelectorAll('.beer')
         beers.forEach(beer => {
