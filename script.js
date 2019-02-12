@@ -69,15 +69,6 @@ containerBlur.addEventListener('click', function () {
 
 document.getElementById('contactForm').addEventListener('submit', submitForm);
 
-function submitForm(event) {
-    event.preventDefault();
-
-    let name = getInput('name');
-    let email = getInput('email');
-
-
-}
-
 // save subscriber to firebase
 function saveSubscriber(name, email) {
     let newSubscriberRef = subscribersRef.push();
@@ -85,6 +76,15 @@ function saveSubscriber(name, email) {
         name: name,
         email: email
     });
+}
+
+function submitForm(event) {
+    event.preventDefault();
+
+    let name = getInput('name');
+    let email = getInput('email');
+
+    saveSubscriber(name, email);
 }
 
 // helper function to get input values
