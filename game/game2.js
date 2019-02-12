@@ -16,7 +16,7 @@ const audioTagBeerUp = document.querySelector('#beer-up')
 const audioStop = document.querySelector('.audio-stop')
 const taxiSoundDrive = document.querySelector('#taxi-drive')
 const taxiSoundHonk = document.querySelector('#taxi-honk')
-let audioPlay = true
+let audioPlay = false
 let countdown
 
 let game = {
@@ -447,3 +447,9 @@ function detectTaxiCollision2() {
         popupWin.style.display = 'block'
     }
 }
+//disable arrow keys and spacebar scrolling
+window.addEventListener("keydown", function(e) {
+    if([32, 37, 38, 39, 40].indexOf(e.keyCode) > -1) {
+        e.preventDefault();
+    }
+}, false);
