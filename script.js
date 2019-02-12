@@ -30,7 +30,7 @@ let containerBlur = document.querySelector('.container');
 let formValid = document.querySelector('form');
 let popupFinal = document.body.appendChild(popupDiv).appendChild(divInside);
 
-formValid.addEventListener('submit', function(event) {
+formValid.addEventListener('submit', function (event) {
     event.stopPropagation();
     event.preventDefault()
     containerBlur.style.filter = 'blur(5px)';
@@ -43,11 +43,21 @@ formValid.addEventListener('submit', function(event) {
     popupDiv.style.display = 'block';
 })
 
-popupDiv.addEventListener('click', function(event) {
+popupDiv.addEventListener('click', function (event) {
     event.stopPropagation();
 })
 
-containerBlur.addEventListener('click', function() {
+containerBlur.addEventListener('click', function () {
     popupDiv.style.display = 'none';
     containerBlur.style.filter = 'none'
 })
+
+// contact form submit
+
+document.getElementById('contactForm').addEventListener('submit', submitForm);
+
+function submitForm(event) {
+    event.preventDefault();
+
+    console.log('test test test');
+}
