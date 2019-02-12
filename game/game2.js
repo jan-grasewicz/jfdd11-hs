@@ -40,7 +40,7 @@ let game = {
     board: {
         //to miejsce nalezy wyregulowac po ustawieniu awatara gracza coby nie przechodził przez ściany!
         width: gameBoard.offsetWidth - 60,
-        height: gameBoard.offsetHeight - 20,
+        height: gameBoard.offsetHeight - 61,
     },
     beer: {
         catchRadius: 20,
@@ -120,7 +120,7 @@ function animation() {
     computeTaxiSpeed()
     taxiIsComing()
     beerDisappear()
-
+    console.log(gameBoard.offsetHeight)
     console.log("x: " + game.player.position.x + "|| y: " + game.player.position.y)
     //console.log(game.player.direction)
 }
