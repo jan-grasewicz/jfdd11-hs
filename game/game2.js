@@ -43,7 +43,7 @@ let game = {
         height: gameBoard.offsetHeight - 20,
     },
     beer: {
-        catchRadius: 25,
+        catchRadius: 20,
         amountToSpawn: 5,
         expiration: 3,
     },
@@ -251,11 +251,25 @@ function createBeer(whereNode, top, left) {
     beerNode.style.top = top;
     beerNode.style.left = left;
     beerNode.prefixs = game.time.gameTime
+    
+    const beerNodeImg = document.createElement("div");
+    beerNodeImg.classList.add("beer-img");
+    beerNode.appendChild(beerNodeImg);
+
     whereNode.appendChild(beerNode);
 }
 
 function spawnBeers(howMany) {
     randomBeerPosition(howMany).forEach(pos => createBeer(gameBoard, pos.top, pos.left))
+}
+let beerList = document.querySelectorAll('.beer')
+for (i = 0; i < beerList.length; i++) {
+    let beer = beerList[i]
+    let beerCreated = (beer.prefixs)
+    if (beerCreated - game.time.gameTime >= game.beer.expiration) {
+        beer.parentElement.removeChild(beer)
+        spawnBeers(1)
+    }
 }
 
 function randomBeerPosition(howMany) {
@@ -263,8 +277,8 @@ function randomBeerPosition(howMany) {
     let range = Array.from({ length: 9 }, (_, i) => i)
     let nestedPositions = range.map(y => range.map(x => ({ x, y })))
     let flatPositions = nestedPositions.reduce((result, next) => result.concat(next), [])
-    let normalizedPositions = flatPositions.map(pos => ({ x: pos.x * 10 + 10, y: pos.y * 10 + 10 }))
-    let cssPositions = normalizedPositions.map(pos => ({ ...pos, left: (pos.x - 3) + '%', top: (pos.y - 3) + '%' }))
+    let normalizedPositions = flatPositions.map(pos => ({ x: pos.x * 10 + 5.5, y: pos.y * 10 + 5.5 }))
+    let cssPositions = normalizedPositions.map(pos => ({ ...pos, left: (pos.x - 0) + '%', top: (pos.y - 0) + '%' }))
     let positions = []
     for (let i = 0; i < howMany; i++) {
 
@@ -447,3 +461,9 @@ function detectTaxiCollision2() {
         popupWin.style.display = 'block'
     }
 }
+//disable arrow keys and spacebar scrolling
+window.addEventListener("keydown", function(e) {
+    if([32, 37, 38, 39, 40].indexOf(e.keyCode) > -1) {
+        e.preventDefault();
+    }
+}, false);
