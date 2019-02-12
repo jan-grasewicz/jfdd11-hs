@@ -59,5 +59,14 @@ document.getElementById('contactForm').addEventListener('submit', submitForm);
 function submitForm(event) {
     event.preventDefault();
 
-    console.log('test test test');
+    let name = getInput('name');
+    let email = getInput('email');
+
+    console.log(name);
+}
+
+// helper function to get input values
+
+function getInput(id) {
+    return document.getElementById(id).value;
 }
