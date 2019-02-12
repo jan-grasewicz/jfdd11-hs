@@ -139,12 +139,6 @@ function animation() {
     computeTaxiSpeed()
     taxiIsComing()
     beerDisappear()
-<<<<<<< HEAD
-=======
-    console.log(gameBoard.offsetHeight)
-    console.log("x: " + game.player.position.x + "|| y: " + game.player.position.y)
-    //console.log(game.player.direction)
->>>>>>> 6e1d4c48fc40e1545266e988cbe32b4883d14a80
 }
 
 function toggleAudioBackground() {
