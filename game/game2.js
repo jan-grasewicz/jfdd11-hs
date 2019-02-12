@@ -261,7 +261,8 @@ function createBeer(whereNode, top, left) {
 
 function spawnBeers(howMany) {
     randomBeerPosition(howMany).forEach(pos => createBeer(gameBoard, pos.top, pos.left))
-}let beerList = document.querySelectorAll('.beer')
+}
+let beerList = document.querySelectorAll('.beer')
 for (i = 0; i < beerList.length; i++) {
     let beer = beerList[i]
     let beerCreated = (beer.prefixs)
