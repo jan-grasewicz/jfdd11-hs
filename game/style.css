@@ -316,15 +316,20 @@ progress::-moz-progress-bar {
 }
 
 /* feature 23 */
-
 .beer {
     position: absolute;
+    /* width: 50px; */
+    /* height: 50px; */
+    /* background:rgba(255, 0, 0, 0.288); */
+    }
+.beer-img{
+    position: relative;
+    top:14px;
+    left:14px;
     width: 50px;
     height: 50px;
-    background:url("piwko.png") no-repeat center/contain;
-    /* border-radius: 50%; */
-    /* cdaf82 */
-}
+    background:url("../game/piwko.png") no-repeat center/contain;
+    }
 
 .drinking-msg {
     text-align: center;

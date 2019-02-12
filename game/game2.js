@@ -18,7 +18,7 @@ const taxiSoundDrive = document.querySelector('#taxi-drive')
 const taxiSoundHonk = document.querySelector('#taxi-honk')
 let audioPlay = true
 let countdown
-
+toggleAudioBackground()
 let game = {
     player: {
         rotation: 0,
@@ -40,10 +40,10 @@ let game = {
     board: {
         //to miejsce nalezy wyregulowac po ustawieniu awatara gracza coby nie przechodził przez ściany!
         width: gameBoard.offsetWidth - 60,
-        height: gameBoard.offsetHeight - 20,
+        height: gameBoard.offsetHeight - 61,
     },
     beer: {
-        catchRadius: 25,
+        catchRadius: 20,
         amountToSpawn: 5,
         expiration: 3,
     },
@@ -73,8 +73,7 @@ let animationId = 0;
 
 function startGame() {
     reset();
-    toggleAudioBackground()
-    // audioTagBackground.play()
+    
     everyPopup.style.display = 'none';
     popupStart.style.display = 'none';
     timer(game.time.gameTime);
@@ -108,6 +107,26 @@ function reset() {
     document.querySelector('progress').value = 0;
 }
 
+function levelUp() {
+    beers = document.querySelectorAll('.beer')
+    beers.forEach(beer => {
+        beer.parentElement.removeChild(beer)
+    })
+    game.player.maxSpeed = 3
+    game.player.acceleration = 0.3
+    game.player.rotationSpeed = 6
+
+    game.player.score = 0
+    game.taxi.isComing = false
+    game.taxi.position.y = 0
+    game.time.gameTime = 60
+    if (document.querySelector('.taxi') !== null) {
+        taxiBoard.removeChild(taxi);
+    }
+    blurBody.style.filter = 'none'
+    document.querySelector('progress').value = 0;
+}
+
 function animation() {
     detectTaxiCollision2()
     detectBeerCollision()
@@ -120,9 +139,6 @@ function animation() {
     computeTaxiSpeed()
     taxiIsComing()
     beerDisappear()
-
-    // console.log("x: " + game.player.position.x + "|| y: " + game.player.position.y)
-    //console.log(game.player.direction)
 }
 
 function toggleAudioBackground() {
@@ -215,7 +231,7 @@ function spawnPlayer() {
     gameBoard.appendChild(player)
 }
 
-window.addEventListener('keydown', function (event) {
+window.addEventListener('keydown', function(event) {
     if (event.code === 'ArrowRight') {
         game.player.rotateLeft = true
     }
@@ -230,7 +246,7 @@ window.addEventListener('keydown', function (event) {
     }
 })
 
-window.addEventListener('keyup', function (event) {
+window.addEventListener('keyup', function(event) {
     if (event.code === 'ArrowRight') {
         game.player.rotateLeft = false
     }
@@ -251,6 +267,11 @@ function createBeer(whereNode, top, left) {
     beerNode.style.top = top;
     beerNode.style.left = left;
     beerNode.prefixs = game.time.gameTime
+
+    const beerNodeImg = document.createElement("div");
+    beerNodeImg.classList.add("beer-img");
+    beerNode.appendChild(beerNodeImg);
+
     whereNode.appendChild(beerNode);
 }
 
@@ -258,13 +279,14 @@ function spawnBeers(howMany) {
     randomBeerPosition(howMany).forEach(pos => createBeer(gameBoard, pos.top, pos.left))
 }
 
+
 function randomBeerPosition(howMany) {
 
     let range = Array.from({ length: 9 }, (_, i) => i)
     let nestedPositions = range.map(y => range.map(x => ({ x, y })))
     let flatPositions = nestedPositions.reduce((result, next) => result.concat(next), [])
-    let normalizedPositions = flatPositions.map(pos => ({ x: pos.x * 10 + 10, y: pos.y * 10 + 10 }))
-    let cssPositions = normalizedPositions.map(pos => ({ ...pos, left: (pos.x - 3) + '%', top: (pos.y - 3) + '%' }))
+    let normalizedPositions = flatPositions.map(pos => ({ x: pos.x * 10 + 5.5, y: pos.y * 10 + 5.5 }))
+    let cssPositions = normalizedPositions.map(pos => ({...pos, left: (pos.x - 0) + '%', top: (pos.y - 0) + '%' }))
     let positions = []
     for (let i = 0; i < howMany; i++) {
 
@@ -297,8 +319,8 @@ function detectBeerCollision() {
         let beerTop = beer.offsetTop
         let beerLeft = beer.offsetLeft
         if (game.player.catchRadius + game.beer.catchRadius > Math.hypot(
-            game.player.position.x - beerLeft,
-            game.player.position.y - beerTop)) {
+                game.player.position.x - beerLeft,
+                game.player.position.y - beerTop)) {
             audioTagBeerUp.play()
             beer.parentElement.removeChild(beer)
             game.player.score += 1
@@ -389,11 +411,15 @@ function beerProgressUp() {
     }
     if (game.player.score === 40) {
         taxiBoard.appendChild(taxi);
-        game.time.gameTime += 10;
+        game.time.gameTime = 5;
         game.taxi.isComing = true;
         taxiIsComing();
         taxiSoundDrive.play()
         drinkingMessage('GET TO DA TAXXAA!')
+        beers = document.querySelectorAll('.beer')
+        beers.forEach(beer => {
+            beer.parentElement.removeChild(beer)
+        })
     }
 }
 
@@ -432,7 +458,7 @@ function timer(seconds) {
 }
 
 function detectTaxiCollision2() {
-    if (player !== null && game.player.position.x >= 780 && game.player.position.y >= 420 && game.player.position.y <= 470 && game.taxi.isComing === true) {
+    if (player !== null && game.player.position.x >= 780 && game.player.position.y >= 330 && game.player.position.y <= 365 && game.taxi.isComing === true) {
         player.parentElement.removeChild(player)
         beers = document.querySelectorAll('.beer')
         beers.forEach(beer => {
@@ -447,3 +473,9 @@ function detectTaxiCollision2() {
         popupWin.style.display = 'block'
     }
 }
+//disable arrow keys and spacebar scrolling
+window.addEventListener("keydown", function(e) {
+    if ([32, 37, 38, 39, 40].indexOf(e.keyCode) > -1) {
+        e.preventDefault();
+    }
+}, false);
