@@ -18,7 +18,7 @@ const taxiSoundDrive = document.querySelector('#taxi-drive')
 const taxiSoundHonk = document.querySelector('#taxi-honk')
 let audioPlay = true
 let countdown
-
+toggleAudioBackground()
 let game = {
     player: {
         rotation: 0,
@@ -73,7 +73,7 @@ let animationId = 0;
 
 function startGame() {
     reset();
-    toggleAudioBackground()
+    
     everyPopup.style.display = 'none';
     popupStart.style.display = 'none';
     timer(game.time.gameTime);
@@ -278,15 +278,7 @@ function createBeer(whereNode, top, left) {
 function spawnBeers(howMany) {
     randomBeerPosition(howMany).forEach(pos => createBeer(gameBoard, pos.top, pos.left))
 }
-let beerList = document.querySelectorAll('.beer')
-for (i = 0; i < beerList.length; i++) {
-    let beer = beerList[i]
-    let beerCreated = (beer.prefixs)
-    if (beerCreated - game.time.gameTime >= game.beer.expiration) {
-        beer.parentElement.removeChild(beer)
-        spawnBeers(1)
-    }
-}
+
 
 function randomBeerPosition(howMany) {
 
