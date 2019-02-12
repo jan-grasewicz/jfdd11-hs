@@ -14,8 +14,9 @@ const timerDisplay = document.querySelector('.secs')
 const audioTagBackground = document.querySelector('audio')
 const audioTagBeerUp = document.querySelector('#beer-up')
 const audioStop = document.querySelector('.audio-stop')
-let audioPlay = false
-
+const taxiSoundDrive = document.querySelector('#taxi-drive')
+const taxiSoundHonk = document.querySelector('#taxi-honk')
+let audioPlay = true
 let countdown
 
 let game = {
@@ -38,11 +39,11 @@ let game = {
     },
     board: {
         //to miejsce nalezy wyregulowac po ustawieniu awatara gracza coby nie przechodził przez ściany!
-        width: gameBoard.offsetWidth - 70,
-        height: gameBoard.offsetHeight - 60,
+        width: gameBoard.offsetWidth - 60,
+        height: gameBoard.offsetHeight - 20,
     },
     beer: {
-        catchRadius: 25,
+        catchRadius: 20,
         amountToSpawn: 5,
         expiration: 3,
     },
@@ -72,7 +73,8 @@ let animationId = 0;
 
 function startGame() {
     reset();
-    audioTagBackground.play()
+    toggleAudioBackground()
+    // audioTagBackground.play()
     everyPopup.style.display = 'none';
     popupStart.style.display = 'none';
     timer(game.time.gameTime);
@@ -107,6 +109,7 @@ function reset() {
 }
 
 function animation() {
+    detectTaxiCollision2()
     detectBeerCollision()
     rotation()
     rotationToRadians()
@@ -117,18 +120,19 @@ function animation() {
     computeTaxiSpeed()
     taxiIsComing()
     beerDisappear()
-    detectTaxiCollision()
-        //console.log(game.player.direction)
+
+    // console.log("x: " + game.player.position.x + "|| y: " + game.player.position.y)
+    //console.log(game.player.direction)
 }
 
 function toggleAudioBackground() {
     if (audioPlay === true) {
         audioTagBackground.play()
-        audioStop.style.backgroundImage = 'url(icon.png)'
+        audioStop.style.backgroundImage = 'url(iconplay.png)'
         audioPlay = false
     } else if (audioPlay === false) {
         audioTagBackground.pause()
-        audioStop.style.backgroundImage = 'url(iconplay.png)'
+        audioStop.style.backgroundImage = 'url(icon.png)'
         audioPlay = true
     }
 }
@@ -211,7 +215,7 @@ function spawnPlayer() {
     gameBoard.appendChild(player)
 }
 
-window.addEventListener('keydown', function(event) {
+window.addEventListener('keydown', function (event) {
     if (event.code === 'ArrowRight') {
         game.player.rotateLeft = true
     }
@@ -226,7 +230,7 @@ window.addEventListener('keydown', function(event) {
     }
 })
 
-window.addEventListener('keyup', function(event) {
+window.addEventListener('keyup', function (event) {
     if (event.code === 'ArrowRight') {
         game.player.rotateLeft = false
     }
@@ -247,11 +251,25 @@ function createBeer(whereNode, top, left) {
     beerNode.style.top = top;
     beerNode.style.left = left;
     beerNode.prefixs = game.time.gameTime
+    
+    const beerNodeImg = document.createElement("div");
+    beerNodeImg.classList.add("beer-img");
+    beerNode.appendChild(beerNodeImg);
+
     whereNode.appendChild(beerNode);
 }
 
 function spawnBeers(howMany) {
     randomBeerPosition(howMany).forEach(pos => createBeer(gameBoard, pos.top, pos.left))
+}
+let beerList = document.querySelectorAll('.beer')
+for (i = 0; i < beerList.length; i++) {
+    let beer = beerList[i]
+    let beerCreated = (beer.prefixs)
+    if (beerCreated - game.time.gameTime >= game.beer.expiration) {
+        beer.parentElement.removeChild(beer)
+        spawnBeers(1)
+    }
 }
 
 function randomBeerPosition(howMany) {
@@ -259,8 +277,8 @@ function randomBeerPosition(howMany) {
     let range = Array.from({ length: 9 }, (_, i) => i)
     let nestedPositions = range.map(y => range.map(x => ({ x, y })))
     let flatPositions = nestedPositions.reduce((result, next) => result.concat(next), [])
-    let normalizedPositions = flatPositions.map(pos => ({ x: pos.x * 10 + 10, y: pos.y * 10 + 10 }))
-    let cssPositions = normalizedPositions.map(pos => ({...pos, left: (pos.x - 3) + '%', top: (pos.y - 3) + '%' }))
+    let normalizedPositions = flatPositions.map(pos => ({ x: pos.x * 10 + 5.5, y: pos.y * 10 + 5.5 }))
+    let cssPositions = normalizedPositions.map(pos => ({ ...pos, left: (pos.x - 0) + '%', top: (pos.y - 0) + '%' }))
     let positions = []
     for (let i = 0; i < howMany; i++) {
 
@@ -293,8 +311,8 @@ function detectBeerCollision() {
         let beerTop = beer.offsetTop
         let beerLeft = beer.offsetLeft
         if (game.player.catchRadius + game.beer.catchRadius > Math.hypot(
-                game.player.position.x - beerLeft,
-                game.player.position.y - beerTop)) {
+            game.player.position.x - beerLeft,
+            game.player.position.y - beerTop)) {
             audioTagBeerUp.play()
             beer.parentElement.removeChild(beer)
             game.player.score += 1
@@ -356,38 +374,39 @@ function stopDrinkingMsg() {
 }
 
 function beerProgressUp() {
-    document.querySelector('progress').value = game.player.score * 2;
+    document.querySelector('progress').value = game.player.score * 2.5;
     if (game.player.score > 5 && game.player.score < 10) {
         makeItHarder(1);
     }
     if (game.player.score === 6) {
         drinkingMessage('You are getting drunk!')
     }
-    if (game.player.score > 10 && game.player.score < 20) {
+    if (game.player.score > 8 && game.player.score < 15) {
         makeItHarder(3);
     }
-    if (game.player.score > 20 && game.player.score < 30) {
+    if (game.player.score > 15 && game.player.score < 25) {
         makeItHarder(4);
     }
-    if (game.player.score === 22) {
+    if (game.player.score === 16) {
         drinkingMessage('Slow down bro...')
     }
-    if (game.player.score > 30 && game.player.score < 40) {
+    if (game.player.score > 25 && game.player.score < 35) {
         makeItHarder(5);
     }
-    if (game.player.score > 40 && game.player.score < 51) {
+    if (game.player.score > 35 && game.player.score < 40) {
         makeItHarder(8);
         game.player.acceleration = 0.2;
         game.player.maxSpeed = 3;
     }
-    if (game.player.score === 40) {
+    if (game.player.score === 35) {
         drinkingMessage('I hope you can make it...')
     }
-    if (game.player.score === 3) {
+    if (game.player.score === 40) {
         taxiBoard.appendChild(taxi);
         game.time.gameTime += 10;
         game.taxi.isComing = true;
         taxiIsComing();
+        taxiSoundDrive.play()
         drinkingMessage('GET TO DA TAXXAA!')
     }
 }
@@ -426,29 +445,25 @@ function timer(seconds) {
     }
 }
 
-function detectTaxiCollision() {
-    if (player !== null) {
-        let margins = window.innerHeight - (310 + 850)
-        let margin = margins / 2
-        let playerAbsolutePositionY = margin + 310 + game.player.position.y
-        let doorMinY = margin + 310 + 350
-        let doorMaxY = margin + 310 + 450
-        if (playerAbsolutePositionY <= doorMaxY && playerAbsolutePositionY >= doorMinY && game.player.position.x <= 20) {
-            player.parentElement.removeChild(player)
-            beers = document.querySelectorAll('.beer')
-            beers.forEach(beer => {
-                beer.parentElement.removeChild(beer)
-            })
-            game.player.maxSpeed = 0
-            game.player.rotationSpeed = 0
-            game.taxi.speed = (window.innerHeight - game.taxiboard.nextToDoor) / game.taxi.timeToArrive
-            game.taxi.position.y += game.taxi.speed
-            taxi.style.bottom = game.taxi.position.y + "px"
-            if (game.taxi.position.y >= window.innerHeight) {
-                taxi.parentElement.removeChild(taxi)
-                clearInterval(animationId)
-                clearInterval(countdown)
-            }
-        }
+function detectTaxiCollision2() {
+    if (player !== null && game.player.position.x >= 780 && game.player.position.y >= 420 && game.player.position.y <= 470 && game.taxi.isComing === true) {
+        player.parentElement.removeChild(player)
+        beers = document.querySelectorAll('.beer')
+        beers.forEach(beer => {
+            beer.parentElement.removeChild(beer)
+        })
+        game.player.maxSpeed = 0
+        game.player.rotationSpeed = 0
+        taxi.parentElement.removeChild(taxi)
+        clearInterval(animationId)
+        clearInterval(countdown)
+        everyPopup.style.display = 'block'
+        popupWin.style.display = 'block'
     }
 }
+//disable arrow keys and spacebar scrolling
+window.addEventListener("keydown", function(e) {
+    if([32, 37, 38, 39, 40].indexOf(e.keyCode) > -1) {
+        e.preventDefault();
+    }
+}, false);
