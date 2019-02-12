@@ -105,6 +105,8 @@ function reset() {
     }
     blurBody.style.filter = 'none'
     document.querySelector('progress').value = 0;
+    popupFail.style.display = 'none';
+    popupWin.style.display = 'none';
 }
 
 function levelUp() {
