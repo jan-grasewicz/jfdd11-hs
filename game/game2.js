@@ -74,7 +74,6 @@ let animationId = 0;
 function startGame() {
     reset();
     toggleAudioBackground()
-    // audioTagBackground.play()
     everyPopup.style.display = 'none';
     popupStart.style.display = 'none';
     timer(game.time.gameTime);
@@ -108,6 +107,26 @@ function reset() {
     document.querySelector('progress').value = 0;
 }
 
+function levelUp() {
+    beers = document.querySelectorAll('.beer')
+    beers.forEach(beer => {
+        beer.parentElement.removeChild(beer)
+    })
+    game.player.maxSpeed = 3
+    game.player.acceleration = 0.3
+    game.player.rotationSpeed = 6
+
+    game.player.score = 0
+    game.taxi.isComing = false
+    game.taxi.position.y = 0
+    game.time.gameTime = 60
+    if (document.querySelector('.taxi') !== null) {
+        taxiBoard.removeChild(taxi);
+    }
+    blurBody.style.filter = 'none'
+    document.querySelector('progress').value = 0;
+}
+
 function animation() {
     detectTaxiCollision2()
     detectBeerCollision()
@@ -120,9 +139,6 @@ function animation() {
     computeTaxiSpeed()
     taxiIsComing()
     beerDisappear()
-    console.log(gameBoard.offsetHeight)
-    console.log("x: " + game.player.position.x + "|| y: " + game.player.position.y)
-    //console.log(game.player.direction)
 }
 
 function toggleAudioBackground() {
@@ -215,7 +231,7 @@ function spawnPlayer() {
     gameBoard.appendChild(player)
 }
 
-window.addEventListener('keydown', function (event) {
+window.addEventListener('keydown', function(event) {
     if (event.code === 'ArrowRight') {
         game.player.rotateLeft = true
     }
@@ -230,7 +246,7 @@ window.addEventListener('keydown', function (event) {
     }
 })
 
-window.addEventListener('keyup', function (event) {
+window.addEventListener('keyup', function(event) {
     if (event.code === 'ArrowRight') {
         game.player.rotateLeft = false
     }
@@ -251,7 +267,7 @@ function createBeer(whereNode, top, left) {
     beerNode.style.top = top;
     beerNode.style.left = left;
     beerNode.prefixs = game.time.gameTime
-    
+
     const beerNodeImg = document.createElement("div");
     beerNodeImg.classList.add("beer-img");
     beerNode.appendChild(beerNodeImg);
@@ -278,7 +294,7 @@ function randomBeerPosition(howMany) {
     let nestedPositions = range.map(y => range.map(x => ({ x, y })))
     let flatPositions = nestedPositions.reduce((result, next) => result.concat(next), [])
     let normalizedPositions = flatPositions.map(pos => ({ x: pos.x * 10 + 5.5, y: pos.y * 10 + 5.5 }))
-    let cssPositions = normalizedPositions.map(pos => ({ ...pos, left: (pos.x - 0) + '%', top: (pos.y - 0) + '%' }))
+    let cssPositions = normalizedPositions.map(pos => ({...pos, left: (pos.x - 0) + '%', top: (pos.y - 0) + '%' }))
     let positions = []
     for (let i = 0; i < howMany; i++) {
 
@@ -311,8 +327,8 @@ function detectBeerCollision() {
         let beerTop = beer.offsetTop
         let beerLeft = beer.offsetLeft
         if (game.player.catchRadius + game.beer.catchRadius > Math.hypot(
-            game.player.position.x - beerLeft,
-            game.player.position.y - beerTop)) {
+                game.player.position.x - beerLeft,
+                game.player.position.y - beerTop)) {
             audioTagBeerUp.play()
             beer.parentElement.removeChild(beer)
             game.player.score += 1
@@ -403,11 +419,15 @@ function beerProgressUp() {
     }
     if (game.player.score === 40) {
         taxiBoard.appendChild(taxi);
-        game.time.gameTime += 10;
+        game.time.gameTime = 5;
         game.taxi.isComing = true;
         taxiIsComing();
         taxiSoundDrive.play()
         drinkingMessage('GET TO DA TAXXAA!')
+        beers = document.querySelectorAll('.beer')
+        beers.forEach(beer => {
+            beer.parentElement.removeChild(beer)
+        })
     }
 }
 
@@ -463,7 +483,7 @@ function detectTaxiCollision2() {
 }
 //disable arrow keys and spacebar scrolling
 window.addEventListener("keydown", function(e) {
-    if([32, 37, 38, 39, 40].indexOf(e.keyCode) > -1) {
+    if ([32, 37, 38, 39, 40].indexOf(e.keyCode) > -1) {
         e.preventDefault();
     }
 }, false);
