@@ -109,7 +109,7 @@ body {
   background-color: #cdaf82;
 }
 
-@media (orientation:landscape) {
+@media (min-width: 360px) and (orientation:landscape) {
   .form_container--field {
     padding: 10px
   }
