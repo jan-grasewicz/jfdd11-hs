@@ -19,9 +19,9 @@ const taxiSoundDrive = document.querySelector('#taxi-drive')
 const taxiSoundHonk = document.querySelector('#taxi-honk')
 let countdown
 
-let mugProgressNode=document.querySelector('progress')
-let levelNumberNode=document.querySelector('.level-number')
-let levelResetBtn=document.querySelector('.level-reset')
+let mugProgressNode = document.querySelector('progress')
+let levelNumberNode = document.querySelector('.level-number')
+let levelResetBtn = document.querySelector('.level-reset')
 
 
 let game = {
@@ -104,7 +104,7 @@ function startGame() {
     timerDisplay.style.fontWeight = 'normal';
     computeNextToDoor()
     spawnPlayer()
-    levelNumberNode.textContent= game.level.currentLevel
+    levelNumberNode.textContent = game.level.currentLevel
     clearInterval(animationId);
     animationId = setInterval(animation, 16)
     spawnBeers(game.beer.amountToSpawn)
@@ -134,26 +134,27 @@ function reset() {
     clearInterval(countdown);
 }
 
-function nextLevel(){
-    game.level.currentLevel+=1
-    if(game.player.scoreMultiplier>2){
-        game.player.scoreMultiplier-=0.5
-    }else{
-        game.beer.amountToSpawn-=1
+function nextLevel() {
+    game.level.currentLevel += 1
+    if (game.player.scoreMultiplier > 2) {
+        game.player.scoreMultiplier -= 0.5
+    } else {
+        game.beer.amountToSpawn -= 1
     }
     // console.log('Amount of beers to spawn:' + game.beer.amountToSpawn)
     // console.log('scoreMultiplier:' + game.player.scoreMultiplier)
     startGame()
 }
 
-function levelReset(){
-    game.level.currentLevel=1
+function levelReset() {
+    game.level.currentLevel = 1
     game.beer.amountToSpawn = game.beer.initialAmountToSpawn
     game.player.scoreMultiplier = game.player.initialScoreMultiplier
     startGame()
 }
 
 function animation() {
+    transformPlayer()
     detectTaxiCollision2()
     detectBeerCollision()
     rotation()
@@ -165,6 +166,10 @@ function animation() {
     computeTaxiSpeed()
     taxiIsComing()
     beerDisappear()
+}
+
+function transformPlayer() {
+    player.style.transform = "rotate(" + game.player.rotation + "deg)"
 }
 
 function toggleAudioBackground() {
@@ -181,10 +186,12 @@ function toggleAudioBackground() {
 
 function detectWallCollision() {
     if (game.player.position.x <= 0 || game.player.position.x >= game.board.width) {
-        spawnPlayer()
+        // spawnPlayer()
+        game.player.rotation = (180 - game.player.rotation)
     }
     if (game.player.position.y <= 0 || game.player.position.y >= game.board.height) {
-        spawnPlayer()
+        // spawnPlayer()
+        game.player.rotation = (90 + game.player.rotation)
     }
 }
 
@@ -230,16 +237,16 @@ function rotationToRadians() {
 function rotation() {
     if (game.player.rotateLeft === true) {
         game.player.rotation += game.player.rotationSpeed
-        player.style.transform = "rotate(" + game.player.rotation + "deg)"
+        transformPlayer()
         if (game.player.rotation >= 360) {
-            game.player.rotation = 0
+            game.player.rotation -= 360
         }
     }
     if (game.player.rotateRight === true) {
         game.player.rotation -= game.player.rotationSpeed
-        player.style.transform = "rotate(" + game.player.rotation + "deg)"
+        transformPlayer()
         if (game.player.rotation <= (-360)) {
-            game.player.rotation = 0
+            game.player.rotation += 360
         }
     }
 }
@@ -248,16 +255,16 @@ function spawnPlayer() {
     game.player.direction.x = 0
     game.player.direction.y = 0
     game.player.speed = 0
-    game.player.rotation = 0
+    game.player.rotation = -90
     player.style.top = game.player.startPosition.x + "px"
     player.style.left = game.player.startPosition.y + "px"
-    player.style.transform = "rotate(" + game.player.rotation + "deg)"
+    transformPlayer()
     game.player.position.x = game.player.startPosition.x
     game.player.position.y = game.player.startPosition.y
     gameBoard.appendChild(player)
 }
 
-window.addEventListener('keydown', function(event) {
+window.addEventListener('keydown', function (event) {
     if (event.code === 'ArrowRight') {
         game.player.rotateLeft = true
     }
@@ -272,7 +279,7 @@ window.addEventListener('keydown', function(event) {
     }
 })
 
-window.addEventListener('keyup', function(event) {
+window.addEventListener('keyup', function (event) {
     if (event.code === 'ArrowRight') {
         game.player.rotateLeft = false
     }
@@ -312,7 +319,7 @@ function randomBeerPosition(howMany) {
     let nestedPositions = range.map(y => range.map(x => ({ x, y })))
     let flatPositions = nestedPositions.reduce((result, next) => result.concat(next), [])
     let normalizedPositions = flatPositions.map(pos => ({ x: pos.x * 10 + 5.5, y: pos.y * 10 + 5.5 }))
-    let cssPositions = normalizedPositions.map(pos => ({...pos, left: (pos.x - 0) + '%', top: (pos.y - 0) + '%' }))
+    let cssPositions = normalizedPositions.map(pos => ({ ...pos, left: (pos.x - 0) + '%', top: (pos.y - 0) + '%' }))
     let positions = []
     for (let i = 0; i < howMany; i++) {
 
@@ -344,14 +351,14 @@ function detectBeerCollision() {
         let beerTop = beer.offsetTop
         let beerLeft = beer.offsetLeft
         if (game.player.catchRadius + game.beer.catchRadius > Math.hypot(
-                game.player.position.x - beerLeft,
-                game.player.position.y - beerTop)) {
+            game.player.position.x - beerLeft,
+            game.player.position.y - beerTop)) {
             audioTagBeerUp.play()
             beer.parentElement.removeChild(beer)
             game.player.score += 1
-            game.player.levelProgress=(game.player.score*game.player.scoreMultiplier)
+            game.player.levelProgress = (game.player.score * game.player.scoreMultiplier)
             beerProgressUp()
-            if(game.player.levelProgress<100){
+            if (game.player.levelProgress < 100) {
                 spawnBeers(1)
             }
         }
@@ -503,7 +510,7 @@ function detectTaxiCollision2() {
     }
 }
 //disable arrow keys and spacebar scrolling
-window.addEventListener("keydown", function(e) {
+window.addEventListener("keydown", function (e) {
     if ([32, 37, 38, 39, 40].indexOf(e.keyCode) > -1) {
         e.preventDefault();
     }
