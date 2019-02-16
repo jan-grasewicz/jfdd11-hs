@@ -181,10 +181,12 @@ function toggleAudioBackground() {
 
 function detectWallCollision() {
     if (game.player.position.x <= 0 || game.player.position.x >= game.board.width) {
-        spawnPlayer()
+        // spawnPlayer()
+       game.player.rotation = (180-game.player.rotation)
     }
     if (game.player.position.y <= 0 || game.player.position.y >= game.board.height) {
-        spawnPlayer()
+        // spawnPlayer()
+        game.player.rotation = (90+game.player.rotation)
     }
 }
 
@@ -232,14 +234,14 @@ function rotation() {
         game.player.rotation += game.player.rotationSpeed
         player.style.transform = "rotate(" + game.player.rotation + "deg)"
         if (game.player.rotation >= 360) {
-            game.player.rotation = 0
+            game.player.rotation -= 360
         }
     }
     if (game.player.rotateRight === true) {
         game.player.rotation -= game.player.rotationSpeed
         player.style.transform = "rotate(" + game.player.rotation + "deg)"
         if (game.player.rotation <= (-360)) {
-            game.player.rotation = 0
+            game.player.rotation += 360
         }
     }
 }
@@ -248,7 +250,7 @@ function spawnPlayer() {
     game.player.direction.x = 0
     game.player.direction.y = 0
     game.player.speed = 0
-    game.player.rotation = 0
+    game.player.rotation = -90
     player.style.top = game.player.startPosition.x + "px"
     player.style.left = game.player.startPosition.y + "px"
     player.style.transform = "rotate(" + game.player.rotation + "deg)"
