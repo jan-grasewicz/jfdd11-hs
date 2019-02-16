@@ -518,3 +518,9 @@ window.addEventListener("keydown", function (e) {
         e.preventDefault();
     }
 }, false);
+
+//developers only;)
+function dev(levelProgress=100){
+    game.player.levelProgress = levelProgress
+    beerProgressUp()
+}
