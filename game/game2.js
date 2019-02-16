@@ -154,6 +154,7 @@ function levelReset() {
 }
 
 function animation() {
+    transformPlayer()
     detectTaxiCollision2()
     detectBeerCollision()
     rotation()
@@ -187,12 +188,10 @@ function detectWallCollision() {
     if (game.player.position.x <= 0 || game.player.position.x >= game.board.width) {
         // spawnPlayer()
         game.player.rotation = (180 - game.player.rotation)
-        transformPlayer()
     }
     if (game.player.position.y <= 0 || game.player.position.y >= game.board.height) {
         // spawnPlayer()
         game.player.rotation = (90 + game.player.rotation)
-        transformPlayer()
     }
 }
 
