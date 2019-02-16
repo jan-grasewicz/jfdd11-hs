@@ -21,6 +21,8 @@ let audioPlay = true
 let countdown
 
 let mugProgressNode=document.querySelector('progress')
+let levelNumberNode=document.querySelector('.level-number')
+let levelResetBtn=document.querySelector('.level-reset')
 
 toggleAudioBackground()
 let game = {
@@ -77,6 +79,7 @@ let game = {
 startGameBtn.addEventListener('click', startGame)
 tryAgainBtn.addEventListener('click', startGame)
 nextLevelBtn.addEventListener('click', nextLevel)
+levelResetBtn.addEventListener('click', levelReset)
 audioStop.addEventListener('click', toggleAudioBackground)
 
 let animationId = 0;
@@ -93,6 +96,7 @@ function startGame() {
     timerDisplay.style.fontWeight = 'normal';
     computeNextToDoor()
     spawnPlayer()
+    levelNumberNode.textContent= game.level.currentLevel
     clearInterval(animationId);
     animationId = setInterval(animation, 16)
     spawnBeers(game.beer.amountToSpawn)
@@ -119,6 +123,7 @@ function reset() {
     blurBody.style.filter = 'none'
     popupFail.style.display = 'none';
     popupWin.style.display = 'none';
+    clearInterval(countdown);
 }
 
 function nextLevel(){
@@ -127,25 +132,11 @@ function nextLevel(){
     startGame()
 }
 
-// function levelUp() {
-//     beers = document.querySelectorAll('.beer')
-//     beers.forEach(beer => {
-//         beer.parentElement.removeChild(beer)
-//     })
-//     game.player.maxSpeed = 3
-//     game.player.acceleration = 0.3
-//     game.player.rotationSpeed = 6
-
-//     game.player.score = 0
-//     game.taxi.isComing = false
-//     game.taxi.position.y = 0
-//     game.time.gameTime = 60
-//     if (document.querySelector('.taxi') !== null) {
-//         taxiBoard.removeChild(taxi);
-//     }
-//     blurBody.style.filter = 'none'
-//     mugProgressNode.value = 0;
-// }
+function levelReset(){
+    game.level.currentLevel=1
+    game.player.scoreMultiplier =5
+    startGame()
+}
 
 function animation() {
     detectTaxiCollision2()
@@ -433,7 +424,7 @@ function beerProgressUp() {
     }
     if (game.player.levelProgress >= 100) {
         taxiBoard.appendChild(taxi);
-        game.time.gameTime = 10;
+        game.time.gameTime += 5;
         game.taxi.isComing = true;
         taxiIsComing();
         taxiSoundDrive.play()
@@ -458,7 +449,7 @@ function timer(seconds) {
             timerDisplay.style.fontSize = `22px`;
             timerDisplay.style.color = 'red';
             timerDisplay.style.fontWeight = 'bold';
-            timerDisplay.innerHTML = 'Failed to get DRUNK'
+            timerDisplay.innerHTML = 'Failed<br>to get<br>DRUNK'
             game.player.speed = 0;
             game.player.maxSpeed = 0;
             everyPopup.style.display = 'block';
