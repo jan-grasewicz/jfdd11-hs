@@ -42,9 +42,9 @@ let game = {
         rotationInRadians: 0,
         catchRadius: 25,
         score: 0, //<<amount of collected beers
-        scoreMultiplier: 5, //<< score*scoreMultiplyer=levelProgress ()
+        scoreMultiplier: 0, //<< score*scoreMultiplyer=levelProgress ()
         levelProgress: 0, //<< 0-100 players level progression
-        initialScoreMultiplier: 5, // << stores initial setting for reset
+        initialScoreMultiplier: 5, // << stores value for levelReset
     },
     board: {
         //to miejsce nalezy wyregulowac po ustawieniu awatara gracza coby nie przechodził przez ściany!
@@ -53,8 +53,9 @@ let game = {
     },
     beer: {
         catchRadius: 20,
-        amountToSpawn: 7,
         expiration: 5,
+        amountToSpawn: 0, //amount of beer mugs present on board 
+        initialAmountToSpawn: 7, //<<stores value for levelReset
     },
     taxi: {
         position: { y: 0 },
@@ -83,12 +84,13 @@ nextLevelBtn.addEventListener('click', nextLevel)
 levelResetBtn.addEventListener('click', levelReset)
 audioStop.addEventListener('click', toggleAudioBackground)
 
+game.beer.amountToSpawn = game.beer.initialAmountToSpawn
+game.player.scoreMultiplier = game.player.initialScoreMultiplier
+
 let animationId = 0;
 
 function startGame() {
     reset();
-    console.log('level:'+ game.level.currentLevel)
-    console.log('scoreMultiplier:' + game.player.scoreMultiplier)
     everyPopup.style.display = 'none';
     popupStart.style.display = 'none';
     timer(game.time.gameTime);
@@ -129,12 +131,19 @@ function reset() {
 
 function nextLevel(){
     game.level.currentLevel+=1
-    game.player.scoreMultiplier-=0.5
+    if(game.player.scoreMultiplier>2){
+        game.player.scoreMultiplier-=0.5
+    }else{
+        game.beer.amountToSpawn-=1
+    }
+    // console.log('Amount of beers to spawn:' + game.beer.amountToSpawn)
+    // console.log('scoreMultiplier:' + game.player.scoreMultiplier)
     startGame()
 }
 
 function levelReset(){
     game.level.currentLevel=1
+    game.beer.amountToSpawn = game.beer.initialAmountToSpawn
     game.player.scoreMultiplier = game.player.initialScoreMultiplier
     startGame()
 }
@@ -327,7 +336,6 @@ function beerDisappear() {
 function detectBeerCollision() {
     let beerNodeList = document.querySelectorAll('.beer')
     beerNodeList.forEach((beer) => {
-        // console.log(beer.style.top)
         let beerTop = beer.offsetTop
         let beerLeft = beer.offsetLeft
         if (game.player.catchRadius + game.beer.catchRadius > Math.hypot(
@@ -338,7 +346,9 @@ function detectBeerCollision() {
             game.player.score += 1
             game.player.levelProgress=(game.player.score*game.player.scoreMultiplier)
             beerProgressUp()
-            spawnBeers(1)
+            if(game.player.levelProgress<100){
+                spawnBeers(1)
+            }
         }
     })
 }
@@ -397,32 +407,32 @@ function stopDrinkingMsg() {
 function beerProgressUp() {
     // console.log(game.player.levelProgress)
     mugProgressNode.value = game.player.levelProgress
-    if (game.player.levelProgress > 13 && game.player.levelProgress < 25) {
-        makeItHarder(1);
-    }
-    if (game.player.levelProgress === 15) {
-        drinkingMessage('You are getting drunk!')
-    }
-    if (game.player.levelProgress > 20 && game.player.levelProgress < 38) {
-        makeItHarder(3);
-    }
-    if (game.player.levelProgress > 38 && game.player.levelProgress < 63) {
-        makeItHarder(4);
-    }
-    if (game.player.levelProgress === 40) {
-        drinkingMessage('Slow down bro...')
-    }
-    if (game.player.levelProgress > 63 && game.player.levelProgress < 88) {
-        makeItHarder(5);
-    }
-    if (game.player.levelProgress > 88 && game.player.levelProgress < 100) {
-        makeItHarder(8);
-        game.player.acceleration = 0.2;
-        game.player.maxSpeed = 3;
-    }
-    if (game.player.levelProgress === 88) {
-        drinkingMessage('I hope you can make it...')
-    }
+    // if (game.player.levelProgress > 13 && game.player.levelProgress < 25) {
+    //     makeItHarder(1);
+    // }
+    // if (game.player.levelProgress === 15) {
+    //     drinkingMessage('You are getting drunk!')
+    // }
+    // if (game.player.levelProgress > 20 && game.player.levelProgress < 38) {
+    //     makeItHarder(3);
+    // }
+    // if (game.player.levelProgress > 38 && game.player.levelProgress < 63) {
+    //     makeItHarder(4);
+    // }
+    // if (game.player.levelProgress === 40) {
+    //     drinkingMessage('Slow down bro...')
+    // }
+    // if (game.player.levelProgress > 63 && game.player.levelProgress < 88) {
+    //     makeItHarder(5);
+    // }
+    // if (game.player.levelProgress > 88 && game.player.levelProgress < 100) {
+    //     makeItHarder(8);
+    //     game.player.acceleration = 0.2;
+    //     game.player.maxSpeed = 3;
+    // }
+    // if (game.player.levelProgress === 88) {
+    //     drinkingMessage('I hope you can make it...')
+    // }
     if (game.player.levelProgress >= 100) {
         taxiBoard.appendChild(taxi);
         game.time.gameTime += 5;
