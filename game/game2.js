@@ -17,7 +17,6 @@ const audioTagBeerUp = document.querySelector('#beer-up')
 const audioStop = document.querySelector('.audio-stop')
 const taxiSoundDrive = document.querySelector('#taxi-drive')
 const taxiSoundHonk = document.querySelector('#taxi-honk')
-// let audioPlay = true
 let countdown
 
 let mugProgressNode=document.querySelector('progress')
