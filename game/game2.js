@@ -10,6 +10,7 @@ let popupWin = document.querySelector('.winMsg')
 let popupStart = document.querySelector('.startMsg')
 let startGameBtn = document.querySelector('#start-game')
 let tryAgainBtn = document.querySelector('.tryAgain')
+let nextLevelBtn = document.querySelector('#next-level')
 const timerDisplay = document.querySelector('.secs')
 const audioTagBackground = document.querySelector('audio')
 const audioTagBeerUp = document.querySelector('#beer-up')
@@ -49,8 +50,8 @@ let game = {
     },
     beer: {
         catchRadius: 20,
-        amountToSpawn: 6,
-        expiration: 4,
+        amountToSpawn: 7,
+        expiration: 5,
     },
     taxi: {
         position: { y: 0 },
@@ -75,13 +76,15 @@ let game = {
 //functions being launched here
 startGameBtn.addEventListener('click', startGame)
 tryAgainBtn.addEventListener('click', startGame)
+nextLevelBtn.addEventListener('click', nextLevel)
 audioStop.addEventListener('click', toggleAudioBackground)
 
 let animationId = 0;
 
 function startGame() {
     reset();
-    
+    console.log('level:'+ game.level.currentLevel)
+    console.log('scoreMultiplier:' + game.player.scoreMultiplier)
     everyPopup.style.display = 'none';
     popupStart.style.display = 'none';
     timer(game.time.gameTime);
@@ -112,10 +115,16 @@ function reset() {
     if (document.querySelector('.taxi') !== null) {
         taxiBoard.removeChild(taxi);
     }
-    blurBody.style.filter = 'none'
     mugProgressNode.value = 0;
+    blurBody.style.filter = 'none'
     popupFail.style.display = 'none';
     popupWin.style.display = 'none';
+}
+
+function nextLevel(){
+    game.level.currentLevel+=1
+    game.player.scoreMultiplier-=0.5
+    startGame()
 }
 
 // function levelUp() {
@@ -394,7 +403,7 @@ function stopDrinkingMsg() {
 }
 
 function beerProgressUp() {
-    console.log(game.player.levelProgress)
+    // console.log(game.player.levelProgress)
     mugProgressNode.value = game.player.levelProgress
     if (game.player.levelProgress > 13 && game.player.levelProgress < 25) {
         makeItHarder(1);
@@ -422,7 +431,7 @@ function beerProgressUp() {
     if (game.player.levelProgress === 88) {
         drinkingMessage('I hope you can make it...')
     }
-    if (game.player.levelProgress === 100) {
+    if (game.player.levelProgress >= 100) {
         taxiBoard.appendChild(taxi);
         game.time.gameTime = 10;
         game.taxi.isComing = true;
