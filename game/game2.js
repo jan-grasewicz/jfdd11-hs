@@ -10,15 +10,20 @@ let popupWin = document.querySelector('.winMsg')
 let popupStart = document.querySelector('.startMsg')
 let startGameBtn = document.querySelector('#start-game')
 let tryAgainBtn = document.querySelector('.tryAgain')
+let nextLevelBtn = document.querySelector('#next-level')
 const timerDisplay = document.querySelector('.secs')
 const audioTagBackground = document.querySelector('audio')
 const audioTagBeerUp = document.querySelector('#beer-up')
 const audioStop = document.querySelector('.audio-stop')
 const taxiSoundDrive = document.querySelector('#taxi-drive')
 const taxiSoundHonk = document.querySelector('#taxi-honk')
-let audioPlay = true
 let countdown
-toggleAudioBackground()
+
+let mugProgressNode=document.querySelector('progress')
+let levelNumberNode=document.querySelector('.level-number')
+let levelResetBtn=document.querySelector('.level-reset')
+
+
 let game = {
     player: {
         rotation: 0,
@@ -35,7 +40,10 @@ let game = {
         rotationSpeed: 6,
         rotationInRadians: 0,
         catchRadius: 25,
-        score: 0,
+        score: 0, //<<amount of collected beers
+        scoreMultiplier: 0, //<< score*scoreMultiplyer=levelProgress ()
+        levelProgress: 0, //<< 0-100 players level progression
+        initialScoreMultiplier: 5, // << stores value for levelReset
     },
     board: {
         //to miejsce nalezy wyregulowac po ustawieniu awatara gracza coby nie przechodził przez ściany!
@@ -44,8 +52,9 @@ let game = {
     },
     beer: {
         catchRadius: 20,
-        amountToSpawn: 5,
-        expiration: 3,
+        expiration: 5,
+        amountToSpawn: 0, //amount of beer mugs present on board 
+        initialAmountToSpawn: 7, //<<stores value for levelReset
     },
     taxi: {
         position: { y: 0 },
@@ -60,20 +69,33 @@ let game = {
         nextToDoor: 0,
     },
     time: {
-        gameTime: 60,
+        gameTime: 0,
+        initialGameTime: 30, // << for reset
+    },
+    level: {
+        currentLevel: 1,
+    },
+    audio: {
+        backgroundPlay: true,
     },
 }
 
 //functions being launched here
+toggleAudioBackground()
 startGameBtn.addEventListener('click', startGame)
 tryAgainBtn.addEventListener('click', startGame)
+nextLevelBtn.addEventListener('click', nextLevel)
+levelResetBtn.addEventListener('click', levelReset)
 audioStop.addEventListener('click', toggleAudioBackground)
+
+game.time.gameTime = game.time.initialGameTime
+game.beer.amountToSpawn = game.beer.initialAmountToSpawn
+game.player.scoreMultiplier = game.player.initialScoreMultiplier
 
 let animationId = 0;
 
 function startGame() {
     reset();
-    
     everyPopup.style.display = 'none';
     popupStart.style.display = 'none';
     timer(game.time.gameTime);
@@ -82,6 +104,7 @@ function startGame() {
     timerDisplay.style.fontWeight = 'normal';
     computeNextToDoor()
     spawnPlayer()
+    levelNumberNode.textContent= game.level.currentLevel
     clearInterval(animationId);
     animationId = setInterval(animation, 16)
     spawnBeers(game.beer.amountToSpawn)
@@ -97,36 +120,37 @@ function reset() {
     game.player.acceleration = 0.2
     game.player.rotationSpeed = 6
     game.player.score = 0
+    game.player.levelProgress = 0
     game.taxi.isComing = false
     game.taxi.position.y = 0
-    game.time.gameTime = 60
+    game.time.gameTime = game.time.initialGameTime
     if (document.querySelector('.taxi') !== null) {
         taxiBoard.removeChild(taxi);
     }
+    mugProgressNode.value = 0;
     blurBody.style.filter = 'none'
-    document.querySelector('progress').value = 0;
     popupFail.style.display = 'none';
     popupWin.style.display = 'none';
+    clearInterval(countdown);
 }
 
-function levelUp() {
-    beers = document.querySelectorAll('.beer')
-    beers.forEach(beer => {
-        beer.parentElement.removeChild(beer)
-    })
-    game.player.maxSpeed = 3
-    game.player.acceleration = 0.3
-    game.player.rotationSpeed = 6
-
-    game.player.score = 0
-    game.taxi.isComing = false
-    game.taxi.position.y = 0
-    game.time.gameTime = 60
-    if (document.querySelector('.taxi') !== null) {
-        taxiBoard.removeChild(taxi);
+function nextLevel(){
+    game.level.currentLevel+=1
+    if(game.player.scoreMultiplier>2){
+        game.player.scoreMultiplier-=0.5
+    }else{
+        game.beer.amountToSpawn-=1
     }
-    blurBody.style.filter = 'none'
-    document.querySelector('progress').value = 0;
+    // console.log('Amount of beers to spawn:' + game.beer.amountToSpawn)
+    // console.log('scoreMultiplier:' + game.player.scoreMultiplier)
+    startGame()
+}
+
+function levelReset(){
+    game.level.currentLevel=1
+    game.beer.amountToSpawn = game.beer.initialAmountToSpawn
+    game.player.scoreMultiplier = game.player.initialScoreMultiplier
+    startGame()
 }
 
 function animation() {
@@ -144,14 +168,14 @@ function animation() {
 }
 
 function toggleAudioBackground() {
-    if (audioPlay === true) {
+    if (game.audio.backgroundPlay === true) {
         audioTagBackground.play()
         audioStop.style.backgroundImage = 'url(iconplay.png)'
-        audioPlay = false
-    } else if (audioPlay === false) {
+        game.audio.backgroundPlay = false
+    } else if (game.audio.backgroundPlay === false) {
         audioTagBackground.pause()
         audioStop.style.backgroundImage = 'url(icon.png)'
-        audioPlay = true
+        game.audio.backgroundPlay = true
     }
 }
 
@@ -317,7 +341,6 @@ function beerDisappear() {
 function detectBeerCollision() {
     let beerNodeList = document.querySelectorAll('.beer')
     beerNodeList.forEach((beer) => {
-        // console.log(beer.style.top)
         let beerTop = beer.offsetTop
         let beerLeft = beer.offsetLeft
         if (game.player.catchRadius + game.beer.catchRadius > Math.hypot(
@@ -326,8 +349,11 @@ function detectBeerCollision() {
             audioTagBeerUp.play()
             beer.parentElement.removeChild(beer)
             game.player.score += 1
-            spawnBeers(1)
+            game.player.levelProgress=(game.player.score*game.player.scoreMultiplier)
             beerProgressUp()
+            if(game.player.levelProgress<100){
+                spawnBeers(1)
+            }
         }
     })
 }
@@ -384,36 +410,37 @@ function stopDrinkingMsg() {
 }
 
 function beerProgressUp() {
-    document.querySelector('progress').value = game.player.score * 2.5;
-    if (game.player.score > 5 && game.player.score < 10) {
+    // console.log(game.player.levelProgress)
+    mugProgressNode.value = game.player.levelProgress
+    if (game.player.levelProgress > 13 && game.player.levelProgress < 25) {
         makeItHarder(1);
     }
-    if (game.player.score === 6) {
+    if (game.player.levelProgress === 15) {
         drinkingMessage('You are getting drunk!')
     }
-    if (game.player.score > 8 && game.player.score < 15) {
+    if (game.player.levelProgress > 20 && game.player.levelProgress < 38) {
         makeItHarder(3);
     }
-    if (game.player.score > 15 && game.player.score < 25) {
+    if (game.player.levelProgress > 38 && game.player.levelProgress < 63) {
         makeItHarder(4);
     }
-    if (game.player.score === 16) {
+    if (game.player.levelProgress === 40) {
         drinkingMessage('Slow down bro...')
     }
-    if (game.player.score > 25 && game.player.score < 35) {
+    if (game.player.levelProgress > 63 && game.player.levelProgress < 88) {
         makeItHarder(5);
     }
-    if (game.player.score > 35 && game.player.score < 40) {
+    if (game.player.levelProgress > 88 && game.player.levelProgress < 100) {
         makeItHarder(8);
         game.player.acceleration = 0.2;
         game.player.maxSpeed = 3;
     }
-    if (game.player.score === 35) {
+    if (game.player.levelProgress === 88) {
         drinkingMessage('I hope you can make it...')
     }
-    if (game.player.score === 40) {
+    if (game.player.levelProgress >= 100) {
         taxiBoard.appendChild(taxi);
-        game.time.gameTime = 5;
+        game.time.gameTime += 5;
         game.taxi.isComing = true;
         taxiIsComing();
         taxiSoundDrive.play()
@@ -438,7 +465,7 @@ function timer(seconds) {
             timerDisplay.style.fontSize = `22px`;
             timerDisplay.style.color = 'red';
             timerDisplay.style.fontWeight = 'bold';
-            timerDisplay.innerHTML = 'Failed to get DRUNK'
+            timerDisplay.innerHTML = 'Failed<br>to get<br>DRUNK'
             game.player.speed = 0;
             game.player.maxSpeed = 0;
             everyPopup.style.display = 'block';
