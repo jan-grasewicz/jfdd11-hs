@@ -167,6 +167,10 @@ function animation() {
     beerDisappear()
 }
 
+function transformPlayer() {
+    player.style.transform = "rotate(" + game.player.rotation + "deg)"
+}
+
 function toggleAudioBackground() {
     if (game.audio.backgroundPlay === true) {
         audioTagBackground.play()
@@ -183,12 +187,12 @@ function detectWallCollision() {
     if (game.player.position.x <= 0 || game.player.position.x >= game.board.width) {
         // spawnPlayer()
         game.player.rotation = (180 - game.player.rotation)
-        player.style.transform = "rotate(" + game.player.rotation + "deg)"
+        transformPlayer()
     }
     if (game.player.position.y <= 0 || game.player.position.y >= game.board.height) {
         // spawnPlayer()
         game.player.rotation = (90 + game.player.rotation)
-        player.style.transform = "rotate(" + game.player.rotation + "deg)"
+        transformPlayer()
     }
 }
 
@@ -234,14 +238,14 @@ function rotationToRadians() {
 function rotation() {
     if (game.player.rotateLeft === true) {
         game.player.rotation += game.player.rotationSpeed
-        player.style.transform = "rotate(" + game.player.rotation + "deg)"
+        transformPlayer()
         if (game.player.rotation >= 360) {
             game.player.rotation -= 360
         }
     }
     if (game.player.rotateRight === true) {
         game.player.rotation -= game.player.rotationSpeed
-        player.style.transform = "rotate(" + game.player.rotation + "deg)"
+        transformPlayer()
         if (game.player.rotation <= (-360)) {
             game.player.rotation += 360
         }
@@ -255,7 +259,7 @@ function spawnPlayer() {
     game.player.rotation = -90
     player.style.top = game.player.startPosition.x + "px"
     player.style.left = game.player.startPosition.y + "px"
-    player.style.transform = "rotate(" + game.player.rotation + "deg)"
+    transformPlayer()
     game.player.position.x = game.player.startPosition.x
     game.player.position.y = game.player.startPosition.y
     gameBoard.appendChild(player)
