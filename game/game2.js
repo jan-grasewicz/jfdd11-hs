@@ -17,14 +17,14 @@ const audioTagBeerUp = document.querySelector('#beer-up')
 const audioStop = document.querySelector('.audio-stop')
 const taxiSoundDrive = document.querySelector('#taxi-drive')
 const taxiSoundHonk = document.querySelector('#taxi-honk')
-let audioPlay = true
+// let audioPlay = true
 let countdown
 
 let mugProgressNode=document.querySelector('progress')
 let levelNumberNode=document.querySelector('.level-number')
 let levelResetBtn=document.querySelector('.level-reset')
 
-toggleAudioBackground()
+
 let game = {
     player: {
         rotation: 0,
@@ -70,20 +70,26 @@ let game = {
         nextToDoor: 0,
     },
     time: {
-        gameTime: 60,
+        gameTime: 0,
+        initialGameTime: 30, // << for reset
     },
     level: {
         currentLevel: 1,
     },
+    audio: {
+        backgroundPlay: true,
+    },
 }
 
 //functions being launched here
+toggleAudioBackground()
 startGameBtn.addEventListener('click', startGame)
 tryAgainBtn.addEventListener('click', startGame)
 nextLevelBtn.addEventListener('click', nextLevel)
 levelResetBtn.addEventListener('click', levelReset)
 audioStop.addEventListener('click', toggleAudioBackground)
 
+game.time.gameTime = game.time.initialGameTime
 game.beer.amountToSpawn = game.beer.initialAmountToSpawn
 game.player.scoreMultiplier = game.player.initialScoreMultiplier
 
@@ -118,7 +124,7 @@ function reset() {
     game.player.levelProgress = 0
     game.taxi.isComing = false
     game.taxi.position.y = 0
-    game.time.gameTime = 30
+    game.time.gameTime = game.time.initialGameTime
     if (document.querySelector('.taxi') !== null) {
         taxiBoard.removeChild(taxi);
     }
@@ -163,14 +169,14 @@ function animation() {
 }
 
 function toggleAudioBackground() {
-    if (audioPlay === true) {
+    if (game.audio.backgroundPlay === true) {
         audioTagBackground.play()
         audioStop.style.backgroundImage = 'url(iconplay.png)'
-        audioPlay = false
-    } else if (audioPlay === false) {
+        game.audio.backgroundPlay = false
+    } else if (game.audio.backgroundPlay === false) {
         audioTagBackground.pause()
         audioStop.style.backgroundImage = 'url(icon.png)'
-        audioPlay = true
+        game.audio.backgroundPlay = true
     }
 }
 
