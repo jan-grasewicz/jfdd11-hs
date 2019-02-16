@@ -105,6 +105,7 @@ function reset() {
     game.player.acceleration = 0.2
     game.player.rotationSpeed = 6
     game.player.score = 0
+    game.player.levelProgress = 0
     game.taxi.isComing = false
     game.taxi.position.y = 0
     game.time.gameTime = 30
@@ -395,33 +396,32 @@ function stopDrinkingMsg() {
 function beerProgressUp() {
     console.log(game.player.levelProgress)
     mugProgressNode.value = game.player.levelProgress
-    // game.player.score * 2.5;
-    // if (game.player.score > 5 && game.player.score < 10) {
-    //     makeItHarder(1);
-    // }
-    // if (game.player.score === 6) {
-    //     drinkingMessage('You are getting drunk!')
-    // }
-    // if (game.player.score > 8 && game.player.score < 15) {
-    //     makeItHarder(3);
-    // }
-    // if (game.player.score > 15 && game.player.score < 25) {
-    //     makeItHarder(4);
-    // }
-    // if (game.player.score === 16) {
-    //     drinkingMessage('Slow down bro...')
-    // }
-    // if (game.player.score > 25 && game.player.score < 35) {
-    //     makeItHarder(5);
-    // }
-    // if (game.player.score > 35 && game.player.score < 40) {
-    //     makeItHarder(8);
-    //     game.player.acceleration = 0.2;
-    //     game.player.maxSpeed = 3;
-    // }
-    // if (game.player.score === 35) {
-    //     drinkingMessage('I hope you can make it...')
-    // }
+    if (game.player.levelProgress > 13 && game.player.levelProgress < 25) {
+        makeItHarder(1);
+    }
+    if (game.player.levelProgress === 15) {
+        drinkingMessage('You are getting drunk!')
+    }
+    if (game.player.levelProgress > 20 && game.player.levelProgress < 38) {
+        makeItHarder(3);
+    }
+    if (game.player.levelProgress > 38 && game.player.levelProgress < 63) {
+        makeItHarder(4);
+    }
+    if (game.player.levelProgress === 40) {
+        drinkingMessage('Slow down bro...')
+    }
+    if (game.player.levelProgress > 63 && game.player.levelProgress < 88) {
+        makeItHarder(5);
+    }
+    if (game.player.levelProgress > 88 && game.player.levelProgress < 100) {
+        makeItHarder(8);
+        game.player.acceleration = 0.2;
+        game.player.maxSpeed = 3;
+    }
+    if (game.player.levelProgress === 88) {
+        drinkingMessage('I hope you can make it...')
+    }
     if (game.player.levelProgress === 100) {
         taxiBoard.appendChild(taxi);
         game.time.gameTime = 10;
