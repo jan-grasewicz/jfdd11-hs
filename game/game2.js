@@ -42,8 +42,9 @@ let game = {
         rotationInRadians: 0,
         catchRadius: 25,
         score: 0, //<<amount of collected beers
-        scoreMultiplier: 5, //<< score*scoreMultiplyer=levelProgress
+        scoreMultiplier: 5, //<< score*scoreMultiplyer=levelProgress ()
         levelProgress: 0, //<< 0-100 players level progression
+        initialScoreMultiplier: 5, // << stores initial setting for reset
     },
     board: {
         //to miejsce nalezy wyregulowac po ustawieniu awatara gracza coby nie przechodził przez ściany!
@@ -134,7 +135,7 @@ function nextLevel(){
 
 function levelReset(){
     game.level.currentLevel=1
-    game.player.scoreMultiplier =5
+    game.player.scoreMultiplier = game.player.initialScoreMultiplier
     startGame()
 }
 
