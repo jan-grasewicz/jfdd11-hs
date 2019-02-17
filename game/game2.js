@@ -23,7 +23,6 @@ let mugProgressNode = document.querySelector('progress')
 let levelNumberNode = document.querySelector('.level-number')
 let levelResetBtn = document.querySelector('.level-reset')
 
-
 let game = {
     player: {
         rotation: 0,
@@ -40,6 +39,7 @@ let game = {
         rotationSpeed: 6,
         rotationInRadians: 0,
         catchRadius: 25,
+        initialCatchRadius: 25,
         score: 0, //<<amount of collected beers
         scoreMultiplier: 0, //<< score*scoreMultiplyer=levelProgress ()
         levelProgress: 0, //<< 0-100 players level progression
@@ -89,6 +89,7 @@ levelResetBtn.addEventListener('click', levelReset)
 audioStop.addEventListener('click', toggleAudioBackground)
 
 game.time.gameTime = game.time.initialGameTime
+game.player.catchRadius=game.player.initialCatchRadius
 game.beer.amountToSpawn = game.beer.initialAmountToSpawn
 game.player.scoreMultiplier = game.player.initialScoreMultiplier
 
@@ -123,6 +124,7 @@ function reset() {
     game.player.levelProgress = 0
     game.taxi.isComing = false
     game.taxi.position.y = 0
+    game.player.catchRadius=game.player.initialCatchRadius
     game.time.gameTime = game.time.initialGameTime
     if (document.querySelector('.taxi') !== null) {
         taxiBoard.removeChild(taxi);
@@ -452,6 +454,7 @@ function beerProgressUp() {
         taxiIsComing();
         taxiSoundDrive.play()
         drinkingMessage('GET TO DA TAXXAA!')
+        game.player.catchRadius=10
         beers = document.querySelectorAll('.beer')
         beers.forEach(beer => {
             beer.parentElement.removeChild(beer)
@@ -515,3 +518,9 @@ window.addEventListener("keydown", function (e) {
         e.preventDefault();
     }
 }, false);
+
+//developers only;)
+function dev(levelProgress=100){
+    game.player.levelProgress = levelProgress
+    beerProgressUp()
+}
