@@ -1,6 +1,8 @@
 # Brewio
 
-Check out our ## Landing Page at:
+Check out our 
+## Landing Page
+ at:
 https://infoshareacademy.github.io/jfdd11-hs/
 ( view on desktop or mobile )
 # Out game is available after subscription to out newsletter or at:
